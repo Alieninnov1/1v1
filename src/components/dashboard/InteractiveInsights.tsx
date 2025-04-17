@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Chart, Brain, Globe } from "lucide-react";
+import { ArrowRight, BarChart, Brain, Globe } from "lucide-react";
 
 interface InsightCardProps {
   title: string;
@@ -69,7 +68,7 @@ const InteractiveInsights = () => {
       <InsightCard
         title="Data-Driven Learning"
         description="Curriculum adjustments based on real-time industry skill demands and market trends."
-        icon={<Chart className="h-6 w-6 text-blue-500" />}
+        icon={<BarChart className="h-6 w-6 text-blue-500" />}
         color="#3B82F6"
       />
       <InsightCard
