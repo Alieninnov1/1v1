@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Github, Twitter, Discord } from "lucide-react";
+import { Github, Twitter, MessagesSquare } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -77,7 +76,7 @@ const Footer = () => {
                 <Twitter size={24} />
               </a>
               <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
-                <Discord size={24} />
+                <MessagesSquare size={24} />
               </a>
             </div>
           </div>

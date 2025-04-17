@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +14,7 @@ import Knowledge from "./pages/Knowledge";
 import PolicySandbox from "./pages/PolicySandbox";
 import DaoGovernance from "./pages/DaoGovernance";
 import BlockchainExplorer from "./pages/BlockchainExplorer";
+import TokenEconomics from "./pages/TokenEconomics";
 
 // Create a client with default options optimized for performance
 const queryClient = new QueryClient({
@@ -44,7 +44,7 @@ const App = () => (
           <Route path="/policy-sandbox" element={<PolicySandbox />} />
           <Route path="/dao-governance" element={<DaoGovernance />} />
           <Route path="/blockchain-explorer" element={<BlockchainExplorer />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/token-economics" element={<TokenEconomics />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
