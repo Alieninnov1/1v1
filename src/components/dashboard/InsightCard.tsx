@@ -1,8 +1,8 @@
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import { useAnimatedHover } from "@/hooks/useAnimatedHover";
 
 interface InsightCardProps {
   title: string;
@@ -12,17 +12,13 @@ interface InsightCardProps {
 }
 
 const InsightCard = ({ title, description, icon, color }: InsightCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const { isHovered, hoverHandlers, animationProps } = useAnimatedHover();
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+      {...animationProps}
+      {...hoverHandlers}
       className="w-full"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
     >
       <Card className={`relative overflow-hidden shadow-lg border-none h-full`}>
         <motion.div
