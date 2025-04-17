@@ -108,7 +108,7 @@ const Discussions = () => {
           )}
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <Tabs defaultValue="all" className="w-full">
+            <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid grid-cols-4">
                 <TabsTrigger value="all" className="flex items-center gap-2">
                   <TrendingUp className="h-4 w-4" />
