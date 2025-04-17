@@ -1,12 +1,12 @@
 
 import { useState } from "react";
-import { AnimationProps } from "framer-motion";
+import type { MotionProps } from "framer-motion";
 
 interface AnimatedHoverProps {
-  initial?: AnimationProps["initial"];
-  whileHover?: AnimationProps["whileHover"];
-  animate?: AnimationProps["animate"];
-  transition?: AnimationProps["transition"];
+  initial?: MotionProps["initial"];
+  whileHover?: MotionProps["whileHover"];
+  animate?: MotionProps["animate"];
+  transition?: MotionProps["transition"];
 }
 
 export const useAnimatedHover = (props?: AnimatedHoverProps) => {
