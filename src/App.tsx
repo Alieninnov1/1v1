@@ -11,6 +11,7 @@ import Discussions from "./pages/Discussions";
 import Industry from "./pages/Industry";
 import Government from "./pages/Government";
 import Knowledge from "./pages/Knowledge";
+import PolicySandbox from "./pages/PolicySandbox";
 
 // Create a client with default options optimized for performance
 const queryClient = new QueryClient({
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/industry" element={<Industry />} />
           <Route path="/government" element={<Government />} />
           <Route path="/knowledge" element={<Knowledge />} />
+          <Route path="/policy-sandbox" element={<PolicySandbox />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -48,7 +48,7 @@ const Index = () => {
     { name: "Dashboard", icon: Computer, color: "blue", action: () => navigate('/dashboard') },
     { name: "Knowledge Base", icon: BookOpen, color: "purple", action: () => setShowKnowledgeBase(!showKnowledgeBase) },
     { name: "Curriculum", icon: FileText, color: "yellow", action: () => openDialog("Curriculum Alignment", "Connect curriculum to industry needs and policy requirements in real-time.") },
-    { name: "Policy Sandbox", icon: Shield, color: "green", action: () => openDialog("Policy Sandbox", "Simulate the impact of education policies before implementing them.") },
+    { name: "Policy Sandbox", icon: Shield, color: "green", action: () => navigate('/policy-sandbox') },
     { name: "AI Assistant", icon: Brain, color: "indigo", action: () => openDialog("AI Curriculum Assistant", "Get AI-powered recommendations to align curriculum with industry needs and future skills.") },
     { name: "Feedback Wall", icon: PanelLeft, color: "orange", action: () => setShowFeedback(!showFeedback) },
     { name: "Tools", icon: Wrench, color: "red", action: () => openDialog("HelixHub Tools", "Access tools for analyzing curriculum-industry alignment and regional skill gaps.") },
