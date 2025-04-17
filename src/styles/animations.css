@@ -1,4 +1,3 @@
-
 @layer base {
   .fade-in {
     animation: fadeIn 0.4s ease forwards;
@@ -26,6 +25,51 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* 3D Parallax Effect */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px) translateZ(20px);
+  }
+
+  /* Card Float Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(45deg, #9b87f5, #7E69AB);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientFlow 3s ease infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 }
 

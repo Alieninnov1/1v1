@@ -6,3 +6,56 @@
 @import './styles/xp-theme.css';
 @import './styles/cards.css';
 @import './styles/ethereum-theme.css';
+
+/* Dynamic background animation */
+body {
+  background: linear-gradient(-45deg, #1A1F2C, #2d364c, #323a4d, #546079);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 3D text effects */
+h1, h2, h3 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+h1:hover, h2:hover, h3:hover {
+  transform: translateZ(20px);
+}
+
+/* Responsive padding adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+/* Enhanced card animations */
+.eth-card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.eth-card:hover {
+  transform: translateY(-5px) rotateX(5deg);
+  box-shadow: 0 20px 30px rgba(155, 135, 245, 0.2);
+}
