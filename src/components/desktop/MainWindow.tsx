@@ -10,22 +10,22 @@ const MainWindow = () => {
   const { toast } = useToast();
 
   return (
-    <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="xp-window max-w-7xl mx-auto mb-8">
-      <div className="xp-title-bar">
+    <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="xp-window max-w-7xl mx-auto mb-8 glass-card">
+      <div className="xp-title-bar bg-gradient-to-r from-purple-800 to-blue-700">
         <div className="flex items-center">
-          <Computer size={14} />
+          <Computer size={14} className="text-blue-200" />
           <span className="ml-2">HelixHub Explorer</span>
         </div>
         <div className="xp-window-buttons">
           <motion.button 
-            className="xp-window-button xp-minimize" 
+            className="xp-window-button xp-minimize bg-blue-800 hover:bg-blue-700" 
             whileTap={{ scale: 0.9 }}
             onClick={() => toast({ title: "Window Minimized", description: "This window would be minimized to the taskbar" })}
           >
             <Minimize2 size={10} />
           </motion.button>
           <motion.button 
-            className="xp-window-button xp-maximize" 
+            className="xp-window-button xp-maximize bg-blue-800 hover:bg-blue-700" 
             whileTap={{ scale: 0.9 }}
             onClick={() => toast({ title: "Window Maximized", description: "This window would be maximized to full screen" })}
           >
@@ -41,7 +41,7 @@ const MainWindow = () => {
         </div>
       </div>
       
-      <div className="xp-window-content overflow-auto">
+      <div className="xp-window-content overflow-auto bg-gray-900 text-white">
         <Hero />
         <Features />
         <CallToAction />

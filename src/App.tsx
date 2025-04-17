@@ -13,6 +13,8 @@ import Government from "./pages/Government";
 import Academia from "./pages/Academia";
 import Knowledge from "./pages/Knowledge";
 import PolicySandbox from "./pages/PolicySandbox";
+import DaoGovernance from "./pages/DaoGovernance";
+import BlockchainExplorer from "./pages/BlockchainExplorer";
 
 // Create a client with default options optimized for performance
 const queryClient = new QueryClient({
@@ -40,6 +42,8 @@ const App = () => (
           <Route path="/academia" element={<Academia />} />
           <Route path="/knowledge" element={<Knowledge />} />
           <Route path="/policy-sandbox" element={<PolicySandbox />} />
+          <Route path="/dao-governance" element={<DaoGovernance />} />
+          <Route path="/blockchain-explorer" element={<BlockchainExplorer />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

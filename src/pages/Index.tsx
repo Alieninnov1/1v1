@@ -35,7 +35,20 @@ const Index = () => {
           setShowStartup={setShowStartup}
         />
       ) : (
-        <div className="min-h-screen bg-gradient-to-b from-sky-300 to-sky-500 p-4 pb-16 relative">
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-purple-900 p-4 pb-16 relative overflow-hidden bg-mesh-pattern">
+          {/* Animated ethereum-style network nodes in background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <svg className="w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <radialGradient id="network-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                  <stop offset="0%" stopColor="#7E69AB" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#1A1F2C" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#network-gradient)" />
+            </svg>
+          </div>
+          
           <DesktopIconGrid 
             onKnowledgeBaseClick={() => setShowKnowledgeBase(!showKnowledgeBase)}
             onFeedbackClick={() => setShowFeedback(!showFeedback)}
@@ -60,8 +73,8 @@ const Index = () => {
           />
           
           <WindowDialog
-            title="Welcome to HelixHub XP"
-            content="HelixHub connects academia, industry, and government to bridge skill gaps and drive innovation. Click on the desktop icons to explore different features of the platform."
+            title="Welcome to HelixHub Decentralized Network"
+            content="HelixHub connects academia, industry, and government via a decentralized blockchain network. Governance is handled by the HelixDAO, ensuring transparent and democratic decision-making. Explore the desktop icons to discover features of the platform."
             isOpen={showWelcome}
             onClose={() => setShowWelcome(false)}
           />
