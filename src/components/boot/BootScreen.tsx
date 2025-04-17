@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -12,7 +13,7 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
   useEffect(() => {
     if (showStartup) {
       const interval = setInterval(() => {
-        setBootProgress((prev) => {
+        setBootProgress((prev: number) => {
           const newProgress = prev + Math.random() * 10;
           if (newProgress >= 100) {
             clearInterval(interval);
