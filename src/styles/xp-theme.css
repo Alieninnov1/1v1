@@ -9,6 +9,7 @@
   box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
   background: #f4f4f4;
   border: 1px solid #c7c7c7;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 /* XP Title Bar */
@@ -26,6 +27,7 @@
 .xp-window-content {
   background: #ffffff;
   border-top: 1px solid #c7c7c7;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* XP Button */
@@ -39,6 +41,9 @@
   padding: 0.4rem 1rem;
   cursor: pointer;
   font-family: "Tahoma", sans-serif;
+  transition: all 0.2s;
+  will-change: transform, box-shadow;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .xp-button:hover {
@@ -48,12 +53,20 @@
 .xp-button:active {
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
   background: linear-gradient(to bottom, #E0E0E0 0%, #EEEEEE 100%);
+  transform: translateY(1px);
 }
 
-/* Card Styles */
+/* Card Styles with enhanced visuals */
 .knowledge-card {
-  @apply border-l-4 rounded-lg p-4 transition-all duration-300 hover:shadow-md;
+  @apply border-l-4 rounded-lg p-4 transition-all duration-300;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent 50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  will-change: transform, box-shadow;
+}
+
+.knowledge-card:hover {
+  @apply shadow-md;
+  transform: translateY(-2px);
 }
 
 .knowledge-card.teacher {
@@ -81,7 +94,7 @@
   background: linear-gradient(to right, rgba(167, 90, 219, 0.05), transparent 50%);
 }
 
-/* XP Scrollbar */
+/* XP Scrollbar - enhanced */
 .scrollbar-hidden::-webkit-scrollbar {
   width: 16px;
 }
@@ -102,7 +115,7 @@
   background: #b8b8b8;
 }
 
-/* Task Bar */
+/* Task Bar with smoother gradients */
 .xp-taskbar {
   background: linear-gradient(to bottom, #2a92fb, #0155b7);
   border-top: 1px solid #fff;
@@ -110,6 +123,9 @@
   height: 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  z-index: 50;
 }
 
 .xp-start-button {
@@ -119,29 +135,71 @@
   border-radius: 3px;
   padding: 0.25rem 0.75rem;
   font-size: 0.9rem;
-  margin-left: 8px;
+  margin-left: 2px;
   display: flex;
   align-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: all 0.2s;
 }
 
 .xp-start-button:hover {
   background: linear-gradient(to bottom, #6bcc62, #38b332);
 }
 
-/* Desktop Icons */
+.xp-start-button:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Start Menu enhancements */
+.xp-start-menu {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 320px;
+  background: white;
+  border: 2px solid #0055E5;
+  border-bottom: none;
+  box-shadow: 3px -3px 10px rgba(0,0,0,0.2);
+  z-index: 100;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+}
+
+.xp-start-header {
+  background: linear-gradient(to right, #215CCA 0%, #2983FC 100%);
+  color: white;
+  padding: 8px;
+}
+
+.xp-start-item {
+  border-radius: 2px;
+}
+
+/* Enhanced Desktop Icons */
 .xp-desktop-icon {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 75px;
+  transition: transform 0.2s;
+}
+
+.xp-desktop-icon:hover {
+  transform: scale(1.05);
+}
+
+.xp-desktop-icon:active {
+  transform: scale(0.95);
 }
 
 .xp-icon-img {
   width: 48px;
   height: 48px;
   margin-bottom: 5px;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
 }
 
 .xp-icon-text {
@@ -154,7 +212,7 @@
   white-space: nowrap;
 }
 
-/* XP Window Buttons */
+/* XP Window Buttons with improved interactions */
 .xp-window-buttons {
   display: flex;
   gap: 4px;
@@ -168,6 +226,11 @@
   justify-content: center;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.15s;
+}
+
+.xp-window-button:active {
+  transform: scale(0.85);
 }
 
 .xp-minimize {
@@ -189,10 +252,43 @@
   background: linear-gradient(to bottom, #f77, #e00);
 }
 
+/* Glass Card Effect */
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* XP Clock */
+.xp-clock {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0 8px;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+/* Windows XP Notification */
+.xp-notification {
+  background: linear-gradient(to bottom, #ffffe1, #ffffd6);
+  border: 1px solid #e5e5a2;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #333;
+  border-radius: 3px;
+  position: relative;
+}
+
 /* Mobile Optimizations */
 @media (max-width: 640px) {
   .xp-button {
-    padding: 0.3rem 0.5rem;
+    padding: 0.3rem 0.6rem;
     font-size: 0.7rem;
   }
   
@@ -208,5 +304,22 @@
   .xp-start-button {
     font-size: 0.7rem;
     padding: 0.15rem 0.5rem;
+  }
+  
+  .xp-start-menu {
+    width: 280px;
+  }
+  
+  .xp-desktop-icon {
+    width: 60px;
+  }
+  
+  .xp-icon-img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .xp-icon-text {
+    font-size: 0.65rem;
   }
 }

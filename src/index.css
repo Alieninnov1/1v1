@@ -12,6 +12,14 @@ body {
   background: linear-gradient(-45deg, #1A1F2C, #2d364c, #323a4d, #546079);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background: #1A1F2C;
+  }
 }
 
 @keyframes gradientBG {
@@ -26,10 +34,12 @@ body {
   }
 }
 
-/* 3D text effects */
+/* 3D text effects with better performance */
 h1, h2, h3 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 h1:hover, h2:hover, h3:hover {
@@ -41,6 +51,16 @@ h1:hover, h2:hover, h3:hover {
   .container {
     padding: 1rem;
   }
+  
+  h1, h2, h3 {
+    /* Reduce text shadow on mobile for performance */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Optimize tap targets for mobile */
+  button, a {
+    padding: 0.5rem;
+  }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
@@ -49,13 +69,80 @@ h1:hover, h2:hover, h3:hover {
   }
 }
 
-/* Enhanced card animations */
+/* Enhanced card animations with better performance */
 .eth-card {
   transform-style: preserve-3d;
   transition: transform 0.5s ease, box-shadow 0.5s ease;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .eth-card:hover {
   transform: translateY(-5px) rotateX(5deg);
   box-shadow: 0 20px 30px rgba(155, 135, 245, 0.2);
+}
+
+/* Wavy background animation - 21st.dev style */
+.bg-mesh-pattern {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-mesh-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.2;
+}
+
+/* Optimized loading and performance */
+img, svg {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Touch device optimizations */
+@media (hover: hover) {
+  .no-hover-on-touch {
+    display: block;
+  }
+  
+  .hover-only-on-touch {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .no-hover-on-touch {
+    display: none;
+  }
+  
+  .hover-only-on-touch {
+    display: block;
+  }
+}
+
+/* Image optimizations */
+.opt-img {
+  content-visibility: auto;
+  object-fit: cover;
+}
+
+/* Print styles for better document printing */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .xp-window {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
 }

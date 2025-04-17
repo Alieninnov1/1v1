@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import BootScreen from "@/components/boot/BootScreen";
 import WindowDialog from "@/components/dialog/WindowDialog";
@@ -16,8 +16,18 @@ const Index = () => {
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogContent, setDialogContent] = useState("");
   const [showKnowledgeBase, setShowKnowledgeBase] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  // Auto-show welcome after boot completes
+  useEffect(() => {
+    if (!showStartup && bootProgress >= 100) {
+      const timer = setTimeout(() => {
+        setShowWelcome(true);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [showStartup, bootProgress]);
 
   const openDialog = (title: string, content: string) => {
     setDialogTitle(title);
@@ -26,7 +36,7 @@ const Index = () => {
   };
 
   return (
-    <Layout>
+    <Layout hideNavFooter={true}>
       {showStartup ? (
         <BootScreen 
           showStartup={showStartup}
@@ -36,17 +46,30 @@ const Index = () => {
         />
       ) : (
         <div className="min-h-screen bg-gradient-to-b from-gray-900 to-purple-900 p-4 pb-16 relative overflow-hidden bg-mesh-pattern">
-          {/* Animated ethereum-style network nodes in background */}
+          {/* Animated network nodes in background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <svg className="w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <defs>
-                <radialGradient id="network-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                  <stop offset="0%" stopColor="#7E69AB" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#1A1F2C" stopOpacity="0" />
-                </radialGradient>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#network-gradient)" />
-            </svg>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-800/10 via-transparent to-transparent"></div>
+            
+            {/* Animated particles */}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div 
+                key={i}
+                className="absolute rounded-full bg-white/10"
+                style={{
+                  width: Math.random() * 4 + 2 + 'px',
+                  height: Math.random() * 4 + 2 + 'px',
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  opacity: Math.random() * 0.5 + 0.2,
+                  animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+                  animationDelay: `${Math.random() * 5}s`
+                }}
+              ></div>
+            ))}
+
+            {/* Lens flare effect */}
+            <div className="absolute top-1/4 -right-24 w-96 h-96 rounded-full bg-purple-600/10 blur-3xl"></div>
+            <div className="absolute bottom-1/4 -left-24 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl"></div>
           </div>
           
           <DesktopIconGrid 
