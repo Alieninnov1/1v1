@@ -35,12 +35,27 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-gradient-to-b from-gray-900 to-purple-900 flex flex-col items-center justify-center text-white z-50"
+          className="fixed inset-0 bg-gradient-to-b from-[#151823] to-[#262d4a] flex flex-col items-center justify-center text-white z-50"
         >
           <div className="relative w-full max-w-md aspect-square mb-8">
-            {/* Background starfield effect */}
+            {/* Background starfield effect with subtle animation */}
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute inset-0 bg-[url('/lovable-uploads/261b8a7f-e6a4-4b35-b826-2641f23da6d7.png')] bg-contain bg-center bg-no-repeat" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-blue-900/10 to-transparent"></div>
+              {Array.from({ length: 100 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full bg-white"
+                  style={{
+                    width: `${Math.random() * 2 + 1}px`,
+                    height: `${Math.random() * 2 + 1}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    opacity: Math.random() * 0.5 + 0.1,
+                    animation: `twinkle ${Math.random() * 4 + 2}s linear infinite`,
+                    animationDelay: `${Math.random() * 2}s`
+                  }}
+                ></div>
+              ))}
             </div>
             
             {/* Logo container with glow effect */}
@@ -56,7 +71,7 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
               <img
                 src="/lovable-uploads/261b8a7f-e6a4-4b35-b826-2641f23da6d7.png"
                 alt="HelixHub Logo"
-                className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+                className="w-[85%] h-[85%] object-contain drop-shadow-[0_0_25px_rgba(139,92,246,0.6)]"
               />
             </motion.div>
           </div>
@@ -65,11 +80,11 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
           <motion.div
             initial={{ width: "80%", opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-64 relative"
+            className="w-72 relative"
           >
-            <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur-sm">
+            <div className="h-2 bg-gray-800/50 rounded-full overflow-hidden backdrop-blur-sm">
               <motion.div
-                className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full"
+                className="h-full bg-gradient-to-r from-indigo-600 via-violet-500 to-purple-600 rounded-full"
                 style={{ width: `${bootProgress}%` }}
                 initial={{ width: "0%" }}
                 animate={{ width: `${bootProgress}%` }}
@@ -86,14 +101,19 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
                 {bootProgress < 100 ? (
                   <>
                     <Loader2 className="animate-spin" size={16} />
-                    Initializing... {Math.round(bootProgress)}%
+                    <span className="font-inter tracking-wide">Initializing HelixHub... {Math.round(bootProgress)}%</span>
                   </>
                 ) : (
-                  "Ready to launch"
+                  <span className="font-inter font-medium tracking-wide">Ready to launch</span>
                 )}
               </span>
             </motion.div>
           </motion.div>
+          
+          {/* Version information */}
+          <div className="absolute bottom-4 text-xs text-gray-400 font-light">
+            HelixHub v1.0.0 | Triple Helix Innovation Platform
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

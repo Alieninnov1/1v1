@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Github, Twitter, MessagesSquare } from "lucide-react";
 
@@ -5,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1A1F2C]/95 backdrop-blur-md border-t border-purple-900/30">
+    <footer className="bg-[#151823]/95 backdrop-blur-md border-t border-purple-900/30">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
@@ -23,7 +24,7 @@ const Footer = () => {
 
           {/* Links - First column */}
           <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider">Platform</h3>
+            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider mb-4">Platform</h3>
             <ul className="mt-4 space-y-3">
               <li>
                 <Link to="/dashboard" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
@@ -45,7 +46,7 @@ const Footer = () => {
 
           {/* Links - Second column */}
           <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider">Stakeholders</h3>
+            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider mb-4">Stakeholders</h3>
             <ul className="mt-4 space-y-3">
               <li>
                 <Link to="/academia" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
@@ -67,15 +68,15 @@ const Footer = () => {
 
           {/* Community */}
           <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider">Community</h3>
+            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider mb-4">Community</h3>
             <div className="mt-4 flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100 transition-colors">
                 <Github size={24} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100 transition-colors">
                 <Twitter size={24} />
               </a>
-              <a href="https://discord.gg/sxYscnTv" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+              <a href="https://discord.gg/sxYscnTv" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100 transition-colors">
                 <MessagesSquare size={24} />
               </a>
             </div>

@@ -68,7 +68,8 @@
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
     height: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    font-family: 'Inter', 'Tahoma', sans-serif;
   }
 
   body {
@@ -83,6 +84,8 @@
     overflow-x: hidden;
     position: relative;
     width: 100%;
+    background: linear-gradient(to bottom, #151823, #1d2235);
+    color: #f0f4ff;
   }
 
   /* Improved focus styles for accessibility */
@@ -112,11 +115,12 @@
   .text-pretty {
     text-wrap: pretty;
   }
-
-  /* Interactive wave background */
+  
+  /* Improved wave background */
   .wave-bg {
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, #1e2338 0%, #262d4a 100%);
   }
   
   .wave-bg::before {
@@ -126,31 +130,45 @@
     height: 200%;
     top: -50%;
     left: -50%;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0) 70%);
-    animation: wave 15s linear infinite;
+    background: radial-gradient(ellipse at center, rgba(103, 84, 220, 0.15) 0%, rgba(0,0,0,0) 70%);
+    animation: wave 20s linear infinite;
     z-index: -1;
   }
   
   @keyframes wave {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
-  /* Responsive text sizing */
+  /* Consistent text sizing */
   h1 {
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+    background: linear-gradient(to right, #e2e8ff, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.75rem;
   }
 
   h2 {
-    @apply text-xl sm:text-2xl md:text-3xl font-bold;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight;
+    background: linear-gradient(to right, #d8e0ff, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
   }
 
   h3 {
     @apply text-lg sm:text-xl md:text-2xl font-bold;
+    color: #d8e0ff;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    @apply leading-relaxed text-base sm:text-lg;
+    color: #b4c0e4;
+    margin-bottom: 1rem;
   }
 
   /* Mobile optimizations */
@@ -165,18 +183,25 @@
     
     h1 {
       @apply text-xl sm:text-2xl;
+      font-size: 1.75rem;
     }
     
     h2 {
       @apply text-lg sm:text-xl;
+      font-size: 1.5rem;
     }
     
     h3 {
       @apply text-base sm:text-lg;
+      font-size: 1.25rem;
     }
 
     .content-container {
       @apply px-3;
+    }
+
+    p {
+      font-size: 0.95rem;
     }
   }
 
@@ -191,12 +216,37 @@
       min-width: 44px;
     }
   }
-
-  /* Dark mode improvements */
-  .dark img {
-    filter: brightness(0.9) contrast(1.1);
+  
+  /* Advanced neumorphism glass effect */
+  .glass-panel {
+    background: rgba(37, 45, 74, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
   
+  /* Consistent card style */
+  .feature-card {
+    @apply p-6 rounded-xl transition-all duration-300;
+    background: rgba(37, 45, 74, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(103, 84, 220, 0.15);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 10px 30px rgba(103, 84, 220, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
   /* Parallax effect */
   .parallax {
     perspective: 1000px;
@@ -274,14 +324,5 @@
   .xp-elevated {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
     transform: translateZ(0);
-  }
-  
-  .xp-desktop-pattern {
-    background-color: #013172;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-  
-  .xp-cursor-pointer {
-    cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAHxSURBVDhPY/j//z8DJRhM5Nz4UXH1ffy393/r/n8fD/j/aegl/D+rrOd/QnLCAVwGgDT/eXwYbMj/1w1/ofj/13pchn8eHfz/qiQPbEhYcs4jdANAmv+/awUa8KYBbuD/Ty24DAbh//dugoNTEETi7tG9/z21GcCav7QYwJQQwv9/r8YMMjD+/7YZbghI87/nXcCab2fz/v/Ww4AbwwJkDTxECfz/UgMx5GmiKNgAEP7/exnQRV9bgTRQDBf+WAMJIpDmP8+OggMZpPhPvcj/P42c//82sv//08T+/1s3y/9fDaz/v7ex/f9Sx/L/czXL//elzP/flzL9/1jE9P99HtP/d1mM/99k/P/8OBbZALD/wAY083z81igCFtyXyvP7XTHL/3fFzP/fF4M1f86j//8hi+H/O6D4mxSG/28SGf6/TmD4/zLm//9nUWADPmYyqCFcZZAPyI0QFL+Ix4HfpTH+BxnyDqj5VTzD/5fRQM1RDP+fR/z//zT8//9Hof//Pwj+/+9+AFjzKSCtBMS2IFwJwlegArAZj0L//3sY9P/f/QCgATkQzXd9sf0PsQHiA4S0ARC5QOzp5e3PBhID2QADuAIRKoYXQxUgxCDiIAMIGgADKI4AYm4g5oFiEToGiYEMYKAUAwDmS2D2ygUL0AAAAABJRU5ErkJggg=="), auto;
   }
 }

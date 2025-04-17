@@ -36,7 +36,7 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
     // Mount animation
     setIsMounted(true);
     
-    // Add Ethereum-inspired theme class to body
+    // Add theme class to body
     document.body.classList.add('ethereum-theme');
     
     // Optimized scroll handler with throttling
@@ -58,13 +58,13 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
   }, []);
 
   // Apply hardware acceleration and 3D transforms only if not reduced motion
-  const baseStyles = 'flex flex-col min-h-screen text-white';
+  const baseStyles = 'flex flex-col min-h-screen bg-gradient-to-b from-[#151823] to-[#262d4a] text-white';
   const animationStyles = !isReducedMotion && isMounted ? 'fade-in transform-gpu' : '';
   
   // Calculated parallax style with reduced effect on mobile
   const parallaxStyle = {
     transform: !isReducedMotion 
-      ? `translate3d(0, ${scrollY * (isMobile ? 0.05 : 0.1)}px, 0)`
+      ? `translate3d(0, ${scrollY * (isMobile ? 0.02 : 0.05)}px, 0)`
       : 'none',
     transition: !isReducedMotion
       ? 'transform 0.1s cubic-bezier(0.215, 0.61, 0.355, 1)'

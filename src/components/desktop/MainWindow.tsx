@@ -23,14 +23,14 @@ const MainWindow = () => {
       className="xp-window max-w-7xl mx-auto mb-8 glass-card shadow-xl"
       style={{ transformStyle: 'preserve-3d' }}
     >
-      <div className="xp-title-bar bg-gradient-to-r from-purple-800 to-blue-700">
+      <div className="xp-title-bar bg-gradient-to-r from-[#015ccc] to-[#0277e6] flex items-center justify-between px-2 py-1">
         <div className="flex items-center">
-          <Computer size={isMobile ? 12 : 14} className="text-blue-200" />
-          <span className="ml-2 truncate">{isMobile ? 'Explorer' : 'HelixHub Explorer'}</span>
+          <Computer size={isMobile ? 12 : 14} className="text-blue-200 mr-2" />
+          <span className="text-white font-medium truncate text-sm">{isMobile ? 'Explorer' : 'HelixHub Explorer'}</span>
         </div>
-        <div className="xp-window-buttons">
+        <div className="xp-window-buttons flex space-x-1">
           <motion.button 
-            className="xp-window-button xp-minimize bg-blue-800 hover:bg-blue-700" 
+            className="xp-window-button xp-minimize bg-gradient-to-b from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 p-1 rounded" 
             whileTap={{ scale: 0.9 }}
             onClick={() => toast({ 
               title: "Window Minimized", 
@@ -38,10 +38,10 @@ const MainWindow = () => {
             })}
             aria-label="Minimize window"
           >
-            <Minimize2 size={isMobile ? 8 : 10} />
+            <Minimize2 size={isMobile ? 9 : 11} className="text-blue-100" />
           </motion.button>
           <motion.button 
-            className="xp-window-button xp-maximize bg-blue-800 hover:bg-blue-700" 
+            className="xp-window-button xp-maximize bg-gradient-to-b from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 p-1 rounded" 
             whileTap={{ scale: 0.9 }}
             onClick={() => toast({ 
               title: "Window Maximized", 
@@ -49,10 +49,10 @@ const MainWindow = () => {
             })}
             aria-label="Maximize window"
           >
-            <Maximize2 size={isMobile ? 8 : 10} />
+            <Maximize2 size={isMobile ? 9 : 11} className="text-blue-100" />
           </motion.button>
           <motion.button 
-            className="xp-window-button xp-close" 
+            className="xp-window-button xp-close bg-gradient-to-b from-red-500 to-red-700 hover:from-red-400 hover:to-red-600 p-1 rounded" 
             whileTap={{ scale: 0.9 }}
             onClick={() => toast({ 
               title: "Window Closed", 
@@ -60,12 +60,12 @@ const MainWindow = () => {
             })}
             aria-label="Close window"
           >
-            <X size={isMobile ? 8 : 10} />
+            <X size={isMobile ? 9 : 11} className="text-white" />
           </motion.button>
         </div>
       </div>
       
-      <div className="xp-window-content overflow-auto scrollbar-hidden bg-gray-900 text-white">
+      <div className="xp-window-content overflow-auto scrollbar-hidden bg-[#0c101d] text-white">
         <Hero />
         <Features />
         <CallToAction />
