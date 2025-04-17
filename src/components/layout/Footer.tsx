@@ -75,7 +75,7 @@ const Footer = () => {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
                 <Twitter size={24} />
               </a>
-              <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+              <a href="https://discord.gg/sxYscnTv" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
                 <MessagesSquare size={24} />
               </a>
             </div>

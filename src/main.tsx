@@ -3,10 +3,13 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
+// Performance optimization
+const start = performance.now();
+
 // Add page transition class for smoother loading
 document.documentElement.classList.add('page-transition');
 
-// Set up blockchain theme configuration
+// Set up theme configuration
 document.documentElement.classList.add('ethereum-theme');
 document.body.classList.add('bg-dark');
 
@@ -28,7 +31,10 @@ if (rootElement) {
   
   // Remove transition class after mount
   root.render(<App />);
+  
+  // Cleanup and performance logging
   setTimeout(() => {
     document.documentElement.classList.remove('page-transition');
+    console.log(`App mounted in ${Math.round(performance.now() - start)}ms`);
   }, 300);
 }
