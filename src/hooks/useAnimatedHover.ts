@@ -1,12 +1,16 @@
 
 import { useState } from "react";
-import type { MotionProps } from "framer-motion";
+import type { TargetAndTransition, VariantLabels } from "framer-motion";
 
 interface AnimatedHoverProps {
-  initial?: MotionProps["initial"];
-  whileHover?: MotionProps["whileHover"];
-  animate?: MotionProps["animate"];
-  transition?: MotionProps["transition"];
+  initial?: TargetAndTransition | VariantLabels;
+  whileHover?: TargetAndTransition | VariantLabels;
+  animate?: TargetAndTransition | VariantLabels;
+  transition?: {
+    duration?: number;
+    ease?: string | number[];
+    delay?: number;
+  };
 }
 
 export const useAnimatedHover = (props?: AnimatedHoverProps) => {
