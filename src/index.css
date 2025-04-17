@@ -4,10 +4,11 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/tahoma');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -16,16 +17,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 270 59% 41%; /* Deep Purple (#5E2CA5) */
+    --primary: 223 100% 41%; /* Windows XP Blue (#0055E5) */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 270 30% 95.5%;
+    --secondary: 84 100% 59%; /* Windows XP Green (#92CD00) */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 270 59% 41%;
+    --accent: 210 100% 33%; /* Darker Windows Blue */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -33,21 +34,30 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 270 59% 41%;
+    --ring: 223 100% 41%;
 
-    --radius: 1rem;
+    --radius: 0.5rem; /* XP had more rounded corners */
 
-    --sidebar-background: 270 59% 41%;
+    --sidebar-background: 223 100% 41%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 270 59% 91%;
-    --sidebar-primary-foreground: 270 59% 41%;
-    --sidebar-accent: 270 30% 35%;
+    --sidebar-primary: 223 100% 91%;
+    --sidebar-primary-foreground: 223 100% 41%;
+    --sidebar-accent: 223 100% 35%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 270 30% 35%;
-    --sidebar-ring: 270 59% 61%;
+    --sidebar-border: 223 100% 35%;
+    --sidebar-ring: 223 100% 61%;
     
-    --scrollbar-thumb: 270 59% 41%;
-    --scrollbar-track: 270 30% 95.5%;
+    --scrollbar-thumb: 223 100% 41%;
+    --scrollbar-track: 210 40% 96.1%;
+
+    --xp-blue: #0055E5;
+    --xp-green: #92CD00;
+    --xp-title-blue: #1D4F9A;
+    --xp-title-gradient-start: #2581D7;
+    --xp-title-gradient-end: #8BD5FE;
+    --xp-window-border: #0054E3;
+    --xp-window-gray: #ECE9D8;
+    --xp-button-face: #ECE9D8;
   }
 
   .dark {
@@ -60,16 +70,16 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 270 59% 51%; /* Slightly lighter purple for dark mode */
+    --primary: 223 100% 51%; /* Windows XP Blue - lighter for dark mode */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 270 30% 25%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 84 100% 59%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 270 59% 51%;
+    --accent: 223 100% 51%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -77,18 +87,18 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 270 59% 61%;
+    --ring: 223 100% 61%;
 
-    --sidebar-background: 270 30% 20%;
+    --sidebar-background: 223 100% 20%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 270 59% 61%;
+    --sidebar-primary: 223 100% 61%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 270 30% 25%;
+    --sidebar-accent: 223 100% 25%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 270 30% 25%;
-    --sidebar-ring: 270 59% 61%;
+    --sidebar-border: 223 100% 25%;
+    --sidebar-ring: 223 100% 61%;
     
-    --scrollbar-thumb: 270 59% 51%;
+    --scrollbar-thumb: 223 100% 51%;
     --scrollbar-track: 217.2 32.6% 17.5%;
   }
 }
@@ -106,32 +116,87 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
+    font-family: 'Tahoma', 'Inter', sans-serif;
   }
   
-  /* Custom scrollbar styles */
+  /* Custom scrollbar styles - XP themed */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 16px;
   }
   
   ::-webkit-scrollbar-track {
     background: hsl(var(--scrollbar-track));
+    border-left: 1px solid #999999;
   }
   
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--scrollbar-thumb));
-    border-radius: 5px;
     border: 2px solid hsl(var(--scrollbar-track));
-    transition: all 0.3s ease;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3), inset -1px -1px 0 rgba(0,0,0,0.2);
   }
   
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary));
-    box-shadow: 0 0 8px hsl(var(--primary));
+  }
+  
+  /* Windows XP arrow buttons on scrollbar */
+  ::-webkit-scrollbar-button:single-button {
+    background-color: #ECE9D8;
+    border: 1px solid #999999;
+    height: 16px;
+    width: 16px;
   }
 }
 
 @layer components {
+  /* Windows XP styled components */
+  .xp-window {
+    @apply rounded-t-md overflow-hidden border-2 border-blue-800 shadow-xl bg-[#ECE9D8];
+  }
+  
+  .xp-title-bar {
+    @apply bg-gradient-to-r from-[#2581D7] to-[#8BD5FE] text-white py-1 px-2 flex items-center justify-between;
+    font-family: 'Tahoma', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+  .xp-window-buttons {
+    @apply flex space-x-1;
+  }
+  
+  .xp-window-button {
+    @apply h-5 w-5 rounded flex items-center justify-center text-xs;
+    box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
+  }
+  
+  .xp-minimize {
+    @apply bg-[#ECE9D8] text-black;
+  }
+  
+  .xp-maximize {
+    @apply bg-[#ECE9D8] text-black;
+  }
+  
+  .xp-close {
+    @apply bg-red-500 text-white;
+  }
+  
+  .xp-window-content {
+    @apply p-4 bg-[#ECE9D8];
+  }
+  
+  .xp-button {
+    @apply px-4 py-1 rounded-md text-black bg-[#ECE9D8] border border-gray-400;
+    box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
+  }
+  
+  .xp-button:active {
+    box-shadow: -1px -1px 0 white inset, 1px 1px 0 #888 inset;
+  }
+
+  /* Retain existing utility classes */
   .card-hover {
     @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
   }
@@ -158,11 +223,12 @@
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6;
   }
   
-  /* 3D card effect */
+  /* 3D card effect - modified for XP style */
   .card-3d {
-    @apply relative overflow-hidden rounded-xl transition-all duration-300;
+    @apply relative overflow-hidden rounded-lg border-2;
     transform-style: preserve-3d;
     perspective: 1000px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
   }
   
   .card-3d:hover {
@@ -195,5 +261,27 @@
     h2 {
       @apply text-2xl;
     }
+  }
+  
+  /* Windows XP icons */
+  .xp-icon {
+    @apply flex flex-col items-center justify-center text-center cursor-pointer p-2 hover:bg-blue-100/50;
+  }
+  
+  .xp-icon-img {
+    @apply w-12 h-12 mb-2;
+  }
+  
+  /* Windows XP start menu */
+  .xp-start-menu {
+    @apply absolute bottom-0 left-0 w-72 bg-white border-2 border-blue-800 shadow-xl;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+  }
+  
+  .xp-start-header {
+    @apply bg-gradient-to-b from-blue-600 to-blue-700 text-white p-3 font-bold;
+    border-top-right-radius: 0.3rem;
+    border-top-left-radius: 0.3rem;
   }
 }

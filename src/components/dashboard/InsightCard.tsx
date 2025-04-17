@@ -1,8 +1,9 @@
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
-import { useAnimatedHover } from "@/hooks/useAnimatedHover";
+import { ArrowRight, Maximize2, Minimize2, X } from "lucide-react";
+import { useAnimatedHover, useXPAnimation } from "@/hooks/useAnimatedHover";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface InsightCardProps {
@@ -13,74 +14,84 @@ interface InsightCardProps {
 }
 
 const InsightCard = ({ title, description, icon, color }: InsightCardProps) => {
-  const { isHovered, hoverHandlers, animationProps } = useAnimatedHover();
+  const { isHovered, hoverHandlers } = useAnimatedHover({ xpStyle: true });
+  const { buttonHandlers, buttonClasses } = useXPAnimation();
+  const [isMinimized, setIsMinimized] = useState(false);
   const isMobile = useIsMobile();
-  
-  // Adjust animations based on device type
-  const animations = {
-    initial: animationProps.initial,
-    animate: animationProps.animate,
-    transition: animationProps.transition,
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    // Only apply hover effects on non-mobile devices
-    ...(isMobile ? {} : {
-      whileHover: animationProps.whileHover,
-      whileTap: animationProps.whileTap,
-    })
-  };
   
   return (
     <motion.div
-      {...animations}
-      {...hoverHandlers}
-      className="w-full"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      onHoverStart={hoverHandlers.onHoverStart}
+      onHoverEnd={hoverHandlers.onHoverEnd}
+      className="w-full mb-5"
     >
-      <Card className={`relative overflow-hidden shadow-lg border-none h-full transform transition-all duration-300`}>
-        <motion.div
-          className="absolute inset-0 z-0 opacity-10"
-          style={{ background: color }}
-          animate={{
-            opacity: isHovered ? 0.2 : 0.1,
-          }}
-        />
-        <CardHeader className="relative z-10">
-          <div 
-            className={`p-3 rounded-full inline-flex bg-opacity-10 mb-2`} 
-            style={{ background: color }}
-          >
+      <div className="xp-window">
+        <div className="xp-title-bar">
+          <div className="flex items-center">
             {icon}
+            <span className="ml-2">{title}</span>
           </div>
-          <CardTitle className="text-xl font-satoshi">{title}</CardTitle>
-        </CardHeader>
-        <CardContent className="relative z-10">
-          <p className="text-gray-600 dark:text-gray-300">{description}</p>
-          
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: isHovered || isMobile ? '100%' : 0 }}
-            transition={{ duration: 0.3 }}
-            className="h-[1px] bg-gray-300 dark:bg-gray-700 mt-4"
-          />
-          
+          <div className="xp-window-buttons">
+            <button 
+              className="xp-window-button xp-minimize"
+              onClick={() => setIsMinimized(!isMinimized)}
+            >
+              {isMinimized ? <Maximize2 size={10} /> : <Minimize2 size={10} />}
+            </button>
+            <button className="xp-window-button xp-close">
+              <X size={10} />
+            </button>
+          </div>
+        </div>
+        
+        {!isMinimized && (
           <motion.div 
-            className="mt-4 flex items-center text-sm font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered || isMobile ? 1 : 0 }}
+            className="xp-window-content"
+            initial={{ height: "auto" }}
+            animate={{ height: isMinimized ? 0 : "auto" }}
             transition={{ duration: 0.3 }}
           >
-            <span>Explore details</span>
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <p className="text-gray-800 mb-4">{description}</p>
+            
+            <div className="flex justify-between items-center mt-4 border-t border-gray-300 pt-3">
+              <motion.div 
+                className="text-xs text-gray-500"
+                animate={{ opacity: isHovered ? 1 : 0.7 }}
+              >
+                Last updated: Today
+              </motion.div>
+              
+              <motion.button 
+                className="xp-button flex items-center text-sm"
+                {...buttonHandlers}
+                whileHover={{ backgroundColor: "#E3E1D1" }}
+              >
+                <span>Details</span>
+                <ArrowRight className="ml-1 h-3 w-3" />
+              </motion.button>
+            </div>
+            
+            {/* Interactive elements for stakeholders */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["Teachers", "Students", "Admins", "Policy"].map((role) => (
+                <motion.span
+                  key={role}
+                  className="inline-block px-2 py-1 bg-[#ECE9D8] text-xs border border-gray-400 rounded"
+                  whileHover={{ 
+                    backgroundColor: "#D7E4F2", 
+                    borderColor: "#0055E5" 
+                  }}
+                >
+                  {role}
+                </motion.span>
+              ))}
+            </div>
           </motion.div>
-        </CardContent>
-
-        {/* Subtle 3D effect with gradient highlight on hover */}
-        <motion.div
-          className="absolute inset-0 z-0 opacity-0 bg-gradient-to-tr from-transparent to-white dark:to-gray-700"
-          animate={{ opacity: isHovered ? 0.1 : 0 }}
-          transition={{ duration: 0.3 }}
-        />
-      </Card>
+        )}
+      </div>
     </motion.div>
   );
 };
