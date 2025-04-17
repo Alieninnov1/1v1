@@ -16,8 +16,12 @@ const InsightCard = ({ title, description, icon, color }: InsightCardProps) => {
   
   return (
     <motion.div
-      {...animationProps}
-      {...hoverHandlers}
+      initial={animationProps.initial}
+      animate={animationProps.animate}
+      whileHover={animationProps.whileHover}
+      transition={animationProps.transition}
+      onHoverStart={hoverHandlers.onHoverStart}
+      onHoverEnd={hoverHandlers.onHoverEnd}
       className="w-full"
     >
       <Card className={`relative overflow-hidden shadow-lg border-none h-full`}>
