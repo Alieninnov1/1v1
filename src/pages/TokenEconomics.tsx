@@ -1,5 +1,5 @@
 
-import { Layout } from "@/components/layout/Layout";
+import Layout from "@/components/layout/Layout";
 import { TokenOverview } from "@/components/token/TokenOverview";
 import { TokenDistribution } from "@/components/token/TokenDistribution";
 import { StakingInterface } from "@/components/token/StakingInterface";
