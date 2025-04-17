@@ -1,4 +1,3 @@
-
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import Hero from "@/components/home/Hero";
 import Features from "@/components/home/Features";
 import CallToAction from "@/components/home/CallToAction";
 import KnowledgeBase from "@/components/knowledge/KnowledgeBase";
-import { Computer, FileText, Info, Maximize2, Minimize2, Settings, Shield, X, BookOpen, Brain, Briefcase, PanelLeft } from "lucide-react";
+import { Computer, FileText, Info, Maximize2, Minimize2, Settings, Shield, X, BookOpen, Brain, Briefcase, PanelLeft, Wrench } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import BootScreen from "@/components/boot/BootScreen";

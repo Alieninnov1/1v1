@@ -14,7 +14,7 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
   useEffect(() => {
     if (showStartup) {
       const interval = setInterval(() => {
-        setBootProgress(prev => {
+        setBootProgress((prev: number) => {
           if (prev >= 100) {
             clearInterval(interval);
             setTimeout(() => setShowStartup(false), 500);
@@ -64,3 +64,4 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
 };
 
 export default BootScreen;
+
