@@ -1,9 +1,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
 import OverviewTab from "./tabs/OverviewTab";
 import AnalyticsTab from "./tabs/AnalyticsTab";
 import RecommendationsTab from "./tabs/RecommendationsTab";
+import DashboardMetrics from "./DashboardMetrics";
 
 interface DashboardTabsProps {
   activeTab: string;
