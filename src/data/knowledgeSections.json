@@ -9,7 +9,7 @@
       "role": "teacher",
       "contentType": "curriculum",
       "resourceType": "tool",
-      "actionUrl": "#feedback-loop"
+      "actionUrl": "/dashboard?tab=feedback"
     },
     {
       "title": "Curriculum AI Engine",
@@ -18,7 +18,8 @@
       "color": "#ED9564",
       "role": "teacher",
       "contentType": "curriculum",
-      "resourceType": "tool"
+      "resourceType": "tool",
+      "actionUrl": "/dashboard?tab=recommendations"
     },
     {
       "title": "Innovation Map",
@@ -27,7 +28,8 @@
       "color": "#92CD00",
       "role": "policy",
       "contentType": "innovation",
-      "resourceType": "data"
+      "resourceType": "data",
+      "actionUrl": "/dashboard?tab=analytics"
     },
     {
       "title": "Policy Sandbox",
@@ -36,7 +38,8 @@
       "color": "#A75ADB",
       "role": "policy",
       "contentType": "policy",
-      "resourceType": "tool"
+      "resourceType": "tool",
+      "actionUrl": "/government"
     },
     {
       "title": "Opportunity Zones",
@@ -45,7 +48,8 @@
       "color": "#D24726",
       "role": "industry",
       "contentType": "funding",
-      "resourceType": "guide"
+      "resourceType": "guide",
+      "actionUrl": "/industry"
     },
     {
       "title": "Frugal Innovation",
@@ -54,7 +58,8 @@
       "color": "#5E2CA5",
       "role": "admin",
       "contentType": "innovation",
-      "resourceType": "guide"
+      "resourceType": "guide",
+      "actionUrl": "/dashboard?tab=innovation"
     },
     {
       "title": "Non-dilutive Grants",
@@ -63,7 +68,8 @@
       "color": "#10B981",
       "role": "admin",
       "contentType": "funding",
-      "resourceType": "document"
+      "resourceType": "document",
+      "actionUrl": "/dashboard?tab=funding"
     },
     {
       "title": "Global Datasets",
@@ -72,7 +78,8 @@
       "color": "#0055E5",
       "role": "teacher",
       "contentType": "data",
-      "resourceType": "data"
+      "resourceType": "data",
+      "actionUrl": "/dashboard?tab=analytics"
     }
   ]
 }

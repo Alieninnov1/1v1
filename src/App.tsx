@@ -10,8 +10,18 @@ import Dashboard from "./pages/Dashboard";
 import Discussions from "./pages/Discussions";
 import Industry from "./pages/Industry";
 import Government from "./pages/Government";
+import Knowledge from "./pages/Knowledge";
 
-const queryClient = new QueryClient();
+// Create a client with default options optimized for performance
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -25,6 +35,7 @@ const App = () => (
           <Route path="/discussions" element={<Discussions />} />
           <Route path="/industry" element={<Industry />} />
           <Route path="/government" element={<Government />} />
+          <Route path="/knowledge" element={<Knowledge />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

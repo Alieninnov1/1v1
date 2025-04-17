@@ -1,13 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HelixHub - Connect Academia, Industry, and Government</title>
-    <meta name="description" content="HelixHub - Interactive platform that unites academia, industry, and government" />
+    <title>VisionNet - Connect Academia, Industry, and Government</title>
+    <meta name="description" content="VisionNet - Interactive platform that unites academia, industry, and government" />
     <meta name="author" content="Lovable" />
 
-    <meta property="og:title" content="HelixHub - Connect Academia, Industry, and Government" />
+    <meta property="og:title" content="VisionNet - Connect Academia, Industry, and Government" />
     <meta property="og:description" content="Interactive platform that unites academia, industry, and government" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
@@ -16,8 +17,31 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/logo.png" as="image" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    
+    <!-- Load fonts asynchronously -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    
+    <!-- Non-blocking fallbacks -->
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+      <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet" />
+    </noscript>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    
+    <!-- Enable PWA features -->
+    <meta name="theme-color" content="#5E2CA5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   </head>
 
   <body>
