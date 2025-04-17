@@ -1,0 +1,34 @@
+
+@layer components {
+  .knowledge-card {
+    @apply bg-white p-4 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300;
+  }
+  
+  .knowledge-card.student {
+    @apply border-l-4 border-[#92CD00] hover:border-l-8;
+  }
+  
+  .knowledge-card.teacher {
+    @apply border-l-4 border-[#0055E5] hover:border-l-8;
+  }
+  
+  .knowledge-card.policy {
+    @apply border-l-4 border-[#ED9564] hover:border-l-8;
+  }
+  
+  .knowledge-card.industry {
+    @apply border-l-4 border-[#D24726] hover:border-l-8;
+  }
+  
+  .knowledge-card.admin {
+    @apply border-l-4 border-[#A75ADB] hover:border-l-8;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm dark:bg-black/50;
+  }
+}

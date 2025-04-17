@@ -1,0 +1,40 @@
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--scrollbar-track));
+    border-left: 1px solid #999999;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--scrollbar-thumb));
+    border: 2px solid hsl(var(--scrollbar-track));
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3), inset -1px -1px 0 rgba(0,0,0,0.2);
+    border-radius: 0;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+    animation: glow 1.5s infinite alternate;
+  }
+  
+  ::-webkit-scrollbar-button:single-button {
+    background-color: #ECE9D8;
+    border: 1px solid #999999;
+    height: 16px;
+    width: 16px;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 4px rgba(0, 85, 229, 0.5);
+    }
+    to {
+      box-shadow: 0 0 8px rgba(0, 85, 229, 0.8);
+    }
+  }
+}
