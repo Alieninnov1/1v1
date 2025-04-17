@@ -108,7 +108,7 @@ const Discussions = () => {
           )}
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid grid-cols-4">
                 <TabsTrigger value="all" className="flex items-center gap-2">
                   <TrendingUp className="h-4 w-4" />
@@ -127,6 +127,39 @@ const Discussions = () => {
                   <span className="hidden sm:inline">Government</span>
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="all" className="mt-6 space-y-6">
+                {mockPosts.map((post) => (
+                  <FeedbackCard key={post.id} post={post} />
+                ))}
+              </TabsContent>
+              
+              <TabsContent value="academia" className="mt-6 space-y-6">
+                {mockPosts
+                  .filter((post) => post.author.sector === "academia")
+                  .map((post) => (
+                    <FeedbackCard key={post.id} post={post} />
+                  ))
+                }
+              </TabsContent>
+              
+              <TabsContent value="industry" className="mt-6 space-y-6">
+                {mockPosts
+                  .filter((post) => post.author.sector === "industry")
+                  .map((post) => (
+                    <FeedbackCard key={post.id} post={post} />
+                  ))
+                }
+              </TabsContent>
+              
+              <TabsContent value="government" className="mt-6 space-y-6">
+                {mockPosts
+                  .filter((post) => post.author.sector === "government")
+                  .map((post) => (
+                    <FeedbackCard key={post.id} post={post} />
+                  ))
+                }
+              </TabsContent>
             </Tabs>
             
             <div className="flex gap-2">
@@ -142,39 +175,6 @@ const Discussions = () => {
               </Button>
             </div>
           </div>
-          
-          <TabsContent value="all" className="mt-6 space-y-6">
-            {mockPosts.map((post) => (
-              <FeedbackCard key={post.id} post={post} />
-            ))}
-          </TabsContent>
-          
-          <TabsContent value="academia" className="mt-6 space-y-6">
-            {mockPosts
-              .filter((post) => post.author.sector === "academia")
-              .map((post) => (
-                <FeedbackCard key={post.id} post={post} />
-              ))
-            }
-          </TabsContent>
-          
-          <TabsContent value="industry" className="mt-6 space-y-6">
-            {mockPosts
-              .filter((post) => post.author.sector === "industry")
-              .map((post) => (
-                <FeedbackCard key={post.id} post={post} />
-              ))
-            }
-          </TabsContent>
-          
-          <TabsContent value="government" className="mt-6 space-y-6">
-            {mockPosts
-              .filter((post) => post.author.sector === "government")
-              .map((post) => (
-                <FeedbackCard key={post.id} post={post} />
-              ))
-            }
-          </TabsContent>
         </motion.div>
       </div>
     </Layout>
