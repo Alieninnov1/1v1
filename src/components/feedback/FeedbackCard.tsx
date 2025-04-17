@@ -29,7 +29,7 @@ export interface FeedbackPostProps {
   tags: string[];
 }
 
-// Added this interface to match the props being passed from RealTimeFeedbackWall
+// Interface for the real-time feedback wall props
 export interface FeedbackCardProps {
   author: string;
   role: "teacher" | "policy" | "industry" | "student";
@@ -67,10 +67,10 @@ const getSectorClass = (sector: string) => {
   }
 };
 
-// Updated implementation to handle both types of props
+// Updated component to handle both types of props
 const FeedbackCard = (props: FeedbackCardProps | { post: FeedbackPostProps }) => {
   // If using the RealTimeFeedbackWall props format
-  if ('author' in props) {
+  if ('author' in props && 'message' in props) {
     const { author, role, message, timestamp, onLike, likes, comments, isLiked = false } = props;
     const [liked, setLiked] = useState(isLiked);
     const [likesCount, setLikesCount] = useState(likes);
@@ -86,7 +86,7 @@ const FeedbackCard = (props: FeedbackCardProps | { post: FeedbackPostProps }) =>
     };
 
     // Map role to sector for UI consistency
-    const roleSectorMap = {
+    const roleSectorMap: Record<string, string> = {
       'teacher': 'academia',
       'student': 'academia',
       'industry': 'industry',
@@ -154,7 +154,7 @@ const FeedbackCard = (props: FeedbackCardProps | { post: FeedbackPostProps }) =>
   }
   // Original implementation for the post object format
   else {
-    const { post } = props;
+    const { post } = props as { post: FeedbackPostProps };
     const [liked, setLiked] = useState(false);
     const [saved, setSaved] = useState(false);
     const [likesCount, setLikesCount] = useState(post.likes);

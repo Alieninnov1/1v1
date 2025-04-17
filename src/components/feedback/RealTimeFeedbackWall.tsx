@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "@/hooks/use-toast";
-import FeedbackCard from "./FeedbackCard";
+import FeedbackCard, { FeedbackCardProps } from "./FeedbackCard";
 import { MessageSquare, ThumbsUp, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -153,8 +153,8 @@ const RealTimeFeedbackWall = () => {
         </div>
       </div>
       <div className="xp-window-content p-4">
-        <div className="mb-4 flex justify-between items-center">
-          <div className="flex gap-2">
+        <div className="mb-4 flex flex-wrap justify-between items-center">
+          <div className="flex flex-wrap gap-2 mb-2 sm:mb-0">
             <Button 
               size="sm" 
               variant={filter === "all" ? "default" : "outline"} 
