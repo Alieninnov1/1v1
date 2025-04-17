@@ -1,28 +1,31 @@
 
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 interface DesktopIconProps {
   name: string;
-  icon: LucideIcon;
-  color: string;
+  icon: ReactNode;
   onClick: () => void;
+  style?: React.CSSProperties;
 }
 
-const DesktopIcon = ({ name, icon: Icon, color, onClick }: DesktopIconProps) => {
+const DesktopIcon = ({ name, icon, onClick, style }: DesktopIconProps) => {
   return (
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 }
       }}
-      className="xp-icon"
+      className="xp-desktop-icon flex flex-col items-center cursor-pointer mb-4"
       whileHover={{ scale: 1.05, backgroundColor: "rgba(173, 216, 230, 0.4)" }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
+      style={style}
     >
-      <Icon className={`h-10 w-10 text-${color}-700`} />
-      <span className="text-xs font-bold text-black bg-white/60 px-1 rounded">
+      <div className="mb-1">
+        {icon}
+      </div>
+      <span className="text-xs text-white text-shadow px-1 bg-black/30 backdrop-blur-sm rounded max-w-full overflow-hidden text-ellipsis">
         {name}
       </span>
     </motion.div>
