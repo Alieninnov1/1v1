@@ -1,0 +1,121 @@
+
+/* XP Theme-specific Animations */
+
+/* Window transitions */
+.xp-window-appear {
+  animation: xpWindowAppear 0.3s ease-out forwards;
+  transform-origin: center;
+}
+
+@keyframes xpWindowAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Start menu animations */
+.xp-start-menu-appear {
+  animation: xpStartMenuAppear 0.2s ease-out forwards;
+  transform-origin: bottom left;
+}
+
+@keyframes xpStartMenuAppear {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Button click effect */
+.xp-button-click {
+  animation: xpButtonClick 0.15s ease-out;
+}
+
+@keyframes xpButtonClick {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Error dialog shake */
+.xp-error-shake {
+  animation: xpErrorShake 0.4s ease-in-out;
+}
+
+@keyframes xpErrorShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+/* Minimize animation */
+.xp-minimize {
+  animation: xpMinimize 0.2s ease-in-out forwards;
+}
+
+@keyframes xpMinimize {
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+}
+
+/* Maximize animation */
+.xp-maximize {
+  animation: xpMaximize 0.2s ease-out forwards;
+}
+
+@keyframes xpMaximize {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Desktop icon hover effect */
+.xp-desktop-icon-hover {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.xp-desktop-icon-hover:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Taskbar button hover */
+.xp-taskbar-btn-hover {
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.xp-taskbar-btn-hover:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .xp-window-appear,
+  .xp-start-menu-appear,
+  .xp-button-click,
+  .xp-error-shake,
+  .xp-minimize,
+  .xp-maximize {
+    animation: none !important;
+  }
+  
+  .xp-desktop-icon-hover,
+  .xp-taskbar-btn-hover {
+    transition: none !important;
+  }
+}
