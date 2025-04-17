@@ -31,7 +31,7 @@ const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup
     <div className="fixed top-0 left-0 w-full h-full bg-gray-900 flex flex-col items-center justify-center text-white z-50">
       <motion.img
         src="/logo.png"
-        alt="VisionNet Logo"
+        alt="HelixHub Logo"
         className="w-32 h-32 mb-4"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
