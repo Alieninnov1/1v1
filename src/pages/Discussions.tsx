@@ -11,7 +11,7 @@ const Discussions = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <DiscussionHeader />
-        <div className="mb-8">
+        <div className="mb-8 eth-card p-4">
           <DiscussionTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>

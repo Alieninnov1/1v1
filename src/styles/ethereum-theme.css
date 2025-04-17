@@ -1,0 +1,74 @@
+
+@layer base {
+  .ethereum-theme {
+    /* Ethereum color palette */
+    --eth-dark: #1A1F2C;
+    --eth-medium: #323a4d;
+    --eth-light: #546079;
+    --eth-accent: #00a3ff;
+    --eth-accent-alt: #9b87f5;
+    --eth-white: #ffffff;
+    --eth-offwhite: #f7f8fc;
+    --eth-border: #2d364c;
+    --eth-shadow: rgba(0, 0, 0, 0.25);
+    
+    @apply bg-[#0f1221] text-[#f7f8fc];
+  }
+  
+  /* Ethereum-specific UI elements */
+  .eth-card {
+    @apply bg-[#1A1F2C]/90 backdrop-blur-md border border-[#2d364c]/40 
+           rounded-xl shadow-xl transition-all duration-300;
+  }
+  
+  .eth-card:hover {
+    @apply border-[#9b87f5]/40 shadow-[0_0_15px_rgba(155,135,245,0.15)];
+  }
+  
+  .eth-gradient {
+    background: linear-gradient(135deg, #1A1F2C 0%, #323a4d 100%);
+  }
+  
+  .eth-glow {
+    box-shadow: 0 0 20px rgba(155, 135, 245, 0.2);
+  }
+  
+  .eth-button {
+    @apply bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] text-white 
+           rounded-lg px-4 py-2 transition-all font-medium hover:shadow-[0_0_10px_rgba(155,135,245,0.5)];
+  }
+  
+  .eth-tab-active {
+    @apply border-b-2 border-[#9b87f5] text-[#9b87f5];
+  }
+  
+  /* Animations */
+  @keyframes ethFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes ethPulse {
+    0% { box-shadow: 0 0 5px rgba(155, 135, 245, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(155, 135, 245, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(155, 135, 245, 0.2); }
+  }
+  
+  @keyframes ethBorderGlow {
+    0% { border-color: rgba(155, 135, 245, 0.3); }
+    50% { border-color: rgba(155, 135, 245, 0.8); }
+    100% { border-color: rgba(155, 135, 245, 0.3); }
+  }
+  
+  .eth-fade-in {
+    animation: ethFadeIn 0.5s ease-out forwards;
+  }
+  
+  .eth-pulse {
+    animation: ethPulse 3s infinite;
+  }
+  
+  .eth-border-glow {
+    animation: ethBorderGlow 3s infinite;
+  }
+}

@@ -18,18 +18,18 @@ const MatchmakingTab = () => {
           transition={{ duration: 0.5 }}
           className="mb-4"
         >
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start">
-            <InfoIcon className="text-blue-500 mr-2 mt-0.5 flex-shrink-0" size={18} />
+          <div className="eth-card p-4 flex items-start eth-fade-in">
+            <InfoIcon className="text-[#9b87f5] mr-2 mt-0.5 flex-shrink-0" size={18} />
             <div>
-              <h3 className="font-medium text-blue-800">About the Matchmaking Engine</h3>
-              <p className="text-sm text-blue-700 mt-1">
+              <h3 className="font-medium text-[#f7f8fc]">About the Matchmaking Engine</h3>
+              <p className="text-sm text-[#f7f8fc]/80 mt-1">
                 This live demo showcases how HelixHub matches curriculum with industry demands in real-time. 
                 The engine analyzes skill relevance and provides actionable insights for alignment.
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                <Badge variant="outline" className="bg-white">MVP Feature</Badge>
-                <Badge variant="outline" className="bg-white">AI-Powered</Badge>
-                <Badge variant="outline" className="bg-white">Triple Helix Model</Badge>
+                <Badge variant="outline" className="border-[#9b87f5]/30 text-[#9b87f5] bg-[#1A1F2C]">MVP Feature</Badge>
+                <Badge variant="outline" className="border-[#9b87f5]/30 text-[#9b87f5] bg-[#1A1F2C]">AI-Powered</Badge>
+                <Badge variant="outline" className="border-[#9b87f5]/30 text-[#9b87f5] bg-[#1A1F2C]">Triple Helix Model</Badge>
               </div>
             </div>
           </div>
