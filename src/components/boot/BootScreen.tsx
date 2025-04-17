@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 interface BootScreenProps {
   showStartup: boolean;
   bootProgress: number;
-  setBootProgress: (progress: number) => void;
-  setShowStartup: (show: boolean) => void;
+  setBootProgress: React.Dispatch<React.SetStateAction<number>>;
+  setShowStartup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BootScreen = ({ showStartup, bootProgress, setBootProgress, setShowStartup }: BootScreenProps) => {
   useEffect(() => {
     if (showStartup) {
       const interval = setInterval(() => {
-        setBootProgress((prev: number) => {
+        setBootProgress((prev) => {
           const newProgress = prev + Math.random() * 10;
           if (newProgress >= 100) {
             clearInterval(interval);

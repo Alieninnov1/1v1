@@ -30,6 +30,7 @@ export const knowledgeSections: KnowledgeSection[] = sectionsData.sections.map(s
   return {
     ...section,
     icon: <IconComponent className="h-6 w-6" style={{ color: section.color }} />,
-    role: section.role as KnowledgeSection["role"]
+    role: section.role as KnowledgeSection["role"],
+    resourceType: section.resourceType as KnowledgeSection["resourceType"]
   };
 });
