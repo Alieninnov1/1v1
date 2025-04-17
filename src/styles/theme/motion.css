@@ -1,0 +1,99 @@
+
+/* Motion and Animation Utilities */
+@layer utilities {
+  /* Base transitions */
+  .motion-safe {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .motion-fast {
+    @apply transition-all duration-150 ease-in-out;
+  }
+
+  .motion-slow {
+    @apply transition-all duration-500 ease-in-out;
+  }
+
+  /* Transform utilities */
+  .hover-lift {
+    @apply transition-transform duration-200;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  /* Fade animations */
+  .fade-enter {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .fade-exit {
+    animation: fadeOut 0.3s ease-out;
+  }
+
+  /* Slide animations */
+  .slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .slide-out {
+    animation: slideOut 0.3s ease-out;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slideIn {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+/* Motion preference handling */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none;
+  }
+}
