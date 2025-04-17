@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -25,7 +24,6 @@ const Dashboard = () => {
   const { data: skillTrends, isLoading, refetch } = useSkillTrends();
   const { toast } = useToast();
 
-  // Update URL when tab changes
   useEffect(() => {
     setSearchParams({ tab: activeTab });
   }, [activeTab, setSearchParams]);
@@ -39,7 +37,6 @@ const Dashboard = () => {
     
     await refetch();
     
-    // Simulate refresh delay
     setTimeout(() => {
       setIsRefreshing(false);
       toast({
@@ -51,92 +48,113 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
-        <div className="md:flex md:justify-between md:items-center mb-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="mb-4 md:mb-0"
-          >
-            <Button variant="ghost" size="sm" className="mb-2" asChild>
-              <a href="/">
-                <ArrowLeft size={16} className="mr-1" /> Back to Home
-              </a>
-            </Button>
-            <h1 className="text-2xl font-bold">HelixHub Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Real-time insights connecting academia, industry, and policy
-            </p>
-          </motion.div>
-          
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" onClick={() => toast({
-              title: "Settings",
-              description: "Dashboard settings would open here"
-            })}>
-              <Cog size={16} className="mr-1" />
-              Settings
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => toast({
-              title: "Report Downloaded",
-              description: "Dashboard report has been saved"
-            })}>
-              <Download size={16} className="mr-1" />
-              Export
-            </Button>
-            <Button size="sm" onClick={handleRefresh} disabled={isRefreshing}>
-              <RefreshCcw size={16} className={`mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
-              Refresh
-            </Button>
+      <div className="relative min-h-screen">
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-800/30 via-indigo-700/20 to-blue-800/30 animate-gradient" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-400/20 via-purple-300/10 to-transparent" />
+          <div className="absolute inset-0">
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 opacity-20 mix-blend-overlay animate-wave-${i + 1}`}
+                style={{
+                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 1000 Q 250 750 500 1000 T 1000 1000 L 1000 0 L 0 0 Z' fill='%23fff'/%3E%3C/svg%3E\")",
+                  backgroundSize: "100% 100%",
+                  animation: `wave ${15 + i * 5}s linear infinite`,
+                  animationDelay: `${i * -5}s`
+                }}
+              />
+            ))}
           </div>
         </div>
 
-        <DashboardHeader
-          title="Innovation Ecosystem Dashboard"
-          description="Monitor skill gaps, policy impact, and curriculum alignment in real-time"
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="md:col-span-2">
-            <DashboardTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-          </div>
-          <div className="md:col-span-1">
-            <LiveDataFeed />
-          </div>
-        </div>
-
-        <DashboardMetrics />
-
-        <div className="mt-10">
-          <Card className="p-4">
-            <h2 className="text-xl font-bold mb-4">Live Trending Skills</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {isLoading ? (
-                Array(4).fill(0).map((_, i) => (
-                  <div key={i} className="animate-pulse bg-gray-200 h-32 rounded-lg"></div>
-                ))
-              ) : (
-                skillTrends?.map((skill, idx) => (
-                  <ScrollAnimation key={skill.name} delay={idx * 0.1} type="fade" direction="up">
-                    <SkillTile
-                      name={skill.name}
-                      growth={skill.growth}
-                      demand={skill.demand}
-                      relevance={skill.relevance}
-                    />
-                  </ScrollAnimation>
-                ))
-              )}
+        <div className="container mx-auto px-4 py-8 relative">
+          <div className="md:flex md:justify-between md:items-center mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-4 md:mb-0"
+            >
+              <Button variant="ghost" size="sm" className="mb-2" asChild>
+                <a href="/">
+                  <ArrowLeft size={16} className="mr-1" /> Back to Home
+                </a>
+              </Button>
+              <h1 className="text-2xl font-bold">HelixHub Dashboard</h1>
+              <p className="text-gray-600 dark:text-gray-300">
+                Real-time insights connecting academia, industry, and policy
+              </p>
+            </motion.div>
+            
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm" onClick={() => toast({
+                title: "Settings",
+                description: "Dashboard settings would open here"
+              })}>
+                <Cog size={16} className="mr-1" />
+                Settings
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => toast({
+                title: "Report Downloaded",
+                description: "Dashboard report has been saved"
+              })}>
+                <Download size={16} className="mr-1" />
+                Export
+              </Button>
+              <Button size="sm" onClick={handleRefresh} disabled={isRefreshing}>
+                <RefreshCcw size={16} className={`mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
             </div>
-          </Card>
-        </div>
-        
-        <div className="mt-8 mb-8">
-          <InteractiveInsights />
-        </div>
-        
-        <div className="my-10">
-          <DataScraper />
+          </div>
+
+          <DashboardHeader
+            title="Innovation Ecosystem Dashboard"
+            description="Monitor skill gaps, policy impact, and curriculum alignment in real-time"
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="md:col-span-2">
+              <DashboardTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+            </div>
+            <div className="md:col-span-1">
+              <LiveDataFeed />
+            </div>
+          </div>
+
+          <DashboardMetrics />
+
+          <div className="mt-10">
+            <Card className="p-4">
+              <h2 className="text-xl font-bold mb-4">Live Trending Skills</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {isLoading ? (
+                  Array(4).fill(0).map((_, i) => (
+                    <div key={i} className="animate-pulse bg-gray-200 h-32 rounded-lg"></div>
+                  ))
+                ) : (
+                  skillTrends?.map((skill, idx) => (
+                    <ScrollAnimation key={skill.name} delay={idx * 0.1} type="fade" direction="up">
+                      <SkillTile
+                        name={skill.name}
+                        growth={skill.growth}
+                        demand={skill.demand}
+                        relevance={skill.relevance}
+                      />
+                    </ScrollAnimation>
+                  ))
+                )}
+              </div>
+            </Card>
+          </div>
+          
+          <div className="mt-8 mb-8">
+            <InteractiveInsights />
+          </div>
+          
+          <div className="my-10">
+            <DataScraper />
+          </div>
         </div>
       </div>
     </Layout>
