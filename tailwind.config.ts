@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -84,6 +85,9 @@ export default {
 				lg: '1rem',
 				md: '0.75rem',
 				sm: '0.5rem'
+			},
+			borderWidth: {
+				'6': '6px',  // Adding the custom border-6 width
 			},
 			keyframes: {
 				'accordion-down': {

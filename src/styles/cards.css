@@ -5,27 +5,27 @@
   }
   
   .knowledge-card.student {
-    @apply border-l-4 border-[#92CD00] hover:border-l-6;
+    @apply border-l-4 border-[#92CD00] hover:border-l-8;
     background: linear-gradient(to right, rgba(146, 205, 0, 0.05), transparent 50%);
   }
   
   .knowledge-card.teacher {
-    @apply border-l-4 border-[#0055E5] hover:border-l-6;
+    @apply border-l-4 border-[#0055E5] hover:border-l-8;
     background: linear-gradient(to right, rgba(0, 85, 229, 0.05), transparent 50%);
   }
   
   .knowledge-card.policy {
-    @apply border-l-4 border-[#ED9564] hover:border-l-6;
+    @apply border-l-4 border-[#ED9564] hover:border-l-8;
     background: linear-gradient(to right, rgba(237, 149, 100, 0.05), transparent 50%);
   }
   
   .knowledge-card.industry {
-    @apply border-l-4 border-[#D24726] hover:border-l-6;
+    @apply border-l-4 border-[#D24726] hover:border-l-8;
     background: linear-gradient(to right, rgba(210, 71, 38, 0.05), transparent 50%);
   }
   
   .knowledge-card.admin {
-    @apply border-l-4 border-[#A75ADB] hover:border-l-6;
+    @apply border-l-4 border-[#A75ADB] hover:border-l-8;
     background: linear-gradient(to right, rgba(167, 90, 219, 0.05), transparent 50%);
   }
   
