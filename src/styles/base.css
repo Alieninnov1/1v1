@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,7 +45,7 @@
   }
 
   a:focus, button:focus, input:focus, textarea:focus, select:focus {
-    @apply outline-offset-2 outline-blue-500 ring-2 ring-blue-500/50;
+    @apply outline-offset-2 outline-primary ring-2 ring-primary/50;
   }
 
   @supports (padding-top: env(safe-area-inset-top)) {
