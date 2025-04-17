@@ -1,69 +1,96 @@
 
-import { RefreshCcw, MessageSquare, TrendingUp, Link, ArrowRightLeft } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageSquare, Zap, Users, Database } from "lucide-react";
 import TrendingTopicsTab from "./tabs/TrendingTopicsTab";
 import FeedbackWallTab from "./tabs/FeedbackWallTab";
-import LiveDataTab from "./tabs/LiveDataTab";
 import MatchmakingTab from "./tabs/MatchmakingTab";
+import LiveDataTab from "./tabs/LiveDataTab";
+import DiscussionSidebar from "./DiscussionSidebar";
 
 interface DiscussionTabsProps {
   activeTab: string;
-  setActiveTab: (value: string) => void;
+  setActiveTab: (tab: string) => void;
 }
 
-export const DiscussionTabs = ({ activeTab, setActiveTab }: DiscussionTabsProps) => {
-  return (
-    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <div className="border-b border-[#2d364c]/40 overflow-x-auto">
-        <TabsList className="bg-transparent h-12 flex-nowrap">
-          <TabsTrigger 
-            value="trending" 
-            className={`h-12 px-4 sm:px-6 text-sm whitespace-nowrap flex items-center justify-center ${activeTab === 'trending' ? 'eth-tab-active' : 'text-[#f7f8fc]/70'}`}
-          >
-            <TrendingUp size={16} className="mr-2" />
-            Trending Topics
-          </TabsTrigger>
-          <TabsTrigger 
-            value="feedback" 
-            className={`h-12 px-4 sm:px-6 text-sm whitespace-nowrap flex items-center justify-center ${activeTab === 'feedback' ? 'eth-tab-active' : 'text-[#f7f8fc]/70'}`}
-          >
-            <MessageSquare size={16} className="mr-2" />
-            Feedback Wall
-          </TabsTrigger>
-          <TabsTrigger 
-            value="livedata" 
-            className={`h-12 px-4 sm:px-6 text-sm whitespace-nowrap flex items-center justify-center ${activeTab === 'livedata' ? 'eth-tab-active' : 'text-[#f7f8fc]/70'}`}
-          >
-            <RefreshCcw size={16} className="mr-2" />
-            Live Data
-          </TabsTrigger>
-          <TabsTrigger 
-            value="matchmaking" 
-            className={`h-12 px-4 sm:px-6 text-sm whitespace-nowrap flex items-center justify-center ${activeTab === 'matchmaking' ? 'eth-tab-active' : 'text-[#f7f8fc]/70'}`}
-          >
-            <ArrowRightLeft size={16} className="mr-2" />
-            Matchmaking
-            <span className="ml-1.5 px-1.5 py-0.5 text-[10px] bg-[#9b87f5]/20 text-[#9b87f5] rounded-full">NEW</span>
-          </TabsTrigger>
-        </TabsList>
-      </div>
-      
-      <TabsContent value="trending" className="mt-6">
-        <TrendingTopicsTab />
-      </TabsContent>
-      
-      <TabsContent value="feedback" className="mt-6">
-        <FeedbackWallTab />
-      </TabsContent>
-      
-      <TabsContent value="livedata" className="mt-6">
-        <LiveDataTab />
-      </TabsContent>
+const DiscussionTabs = ({ activeTab, setActiveTab }: DiscussionTabsProps) => {
+  const [showSidebar, setShowSidebar] = useState(false);
+  
+  const tabs = [
+    { id: "trending", label: "Trending Topics", icon: <Zap size={16} /> },
+    { id: "feedback", label: "Feedback Wall", icon: <MessageSquare size={16} /> },
+    { id: "matchmaking", label: "Matchmaking", icon: <Users size={16} /> },
+    { id: "livedata", label: "Live Data", icon: <Database size={16} /> },
+  ];
 
-      <TabsContent value="matchmaking" className="mt-6">
-        <MatchmakingTab />
-      </TabsContent>
-    </Tabs>
+  return (
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
+        <div className="xp-taskbar rounded-t-lg overflow-hidden flex md:hidden justify-between px-2 py-1 items-center">
+          <div className="xp-start-button text-xs" onClick={() => setShowSidebar(!showSidebar)}>
+            Start
+          </div>
+          <div className="text-xs text-white">HelixHub XP</div>
+        </div>
+        
+        {tabs.map((tab) => (
+          <motion.button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            whileTap={{ scale: 0.97 }}
+            className={`xp-button flex items-center justify-center gap-2 rounded-t-lg ${
+              activeTab === tab.id 
+                ? "bg-white text-blue-800 font-bold border-b-0" 
+                : "bg-gray-200 text-gray-700 hover:bg-gray-100"
+            } px-4 py-2 text-sm`}
+          >
+            {tab.icon}
+            <span className="hidden sm:inline">{tab.label}</span>
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Mobile sidebar */}
+      <AnimatePresence>
+        {showSidebar && (
+          <motion.div 
+            initial={{ x: -280, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -280, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg"
+          >
+            <DiscussionSidebar onClose={() => setShowSidebar(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* XP-style content window */}
+      <motion.div 
+        className="xp-window-content bg-white p-1 rounded-b-lg shadow-inner overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1 }}
+      >
+        <div className="min-h-[60vh] overflow-y-auto scrollbar-hidden p-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="window-appear"
+            >
+              {activeTab === "trending" && <TrendingTopicsTab />}
+              {activeTab === "feedback" && <FeedbackWallTab />}
+              {activeTab === "matchmaking" && <MatchmakingTab />}
+              {activeTab === "livedata" && <LiveDataTab />}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+    </>
   );
 };
 
