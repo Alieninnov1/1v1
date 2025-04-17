@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,6 +45,9 @@
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 270 30% 35%;
     --sidebar-ring: 270 59% 61%;
+    
+    --scrollbar-thumb: 270 59% 41%;
+    --scrollbar-track: 270 30% 95.5%;
   }
 
   .dark {
@@ -83,26 +87,57 @@
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 270 30% 25%;
     --sidebar-ring: 270 59% 61%;
+    
+    --scrollbar-thumb: 270 59% 51%;
+    --scrollbar-track: 217.2 32.6% 17.5%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
   }
+  
+  /* Custom scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--scrollbar-track));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--scrollbar-thumb));
+    border-radius: 5px;
+    border: 2px solid hsl(var(--scrollbar-track));
+    transition: all 0.3s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+    box-shadow: 0 0 8px hsl(var(--primary));
+  }
 }
 
 @layer components {
   .card-hover {
-    @apply transition-all duration-200 hover:shadow-card-hover hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
   }
   
   .button-hover {
-    @apply transition-all duration-200 hover:scale-105;
+    @apply transition-all duration-300 hover:scale-105;
   }
   
   .section-padding {
@@ -111,5 +146,54 @@
   
   .glass-card {
     @apply bg-white/80 backdrop-blur-sm dark:bg-black/50;
+  }
+  
+  /* Fluid responsive containers */
+  .container-fluid {
+    @apply w-full max-w-full px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Enhanced mobile grid layout */
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6;
+  }
+  
+  /* 3D card effect */
+  .card-3d {
+    @apply relative overflow-hidden rounded-xl transition-all duration-300;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card-3d:hover {
+    @apply shadow-xl;
+    transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+  }
+  
+  /* Sticky nav support */
+  .sticky-nav {
+    @apply sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-gray-900/90 transition-all duration-300;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Hero banner enhancements */
+  .hero-banner {
+    @apply relative overflow-hidden;
+    min-height: 70vh;
+  }
+  
+  /* Mobile adaptations */
+  @media (max-width: 640px) {
+    .hero-banner {
+      min-height: 90vh;
+    }
+    
+    h1 {
+      @apply text-3xl;
+    }
+    
+    h2 {
+      @apply text-2xl;
+    }
   }
 }
