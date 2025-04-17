@@ -1,85 +1,155 @@
 
-@layer components {
-  .xp-window {
-    @apply rounded-md overflow-hidden border-2 border-blue-800 shadow-xl bg-[#ECE9D8];
-    min-height: 100px;
-    transform: translateZ(0); /* Hardware acceleration */
-    will-change: transform, opacity;
-  }
-  
-  .xp-title-bar {
-    @apply bg-gradient-to-r from-[#2581D7] to-[#8BD5FE] text-white py-1 px-2 flex items-center justify-between;
-    font-family: 'Tahoma', sans-serif;
-    font-weight: bold;
-    font-size: 12px;
-  }
+/* Windows XP Theme Styling */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-  /* Title bar variants */
-  .xp-title-bar.student {
-    @apply bg-gradient-to-r from-[#7DB600] to-[#A7E930];
-  }
-  
-  .xp-title-bar.policy {
-    @apply bg-gradient-to-r from-[#D17E4F] to-[#FFAC79];
-  }
-  
-  .xp-title-bar.industry {
-    @apply bg-gradient-to-r from-[#B73D1C] to-[#FF5A31];
-  }
-  
-  .xp-title-bar.admin {
-    @apply bg-gradient-to-r from-[#8E4FBB] to-[#C085FF];
-  }
-  
-  .xp-window-buttons {
-    @apply flex space-x-1;
-  }
-  
-  .xp-window-button {
-    @apply h-5 w-5 rounded flex items-center justify-center text-xs transition-all;
-    box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
-  }
-  
-  .xp-window-button:active {
-    box-shadow: -1px -1px 0 white inset, 1px 1px 0 #888 inset;
-    transform: translateY(1px);
-  }
-  
-  .xp-window-content {
-    @apply p-4 bg-[#ECE9D8];
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  
-  .xp-button {
-    @apply px-4 py-1 rounded-md text-black bg-[#ECE9D8] border border-gray-400 transition-all duration-200;
-    box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
-  }
-  
-  .xp-button:hover {
-    @apply bg-[#E3E1D1];
-  }
-  
-  .xp-button:active {
-    box-shadow: -1px -1px 0 white inset, 1px 1px 0 #888 inset;
-    transform: translateY(1px);
-  }
+/* XP Window */
+.xp-window {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
+  background: #f4f4f4;
+  border: 1px solid #c7c7c7;
+}
 
-  /* Responsive adaptations */
-  @media (max-width: 640px) {
-    .xp-window {
-      @apply rounded-none border-l-0 border-r-0;
-      width: 100vw;
-      margin-left: -1rem;
-      margin-right: -1rem;
-    }
-    
-    .xp-window-content {
-      @apply p-3;
-    }
-    
-    .xp-button {
-      @apply text-sm py-2;
-    }
-  }
+/* XP Title Bar */
+.xp-title-bar {
+  background: linear-gradient(to right, #0155b7, #036ffc);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* XP Window Content */
+.xp-window-content {
+  background: #ffffff;
+  border-top: 1px solid #c7c7c7;
+}
+
+/* XP Button */
+.xp-button {
+  background: linear-gradient(to bottom, #FFFFFF 0%, #E9E9E9 100%);
+  border: 1px solid #7b9ebd;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.7);
+  color: #333;
+  font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-family: "Tahoma", sans-serif;
+}
+
+.xp-button:hover {
+  background: linear-gradient(to bottom, #F0F0F0 0%, #DDDDDD 100%);
+}
+
+.xp-button:active {
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+  background: linear-gradient(to bottom, #E0E0E0 0%, #EEEEEE 100%);
+}
+
+/* Card Styles */
+.knowledge-card {
+  @apply border-l-4 rounded-lg p-4 transition-all duration-300 hover:shadow-md;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent 50%);
+}
+
+.knowledge-card.teacher {
+  @apply border-l-4 border-[#0055E5] hover:border-l-8;
+  background: linear-gradient(to right, rgba(0, 85, 229, 0.05), transparent 50%);
+}
+
+.knowledge-card.student {
+  @apply border-l-4 border-[#92CD00] hover:border-l-8;
+  background: linear-gradient(to right, rgba(146, 205, 0, 0.05), transparent 50%);
+}
+
+.knowledge-card.policy {
+  @apply border-l-4 border-[#ED9564] hover:border-l-8;
+  background: linear-gradient(to right, rgba(237, 149, 100, 0.05), transparent 50%);
+}
+
+.knowledge-card.industry {
+  @apply border-l-4 border-[#D24726] hover:border-l-8;
+  background: linear-gradient(to right, rgba(210, 71, 38, 0.05), transparent 50%);
+}
+
+.knowledge-card.admin {
+  @apply border-l-4 border-[#A75ADB] hover:border-l-8;
+  background: linear-gradient(to right, rgba(167, 90, 219, 0.05), transparent 50%);
+}
+
+/* XP Scrollbar */
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 16px;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border: 1px solid #d9d9d9;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  background: #c8c8c8;
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb:hover {
+  background: #b8b8b8;
+}
+
+/* Task Bar */
+.xp-taskbar {
+  background: linear-gradient(to bottom, #2a92fb, #0155b7);
+  border-top: 1px solid #fff;
+  box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.xp-start-button {
+  background: linear-gradient(to bottom, #5ab752, #2d9a27);
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9rem;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.xp-start-button:hover {
+  background: linear-gradient(to bottom, #6bcc62, #38b332);
+}
+
+/* Desktop Icons */
+.xp-desktop-icon {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+}
+
+.xp-icon-img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 5px;
+}
+
+.xp-icon-text {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
+  font-size: 0.75rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
