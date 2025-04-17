@@ -2,6 +2,7 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import CardHeader from "./CardHeader";
 import CardActions from "./CardActions";
+import { getSectorClass } from "./SectorBadge";
 import { FeedbackCardProps, FeedbackPostProps } from "./types";
 
 const FeedbackCard = (props: FeedbackCardProps | { post: FeedbackPostProps }) => {

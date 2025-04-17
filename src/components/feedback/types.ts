@@ -27,3 +27,14 @@ export interface FeedbackCardProps {
 }
 
 export type SectorType = 'academia' | 'industry' | 'government';
+
+export interface FeedbackItem {
+  id: string;
+  author: string;
+  role: "student" | "teacher" | "policy" | "industry";
+  message: string;
+  timestamp: string;
+  likes: number;
+  comments: number;
+  hasLiked?: boolean;
+}
