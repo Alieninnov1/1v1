@@ -58,6 +58,13 @@
     --xp-window-border: #0054E3;
     --xp-window-gray: #ECE9D8;
     --xp-button-face: #ECE9D8;
+    
+    /* Role-specific colors */
+    --role-student: #92CD00;
+    --role-teacher: #0055E5;
+    --role-policy: #ED9564;
+    --role-industry: #D24726;
+    --role-admin: #A75ADB;
   }
 
   .dark {
@@ -120,9 +127,15 @@
     font-family: 'Tahoma', 'Inter', sans-serif;
   }
   
-  /* Custom scrollbar styles - XP themed */
+  /* Improved accessibility for focus states */
+  a:focus, button:focus, input:focus, textarea:focus, select:focus {
+    @apply outline-offset-2 outline-blue-500;
+  }
+  
+  /* Enhanced XP-themed scrollbar */
   ::-webkit-scrollbar {
     width: 16px;
+    height: 16px;
   }
   
   ::-webkit-scrollbar-track {
@@ -134,10 +147,12 @@
     background: hsl(var(--scrollbar-thumb));
     border: 2px solid hsl(var(--scrollbar-track));
     box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3), inset -1px -1px 0 rgba(0,0,0,0.2);
+    border-radius: 0; /* XP scrollbars weren't rounded */
   }
   
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary));
+    animation: glow 1.5s infinite alternate;
   }
   
   /* Windows XP arrow buttons on scrollbar */
@@ -147,12 +162,22 @@
     height: 16px;
     width: 16px;
   }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 4px rgba(0, 85, 229, 0.5);
+    }
+    to {
+      box-shadow: 0 0 8px rgba(0, 85, 229, 0.8);
+    }
+  }
 }
 
 @layer components {
-  /* Windows XP styled components */
+  /* Windows XP styled components with enhanced interactivity */
   .xp-window {
     @apply rounded-t-md overflow-hidden border-2 border-blue-800 shadow-xl bg-[#ECE9D8];
+    min-height: 100px;
   }
   
   .xp-title-bar {
@@ -160,6 +185,23 @@
     font-family: 'Tahoma', sans-serif;
     font-weight: bold;
     font-size: 12px;
+  }
+  
+  /* Title bar variants for different stakeholder roles */
+  .xp-title-bar.student {
+    @apply bg-gradient-to-r from-[#7DB600] to-[#A7E930];
+  }
+  
+  .xp-title-bar.policy {
+    @apply bg-gradient-to-r from-[#D17E4F] to-[#FFAC79];
+  }
+  
+  .xp-title-bar.industry {
+    @apply bg-gradient-to-r from-[#B73D1C] to-[#FF5A31];
+  }
+  
+  .xp-title-bar.admin {
+    @apply bg-gradient-to-r from-[#8E4FBB] to-[#C085FF];
   }
   
   .xp-window-buttons {
@@ -185,18 +227,175 @@
   
   .xp-window-content {
     @apply p-4 bg-[#ECE9D8];
+    max-height: 80vh;
+    overflow-y: auto;
   }
   
   .xp-button {
-    @apply px-4 py-1 rounded-md text-black bg-[#ECE9D8] border border-gray-400;
+    @apply px-4 py-1 rounded-md text-black bg-[#ECE9D8] border border-gray-400 transition-all duration-200;
     box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
   }
   
   .xp-button:active {
     box-shadow: -1px -1px 0 white inset, 1px 1px 0 #888 inset;
+    transform: translateY(1px);
+  }
+  
+  .xp-button:hover {
+    @apply bg-[#E3E1D1];
   }
 
-  /* Retain existing utility classes */
+  /* Improved XP icons with enhanced accessibility */
+  .xp-icon {
+    @apply flex flex-col items-center justify-center text-center cursor-pointer p-2 hover:bg-blue-100/50 rounded transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500;
+    height: 100px; /* Fixed height for consistency */
+  }
+  
+  .xp-icon:hover {
+    @apply shadow-md;
+  }
+  
+  .xp-icon:active {
+    @apply shadow-inner transform scale-95;
+  }
+  
+  /* Animated tooltip for better user guidance */
+  .xp-tooltip {
+    @apply bg-black text-white text-xs py-1 px-2 rounded opacity-0 absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 50;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    white-space: nowrap;
+  }
+  
+  .xp-tooltip.visible {
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Role-specific styling for different stakeholders */
+  .role-student {
+    @apply border-l-4 border-[#92CD00];
+  }
+  
+  .role-teacher {
+    @apply border-l-4 border-[#0055E5];
+  }
+  
+  .role-policy {
+    @apply border-l-4 border-[#ED9564];
+  }
+  
+  .role-industry {
+    @apply border-l-4 border-[#D24726];
+  }
+  
+  .role-admin {
+    @apply border-l-4 border-[#A75ADB];
+  }
+
+  /* Enhanced responsive card grid system */
+  .card-grid {
+    @apply grid grid-cols-1 gap-4;
+  }
+  
+  @media (min-width: 640px) {
+    .card-grid {
+      @apply grid-cols-2;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .card-grid {
+      @apply grid-cols-3;
+    }
+  }
+  
+  /* Windows XP Start Menu */
+  .xp-start-menu {
+    @apply fixed bottom-0 left-0 w-72 bg-white border-2 border-blue-800 shadow-xl z-50;
+    border-top-right-radius: 0.5rem;
+  }
+  
+  .xp-start-header {
+    @apply bg-gradient-to-b from-blue-600 to-blue-700 text-white p-3 font-bold;
+    border-top-right-radius: 0.3rem;
+  }
+  
+  /* Windows XP desktop */
+  .xp-desktop {
+    @apply min-h-screen bg-gradient-to-b from-sky-300 to-sky-500 p-4 relative overflow-hidden;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Taskbar */
+  .xp-taskbar {
+    @apply fixed bottom-0 left-0 right-0 h-10 bg-gradient-to-r from-[#2581D7] to-[#3575BD] flex items-center px-2;
+    border-top: 1px solid #3575BD;
+    z-index: 40;
+  }
+  
+  .xp-start-button {
+    @apply flex items-center px-3 h-8 bg-green-600 text-white rounded mr-2;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3);
+  }
+  
+  .xp-window-button-taskbar {
+    @apply flex-shrink-0 h-7 px-2 bg-[#3B81CA] text-white rounded flex items-center mx-1;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.3);
+  }
+  
+  /* XP clock */
+  .xp-clock {
+    @apply ml-auto mr-2 text-white text-xs;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Embellished card styles for knowledge base */
+  .knowledge-card {
+    @apply bg-white p-4 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300;
+  }
+  
+  .knowledge-card.student {
+    @apply border-l-4 border-[#92CD00] hover:border-l-8;
+  }
+  
+  .knowledge-card.teacher {
+    @apply border-l-4 border-[#0055E5] hover:border-l-8;
+  }
+  
+  .knowledge-card.policy {
+    @apply border-l-4 border-[#ED9564] hover:border-l-8;
+  }
+  
+  .knowledge-card.industry {
+    @apply border-l-4 border-[#D24726] hover:border-l-8;
+  }
+  
+  .knowledge-card.admin {
+    @apply border-l-4 border-[#A75ADB] hover:border-l-8;
+  }
+  
+  /* Maintain existing utility classes */
   .card-hover {
     @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
   }
@@ -211,77 +410,5 @@
   
   .glass-card {
     @apply bg-white/80 backdrop-blur-sm dark:bg-black/50;
-  }
-  
-  /* Fluid responsive containers */
-  .container-fluid {
-    @apply w-full max-w-full px-4 sm:px-6 lg:px-8;
-  }
-  
-  /* Enhanced mobile grid layout */
-  .mobile-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6;
-  }
-  
-  /* 3D card effect - modified for XP style */
-  .card-3d {
-    @apply relative overflow-hidden rounded-lg border-2;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-  }
-  
-  .card-3d:hover {
-    @apply shadow-xl;
-    transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
-  }
-  
-  /* Sticky nav support */
-  .sticky-nav {
-    @apply sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-gray-900/90 transition-all duration-300;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Hero banner enhancements */
-  .hero-banner {
-    @apply relative overflow-hidden;
-    min-height: 70vh;
-  }
-  
-  /* Mobile adaptations */
-  @media (max-width: 640px) {
-    .hero-banner {
-      min-height: 90vh;
-    }
-    
-    h1 {
-      @apply text-3xl;
-    }
-    
-    h2 {
-      @apply text-2xl;
-    }
-  }
-  
-  /* Windows XP icons */
-  .xp-icon {
-    @apply flex flex-col items-center justify-center text-center cursor-pointer p-2 hover:bg-blue-100/50;
-  }
-  
-  .xp-icon-img {
-    @apply w-12 h-12 mb-2;
-  }
-  
-  /* Windows XP start menu */
-  .xp-start-menu {
-    @apply absolute bottom-0 left-0 w-72 bg-white border-2 border-blue-800 shadow-xl;
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
-  }
-  
-  .xp-start-header {
-    @apply bg-gradient-to-b from-blue-600 to-blue-700 text-white p-3 font-bold;
-    border-top-right-radius: 0.3rem;
-    border-top-left-radius: 0.3rem;
   }
 }

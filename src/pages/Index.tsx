@@ -6,8 +6,10 @@ import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import Features from "@/components/home/Features";
 import CallToAction from "@/components/home/CallToAction";
-import { Computer, FileText, Info, Maximize2, Minimize2, Settings, Shield, X } from "lucide-react";
+import KnowledgeBase from "@/components/knowledge/KnowledgeBase";
+import { Computer, FileText, Info, Maximize2, Minimize2, Settings, Shield, X, BookOpen, Tool, PanelLeft, Brain } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
@@ -15,6 +17,7 @@ const Index = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogContent, setDialogContent] = useState("");
+  const [showKnowledgeBase, setShowKnowledgeBase] = useState(false);
   const navigate = useNavigate();
   const controls = useAnimation();
   const { toast } = useToast();
@@ -79,12 +82,17 @@ const Index = () => {
     setDialogOpen(true);
   };
   
-  // Simulate Windows XP desktop icons
+  // Enhanced Windows XP desktop icons with more practical links
   const desktopIcons = [
     { 
       name: "Dashboard",
       icon: <Computer className="h-10 w-10 text-blue-700" />,
       action: () => navigate('/dashboard')
+    },
+    { 
+      name: "Knowledge Base",
+      icon: <BookOpen className="h-10 w-10 text-purple-700" />,
+      action: () => setShowKnowledgeBase(!showKnowledgeBase)
     },
     { 
       name: "Curriculum Alignment",
@@ -95,6 +103,16 @@ const Index = () => {
       name: "Policy Sandbox",
       icon: <Shield className="h-10 w-10 text-green-600" />,
       action: () => openDialog("Policy Sandbox", "Simulate the impact of education policies before implementing them.")
+    },
+    {
+      name: "Tools Library",
+      icon: <Tool className="h-10 w-10 text-red-600" />,
+      action: () => openDialog("Tools Library", "Access our collection of interactive tools for education planning and policy development.")
+    },
+    {
+      name: "AI Assistant",
+      icon: <Brain className="h-10 w-10 text-indigo-600" />,
+      action: () => openDialog("AI Curriculum Assistant", "Get AI-powered recommendations to align curriculum with industry needs and future skills.")
     },
     { 
       name: "Settings",
@@ -143,7 +161,7 @@ const Index = () => {
             initial="hidden"
             animate={controls}
             variants={containerVariants}
-            className="mb-8 grid grid-cols-2 sm:grid-cols-4 gap-4"
+            className="mb-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
           >
             {desktopIcons.map((icon, index) => (
               <motion.div
@@ -204,25 +222,26 @@ const Index = () => {
               >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center mb-16">
-                    <motion.h2 
-                      className="text-3xl sm:text-4xl font-bold text-gray-900 font-tahoma mb-6"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
+                    <ScrollAnimation
+                      type="fade"
+                      direction="up"
+                      className="mb-6"
                     >
-                      How HelixHub Works
-                    </motion.h2>
-                    <motion.p 
-                      className="text-xl text-gray-600 max-w-3xl mx-auto"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
+                      <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-tahoma mb-6">
+                        How HelixHub Works
+                      </h2>
+                    </ScrollAnimation>
+                    <ScrollAnimation
+                      type="fade"
+                      direction="up"
+                      delay={0.1}
+                      className="max-w-3xl mx-auto"
                     >
-                      Our platform creates a dynamic ecosystem where education, workforce, 
-                      and policy makers collaborate to bridge skill gaps.
-                    </motion.p>
+                      <p className="text-xl text-gray-600">
+                        Our platform creates a dynamic ecosystem where education, workforce, 
+                        and policy makers collaborate to bridge skill gaps.
+                      </p>
+                    </ScrollAnimation>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -243,29 +262,29 @@ const Index = () => {
                         description: "Implement AI recommendations and data-driven insights to close skill gaps and improve outcomes."
                       }
                     ].map((item, index) => (
-                      <motion.div
+                      <ScrollAnimation
                         key={item.step}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-                        className="text-center px-4"
+                        type="fade"
+                        direction="up"
+                        delay={0.1 * (index + 1)}
                       >
-                        <motion.div 
-                          className="w-16 h-16 bg-[#0055E5] rounded-full flex items-center justify-center text-white mx-auto mb-6 border-2 border-white"
-                          whileHover={{ 
-                            scale: 1.05, 
-                            boxShadow: "0 0 15px rgba(0, 85, 229, 0.4)" 
-                          }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <span className="text-2xl font-bold">{item.step}</span>
+                        <motion.div className="text-center px-4">
+                          <motion.div 
+                            className="w-16 h-16 bg-[#0055E5] rounded-full flex items-center justify-center text-white mx-auto mb-6 border-2 border-white"
+                            whileHover={{ 
+                              scale: 1.05, 
+                              boxShadow: "0 0 15px rgba(0, 85, 229, 0.4)" 
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <span className="text-2xl font-bold">{item.step}</span>
+                          </motion.div>
+                          <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                          <p className="text-gray-600">
+                            {item.description}
+                          </p>
                         </motion.div>
-                        <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                        <p className="text-gray-600">
-                          {item.description}
-                        </p>
-                      </motion.div>
+                      </ScrollAnimation>
                     ))}
                   </div>
                 </div>
@@ -274,6 +293,9 @@ const Index = () => {
               <CallToAction />
             </div>
           </motion.div>
+          
+          {/* Knowledge Base Section - Only shown when toggled */}
+          {showKnowledgeBase && <KnowledgeBase />}
         </div>
       )}
       
