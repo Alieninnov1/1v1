@@ -1,43 +1,44 @@
 
 import { Link } from "react-router-dom";
+import { Github, Twitter, Discord } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 mt-auto">
+    <footer className="bg-[#1A1F2C]/95 backdrop-blur-md border-t border-purple-900/30">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex items-center">
-              <div className="flex items-center justify-center h-10 w-10 rounded-md bg-helix-purple text-white font-bold">
+              <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-br from-purple-600 to-blue-500 text-white font-bold">
                 H
               </div>
-              <span className="ml-2 text-xl font-bold text-helix-purple font-satoshi">HelixHub</span>
+              <span className="ml-2 text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">HelixHub</span>
             </Link>
-            <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
-              Uniting academia, industry, and government to shape the future of education and workforce development.
+            <p className="mt-4 text-sm text-purple-200/70">
+              Uniting academia, industry, and government through decentralized collaboration and blockchain innovation.
             </p>
           </div>
 
           {/* Links - First column */}
           <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">Platform</h3>
+            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider">Platform</h3>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link to="/dashboard" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
+                <Link to="/dashboard" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="/discussions" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
-                  Discussions
+                <Link to="/blockchain-explorer" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
+                  Explorer
                 </Link>
               </li>
               <li>
-                <Link to="/ai-recommendations" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
-                  AI Recommendations
+                <Link to="/dao-governance" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
+                  Governance
                 </Link>
               </li>
             </ul>
@@ -45,52 +46,46 @@ const Footer = () => {
 
           {/* Links - Second column */}
           <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">Stakeholders</h3>
+            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider">Stakeholders</h3>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link to="/academia" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
+                <Link to="/academia" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
                   Academia
                 </Link>
               </li>
               <li>
-                <Link to="/industry" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
+                <Link to="/industry" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
                   Industry
                 </Link>
               </li>
               <li>
-                <Link to="/government" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
+                <Link to="/government" className="text-base text-purple-200/70 hover:text-purple-100 transition-colors">
                   Government
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact/Legal */}
+          {/* Community */}
           <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">Legal</h3>
-            <ul className="mt-4 space-y-3">
-              <li>
-                <Link to="/privacy" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-base text-gray-600 dark:text-gray-300 hover:text-helix-purple dark:hover:text-helix-purple300 transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
+            <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wider">Community</h3>
+            <div className="mt-4 flex space-x-4">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+                <Github size={24} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+                <Twitter size={24} />
+              </a>
+              <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-purple-200/70 hover:text-purple-100">
+                <Discord size={24} />
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-            &copy; {currentYear} HelixHub. All rights reserved.
+        <div className="mt-12 border-t border-purple-900/30 pt-8">
+          <p className="text-sm text-purple-200/50 text-center">
+            &copy; {currentYear} HelixHub. Built with Ethereum technology. All rights reserved.
           </p>
         </div>
       </div>
