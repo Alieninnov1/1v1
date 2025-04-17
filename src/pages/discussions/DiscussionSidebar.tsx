@@ -1,12 +1,25 @@
 
 import { DataScraper } from "@/components/ui/data-scraper";
+import { X } from "lucide-react";
 
-const DiscussionSidebar = () => {
+interface DiscussionSidebarProps {
+  onClose?: () => void;
+}
+
+const DiscussionSidebar = ({ onClose }: DiscussionSidebarProps) => {
   return (
     <div className="space-y-6">
       <div className="xp-window">
-        <div className="xp-title-bar">
+        <div className="xp-title-bar flex justify-between items-center">
           <span>Discussion Stats</span>
+          {onClose && (
+            <button 
+              onClick={onClose}
+              className="xp-window-button xp-close h-4 w-4 text-center flex items-center justify-center"
+            >
+              <X size={10} />
+            </button>
+          )}
         </div>
         <div className="xp-window-content p-4">
           <ul className="space-y-2">
