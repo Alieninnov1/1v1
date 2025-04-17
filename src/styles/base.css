@@ -28,6 +28,9 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 223 100% 41%;
     --radius: 0.5rem;
+    --scrollbar-track: 0 0% 91%;
+    --scrollbar-thumb: 271 76% 53%;
+    --helix-purple: 271 76% 53%;
   }
 
   .dark {
@@ -50,6 +53,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 223 100% 61%;
+    --scrollbar-track: 220 13% 18%;
+    --scrollbar-thumb: 271 76% 53%;
   }
 
   * {
@@ -61,14 +66,56 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Tahoma', 'Inter', sans-serif;
+    font-family: 'Inter', 'Tahoma', sans-serif;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a:focus, button:focus, input:focus, textarea:focus, select:focus {
     @apply outline-offset-2 outline-blue-500;
+  }
+
+  /* Global utility classes */
+  .content-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Responsive text sizing */
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl font-bold;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .mobile-padding {
+      @apply px-3 py-4;
+    }
+    
+    .mobile-compact {
+      @apply space-y-3;
+    }
   }
 }

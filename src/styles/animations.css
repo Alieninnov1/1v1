@@ -1,7 +1,7 @@
 
 @layer base {
   .fade-in {
-    animation: fadeIn 0.5s ease forwards;
+    animation: fadeIn 0.4s ease forwards;
   }
   
   @keyframes fadeIn {
@@ -12,14 +12,29 @@
       opacity: 1;
     }
   }
+
+  .fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @layer components {
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeInComponent 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   
-  @keyframes fadeIn {
+  @keyframes fadeInComponent {
     from {
       opacity: 0;
       transform: translateY(10px);
@@ -31,7 +46,8 @@
   }
   
   .window-appear {
-    animation: windowAppear 0.3s ease forwards;
+    animation: windowAppear 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
   }
 
   @keyframes windowAppear {
@@ -42,6 +58,57 @@
     to {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  /* Content-aware loading animations */
+  .pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 2s infinite;
+    will-change: transform;
+  }
+  
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .window-appear,
+    .fade-in,
+    .fade-up,
+    .pulse,
+    .shimmer::after {
+      animation: none !important;
+      transition: none !important;
     }
   }
 }

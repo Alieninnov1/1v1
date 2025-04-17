@@ -8,7 +8,10 @@ const newFeedbackMessages = [
   "Curriculum alignment with sustainability practices should be mandatory across all engineering disciplines.",
   "Regional analysis shows tech clusters forming around universities with flexible credit transfer systems.",
   "Students coming through the new data visualization track are excelling in our UX research department.",
-  "New policy framework for microcredentials being evaluated. Seeking educational partners for pilot."
+  "New policy framework for microcredentials being evaluated. Seeking educational partners for pilot.",
+  "Our industry-partnered capstone projects resulted in 78% of students receiving job offers within 3 months.",
+  "We need better alignment between cybersecurity curriculum and real-world threats. Too theoretical currently.",
+  "Government grants for cross-disciplinary AI ethics programs are now available through our department."
 ];
 
 const initialFeedback: FeedbackItem[] = [
@@ -50,32 +53,58 @@ const initialFeedback: FeedbackItem[] = [
   }
 ];
 
+// Store feedback items in localStorage to persist between sessions
+const loadFeedback = (): FeedbackItem[] => {
+  try {
+    const saved = localStorage.getItem('helixhub-feedback');
+    return saved ? JSON.parse(saved) : initialFeedback;
+  } catch (error) {
+    console.error('Error loading feedback from localStorage', error);
+    return initialFeedback;
+  }
+};
+
 export const useFeedbackWall = () => {
-  const [feedback, setFeedback] = useState<FeedbackItem[]>(initialFeedback);
+  const [feedback, setFeedback] = useState<FeedbackItem[]>(loadFeedback());
   const [filter, setFilter] = useState<"all" | "student" | "teacher" | "policy" | "industry">("all");
 
+  // Save feedback changes to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('helixhub-feedback', JSON.stringify(feedback));
+    } catch (error) {
+      console.error('Error saving feedback to localStorage', error);
+    }
+  }, [feedback]);
+
+  // Simulate real-time updates with new feedback
   useEffect(() => {
     const interval = setInterval(() => {
       const roles: ("student" | "teacher" | "policy" | "industry")[] = ["student", "teacher", "policy", "industry"];
       const authors = ["Emily Johnson", "TechFuture Inc.", "Education Ministry", "Prof. David Lee", "Maria Rodriguez", "Alex Smith", "Innovation Hub", "Policy Lab"];
       
+      // Random data generation for realistic appearance
+      const messageIndex = Math.floor(Math.random() * newFeedbackMessages.length);
+      const authorIndex = Math.floor(Math.random() * authors.length);
+      const roleIndex = Math.floor(Math.random() * roles.length);
+      
       const newFeedback: FeedbackItem = {
         id: `feed${Date.now()}`,
-        author: authors[Math.floor(Math.random() * authors.length)],
-        role: roles[Math.floor(Math.random() * roles.length)],
-        message: newFeedbackMessages[Math.floor(Math.random() * newFeedbackMessages.length)],
+        author: authors[authorIndex],
+        role: roles[roleIndex],
+        message: newFeedbackMessages[messageIndex],
         timestamp: "Just now",
-        likes: Math.floor(Math.random() * 10),
-        comments: Math.floor(Math.random() * 5)
+        likes: Math.floor(Math.random() * 15),
+        comments: Math.floor(Math.random() * 8)
       };
       
-      setFeedback(prev => [newFeedback, ...prev.slice(0, 5)]);
+      setFeedback(prev => [newFeedback, ...prev.slice(0, 7)]); // Limit to 8 items for performance
       
       toast({
         title: "New Feedback",
         description: `${newFeedback.author} just posted feedback`,
       });
-    }, 45000);
+    }, 45000); // Every 45 seconds for better user experience
     
     return () => clearInterval(interval);
   }, []);
@@ -99,7 +128,7 @@ export const useFeedbackWall = () => {
         description: "Please enter some content for your feedback",
         variant: "destructive"
       });
-      return;
+      return false;
     }
     
     const newPost: FeedbackItem = {
@@ -109,7 +138,8 @@ export const useFeedbackWall = () => {
       message: content,
       timestamp: "Just now",
       likes: 0,
-      comments: 0
+      comments: 0,
+      hasLiked: false
     };
     
     setFeedback(prev => [newPost, ...prev]);

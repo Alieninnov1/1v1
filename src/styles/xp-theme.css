@@ -1,8 +1,10 @@
 
 @layer components {
   .xp-window {
-    @apply rounded-t-md overflow-hidden border-2 border-blue-800 shadow-xl bg-[#ECE9D8];
+    @apply rounded-md overflow-hidden border-2 border-blue-800 shadow-xl bg-[#ECE9D8];
     min-height: 100px;
+    transform: translateZ(0); /* Hardware acceleration */
+    will-change: transform, opacity;
   }
   
   .xp-title-bar {
@@ -38,6 +40,11 @@
     box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
   }
   
+  .xp-window-button:active {
+    box-shadow: -1px -1px 0 white inset, 1px 1px 0 #888 inset;
+    transform: translateY(1px);
+  }
+  
   .xp-window-content {
     @apply p-4 bg-[#ECE9D8];
     max-height: 80vh;
@@ -47,5 +54,32 @@
   .xp-button {
     @apply px-4 py-1 rounded-md text-black bg-[#ECE9D8] border border-gray-400 transition-all duration-200;
     box-shadow: 1px 1px 0 white inset, -1px -1px 0 #888 inset;
+  }
+  
+  .xp-button:hover {
+    @apply bg-[#E3E1D1];
+  }
+  
+  .xp-button:active {
+    box-shadow: -1px -1px 0 white inset, 1px 1px 0 #888 inset;
+    transform: translateY(1px);
+  }
+
+  /* Responsive adaptations */
+  @media (max-width: 640px) {
+    .xp-window {
+      @apply rounded-none border-l-0 border-r-0;
+      width: 100vw;
+      margin-left: -1rem;
+      margin-right: -1rem;
+    }
+    
+    .xp-window-content {
+      @apply p-3;
+    }
+    
+    .xp-button {
+      @apply text-sm py-2;
+    }
   }
 }
