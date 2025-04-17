@@ -4,7 +4,7 @@ import type { MotionProps } from "framer-motion";
 
 interface AnimatedHoverProps {
   initial?: MotionProps["initial"];
-  whileHover?: MotionProps["whileHover"];
+  whileHover?: MotionProps["animate"]; // Using animate type since whileHover has same structure
   animate?: MotionProps["animate"];
   transition?: MotionProps["transition"];
 }
