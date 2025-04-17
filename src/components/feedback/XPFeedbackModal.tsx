@@ -34,11 +34,33 @@ const XPFeedbackModal = ({ isOpen, onClose }: XPFeedbackModalProps) => {
     setIsSubmitting(true);
     
     try {
-      await fetch("https://script.google.com/macros/s/AKfycby0GnoHmLw28fsgXi3NOi6vJBvUgC9bEY7NL2Xm8i3cefKtYJbqrKtwZ_QFZr4pGAP2TQ/exec", {
-        method: "POST",
-        body: JSON.stringify(formData)
-      });
+      // Store feedback in localStorage for demo purposes
+      const timestamp = new Date().toISOString();
+      const feedbackItem = {
+        id: `feedback-${Date.now()}`,
+        author: formData.name,
+        role: formData.type.toLowerCase() === 'student' ? 'student' 
+              : formData.type.toLowerCase() === 'gov' ? 'policy'
+              : formData.type.toLowerCase() === 'sme' ? 'industry'
+              : 'student',
+        message: formData.message,
+        timestamp: "Just now",
+        likes: 0,
+        comments: 0
+      };
+      
+      // Get existing feedback or initialize empty array
+      const existingFeedback = JSON.parse(localStorage.getItem('helixhub-feedback') || '[]');
+      
+      // Add new feedback at the beginning
+      existingFeedback.unshift(feedbackItem);
+      
+      // Save updated feedback
+      localStorage.setItem('helixhub-feedback', JSON.stringify(existingFeedback));
 
+      // Mock successful submission to Google Sheets
+      console.log("Feedback submitted:", feedbackItem);
+      
       toast({
         title: "Success",
         description: "Your feedback has been sent successfully!",
@@ -47,6 +69,7 @@ const XPFeedbackModal = ({ isOpen, onClose }: XPFeedbackModalProps) => {
       setFormData({ name: '', type: '', message: '' });
       onClose();
     } catch (error) {
+      console.error("Error submitting feedback:", error);
       toast({
         title: "Error",
         description: "Failed to send feedback. Please try again.",

@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { FeedbackItem } from "../types";
 
 const newFeedbackMessages = [
@@ -67,6 +67,7 @@ const loadFeedback = (): FeedbackItem[] => {
 export const useFeedbackWall = () => {
   const [feedback, setFeedback] = useState<FeedbackItem[]>(loadFeedback());
   const [filter, setFilter] = useState<"all" | "student" | "teacher" | "policy" | "industry">("all");
+  const { toast } = useToast();
 
   // Save feedback changes to localStorage
   useEffect(() => {
@@ -107,7 +108,7 @@ export const useFeedbackWall = () => {
     }, 45000); // Every 45 seconds for better user experience
     
     return () => clearInterval(interval);
-  }, []);
+  }, [toast]);
 
   const handleLike = (id: string) => {
     setFeedback(prev => prev.map(item => 
