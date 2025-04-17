@@ -1,21 +1,19 @@
-
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import FeedbackCard from "./FeedbackCard";
-import FeedbackForm from "./FeedbackForm";
+import XPFeedbackModal from "./XPFeedbackModal";
 import FeedbackFilter from "./FeedbackFilter";
 import { useFeedbackWall } from "./hooks/useFeedbackWall";
 import { toast } from "@/hooks/use-toast";
 
 const RealTimeFeedbackWall = () => {
-  const [newPostVisible, setNewPostVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const { feedback, filter, setFilter, handleLike, handleNewPost } = useFeedbackWall();
+  const { feedback, filter, setFilter, handleLike } = useFeedbackWall();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to top when new feedback is added
   useEffect(() => {
     if (containerRef.current && feedback.length > 0) {
       const firstItem = containerRef.current.querySelector('.feedback-item');
@@ -23,7 +21,6 @@ const RealTimeFeedbackWall = () => {
     }
   }, [feedback.length]);
 
-  // Manual refresh animation
   const handleRefresh = () => {
     setRefreshing(true);
     setTimeout(() => {
@@ -61,26 +58,16 @@ const RealTimeFeedbackWall = () => {
           <Button 
             size="sm"
             className="bg-[#92CD00] hover:bg-[#7DB600] text-white"
-            onClick={() => setNewPostVisible(!newPostVisible)}
+            onClick={() => setModalVisible(true)}
           >
             + New Feedback
           </Button>
         </div>
 
-        <AnimatePresence>
-          {newPostVisible && (
-            <FeedbackForm 
-              onSubmit={(content) => {
-                const success = handleNewPost(content);
-                if (success) {
-                  setNewPostVisible(false);
-                }
-                return success;
-              }}
-              onCancel={() => setNewPostVisible(false)}
-            />
-          )}
-        </AnimatePresence>
+        <XPFeedbackModal 
+          isOpen={modalVisible}
+          onClose={() => setModalVisible(false)}
+        />
 
         <div 
           ref={containerRef} 
