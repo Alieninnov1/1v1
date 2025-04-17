@@ -30,7 +30,7 @@ const Discussions = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.4 }}
         >
-          <div className="xp-title-bar bg-gradient-to-r from-blue-800 to-blue-600 flex justify-between items-center p-1 px-2">
+          <div className="xp-title-bar bg-gradient-to-r from-purple-800 to-blue-700 flex justify-between items-center p-1 px-2">
             <div className="flex items-center">
               <span className="hidden sm:inline text-white text-xs">HelixHub Discussion Explorer</span>
               <span className="sm:hidden text-white text-xs">Discussions</span>
