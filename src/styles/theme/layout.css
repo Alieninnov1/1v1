@@ -1,0 +1,50 @@
+
+/* Layout and Container Styles */
+.content-container {
+  @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.wave-bg {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e2338 0%, #262d4a 100%);
+}
+
+.wave-bg::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(ellipse at center, rgba(103, 84, 220, 0.15) 0%, rgba(0,0,0,0) 70%);
+  animation: wave 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .mobile-padding {
+    @apply px-3 py-4;
+  }
+  
+  .mobile-compact {
+    @apply space-y-3;
+  }
+
+  .content-container {
+    @apply px-3;
+  }
+}
