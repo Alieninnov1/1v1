@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Discussions from "./pages/Discussions";
 import Industry from "./pages/Industry";
 import Government from "./pages/Government";
+import Academia from "./pages/Academia";
 import Knowledge from "./pages/Knowledge";
 import PolicySandbox from "./pages/PolicySandbox";
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/discussions" element={<Discussions />} />
           <Route path="/industry" element={<Industry />} />
           <Route path="/government" element={<Government />} />
+          <Route path="/academia" element={<Academia />} />
           <Route path="/knowledge" element={<Knowledge />} />
           <Route path="/policy-sandbox" element={<PolicySandbox />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
