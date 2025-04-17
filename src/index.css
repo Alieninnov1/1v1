@@ -3,7 +3,7 @@
 @import './styles/base.css';
 @import './styles/scrollbar.css';
 @import './styles/animations.css';
-@import './styles/xp-theme.css';
+@import './styles/xp-theme/index.css';
 @import './styles/cards.css';
 @import './styles/ethereum-theme.css';
 

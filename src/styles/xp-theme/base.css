@@ -1,0 +1,28 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Base XP Window Styling */
+.xp-window {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
+  background: #f4f4f4;
+  border: 1px solid #c7c7c7;
+  transform: translateZ(0);
+}
+
+.xp-title-bar {
+  background: linear-gradient(to right, #0155b7, #036ffc);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.xp-window-content {
+  background: #ffffff;
+  border-top: 1px solid #c7c7c7;
+  -webkit-overflow-scrolling: touch;
+}

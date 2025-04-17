@@ -1,0 +1,26 @@
+
+/* Start Menu */
+.xp-start-menu {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 320px;
+  background: white;
+  border: 2px solid #0055E5;
+  border-bottom: none;
+  box-shadow: 3px -3px 10px rgba(0,0,0,0.2);
+  z-index: 100;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+}
+
+.xp-start-header {
+  background: linear-gradient(to right, #215CCA 0%, #2983FC 100%);
+  color: white;
+  padding: 8px;
+}
+
+.xp-start-item {
+  border-radius: 2px;
+}

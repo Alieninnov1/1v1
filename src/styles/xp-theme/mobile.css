@@ -1,0 +1,39 @@
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .xp-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  
+  .xp-window {
+    border-radius: 6px;
+  }
+  
+  .xp-title-bar {
+    padding: 0.3rem;
+    font-size: 0.6rem;
+  }
+  
+  .xp-start-button {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+  
+  .xp-start-menu {
+    width: 280px;
+  }
+  
+  .xp-desktop-icon {
+    width: 60px;
+  }
+  
+  .xp-icon-img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .xp-icon-text {
+    font-size: 0.65rem;
+  }
+}

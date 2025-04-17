@@ -1,0 +1,61 @@
+
+/* XP Buttons */
+.xp-button {
+  background: linear-gradient(to bottom, #FFFFFF 0%, #E9E9E9 100%);
+  border: 1px solid #7b9ebd;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.7);
+  color: #333;
+  font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-family: "Tahoma", sans-serif;
+  transition: all 0.2s;
+  will-change: transform, box-shadow;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.xp-button:hover {
+  background: linear-gradient(to bottom, #F0F0F0 0%, #DDDDDD 100%);
+}
+
+.xp-button:active {
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+  background: linear-gradient(to bottom, #E0E0E0 0%, #EEEEEE 100%);
+  transform: translateY(1px);
+}
+
+/* Window Buttons */
+.xp-window-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.xp-window-button {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.15s;
+}
+
+.xp-window-button:active {
+  transform: scale(0.85);
+}
+
+.xp-minimize, .xp-maximize {
+  background: linear-gradient(to bottom, #fff, #eee);
+  color: #333;
+}
+
+.xp-close {
+  background: linear-gradient(to bottom, #f55, #c00);
+  color: white;
+}
+
+.xp-close:hover {
+  background: linear-gradient(to bottom, #f77, #e00);
+}

@@ -1,0 +1,35 @@
+
+/* Desktop Icons */
+.xp-desktop-icon {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+  transition: transform 0.2s;
+}
+
+.xp-desktop-icon:hover {
+  transform: scale(1.05);
+}
+
+.xp-desktop-icon:active {
+  transform: scale(0.95);
+}
+
+.xp-icon-img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 5px;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+}
+
+.xp-icon-text {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
+  font-size: 0.75rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
