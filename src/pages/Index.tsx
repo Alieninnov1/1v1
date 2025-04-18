@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import BootScreen from "@/components/boot/BootScreen";
 import WindowDialog from "@/components/dialog/WindowDialog";
@@ -9,6 +10,7 @@ import OnboardingWizard from "@/components/onboarding/OnboardingWizard";
 import AnimatedBackground from "@/components/home/background/AnimatedBackground";
 import BasicUIContent from "@/components/home/basic-ui/BasicUIContent";
 import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
@@ -82,7 +84,18 @@ const Index = () => {
           
           <WindowDialog
             title="Welcome to HelixHub Decentralized Network"
-            content="HelixHub connects academia, industry, and government via a triple helix model. Explore how these three sectors collaborate to drive innovation and address skill gaps in real-time. Try our interactive 3D model to visualize these complex relationships."
+            content={
+              <>
+                <p className="mb-4">HelixHub connects academia, industry, and government via a triple helix model. Explore how these three sectors collaborate to drive innovation and address skill gaps in real-time. Try our interactive 3D model to visualize these complex relationships.</p>
+                <div className="flex justify-end">
+                  <Link to="/landing">
+                    <Button variant="outline" className="bg-transparent border-purple-500/30 text-white hover:bg-purple-900/20">
+                      View Investor Landing Page
+                    </Button>
+                  </Link>
+                </div>
+              </>
+            }
             isOpen={showWelcome}
             onClose={() => setShowWelcome(false)}
           />

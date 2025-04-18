@@ -1,19 +1,22 @@
 
 import { useEffect } from "react";
-import { ArrowRightLeft, Sparkles } from "lucide-react";
+import { ArrowRightLeft, Sparkles, Zap } from "lucide-react";
 import { useMatchGeneration } from "@/hooks/useMatchGeneration";
 import MatchmakingControls from "./MatchmakingControls";
 import MatchStats from "./MatchStats";
 import MatchResultsList from "./MatchResultsList";
+import { motion } from "framer-motion";
 
 interface MatchmakingEngineProps {
   animationSpeed?: number;
   autoMatch?: boolean;
+  showHeader?: boolean;
 }
 
 const MatchmakingEngine = ({ 
   animationSpeed = 1500,
-  autoMatch = true
+  autoMatch = true,
+  showHeader = true
 }: MatchmakingEngineProps) => {
   const {
     matches,
@@ -39,27 +42,42 @@ const MatchmakingEngine = ({
   }, [isMatching, animationSpeed, autoMatch, handleCreateMatch]);
 
   return (
-    <div className="xp-window w-full backdrop-blur-md bg-gray-900/60 border border-purple-500/20 rounded-xl shadow-2xl overflow-hidden transition-all hover:border-purple-500/30">
-      <div className="xp-title-bar flex justify-between items-center bg-gradient-to-r from-purple-900/80 to-indigo-900/80 p-3 border-b border-purple-500/30">
-        <div className="flex items-center">
-          <ArrowRightLeft size={16} className="mr-2 text-purple-300" />
-          <span className="font-semibold text-white/90">Curriculum-Industry Matchmaking Engine</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">LIVE DEMO</span>
-        </div>
-      </div>
-
-      <div className="xp-window-content p-4">
-        <div className="mb-6 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-4 rounded-lg border border-purple-500/20 shadow-inner">
-          <div className="flex flex-wrap justify-between items-center gap-3">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
+      className="xp-window w-full backdrop-blur-md bg-gray-900/80 border border-purple-500/30 rounded-xl shadow-2xl overflow-hidden transition-all hover:border-purple-500/40 hover:shadow-purple-500/10"
+    >
+      {showHeader && (
+        <div className="xp-title-bar flex justify-between items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 p-4 border-b border-purple-500/30">
+          <div className="flex items-center">
+            <ArrowRightLeft size={18} className="mr-3 text-purple-300" />
             <div>
-              <h3 className="text-sm font-semibold mb-1 flex items-center text-white">
-                <Sparkles size={16} className="text-yellow-400 mr-2" />
-                Live Matchmaking Demo
+              <h3 className="font-semibold text-white/90 text-lg">Curriculum-Industry Matchmaking Engine</h3>
+              <p className="text-xs text-gray-300 mt-1">Real-time skill gap analysis and opportunity matching</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] bg-purple-500/30 text-purple-300 px-2 py-1 rounded-full border border-purple-500/40 flex items-center">
+              <Zap size={10} className="mr-1" />
+              LIVE DEMO
+            </span>
+          </div>
+        </div>
+      )}
+
+      <div className="xp-window-content p-5">
+        <div className="mb-6 bg-gradient-to-r from-purple-900/40 to-indigo-900/40 p-5 rounded-lg border border-purple-500/30 shadow-inner">
+          <div className="flex flex-wrap justify-between items-center gap-4">
+            <div>
+              <h3 className="text-base font-semibold mb-2 flex items-center text-white">
+                <Sparkles size={18} className="text-yellow-400 mr-2" />
+                AI-Powered Matchmaking
               </h3>
-              <p className="text-xs text-gray-300">
-                Watch curriculum needs align with industry demands in real-time
+              <p className="text-sm text-gray-300">
+                Watch as our AI engine aligns curriculum needs with industry demands in real-time,
+                creating precise matches between educational content and workforce requirements.
               </p>
             </div>
             
@@ -82,7 +100,7 @@ const MatchmakingEngine = ({
         
         <MatchResultsList matches={matches} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
