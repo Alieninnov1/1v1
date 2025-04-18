@@ -6,7 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import TaskbarButton from "./taskbar/TaskbarButton";
 import StartMenu from "./taskbar/StartMenu";
 import TaskbarClock from "./taskbar/TaskbarClock";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Taskbar = () => {
   const [showStartMenu, setShowStartMenu] = useState(false);
@@ -18,6 +18,7 @@ const Taskbar = () => {
   }[]>([]);
   const isMobile = useIsMobile();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Set initial windows based on current route
   useEffect(() => {
@@ -91,7 +92,7 @@ const Taskbar = () => {
               active={isActive(window.path)}
               onClick={() => {
                 if (window.path !== location.pathname) {
-                  window.location.href = window.path;
+                  navigate(window.path);
                 }
               }}
             />
