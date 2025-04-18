@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Building2, Briefcase } from "lucide-react";
 const Hero = () => {
-  return <section className="bg-gradient-to-br from-white to-helix-purple50 dark:from-gray-900 dark:to-helix-purple900 py-16 sm:py-20 md:py-28">
+  return <section className="bg-gradient-to-br from-white to-helix-purple50 dark:from-gray-900 dark:to-helix-purple900 py-16 sm:py-20 md:py-28 bg-indigo-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Hero text */}

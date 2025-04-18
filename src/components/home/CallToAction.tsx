@@ -20,7 +20,7 @@ const CallToAction = () => {
             <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-500/30 shadow-lg shadow-purple-900/20">
               Join HelixHub
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-purple-500 hover:bg-purple-900/20 text-indigo-900">
+            <Button size="lg" variant="outline" className="bg-transparent border-purple-500 hover:bg-purple-900/20 text-slate-800">
               Schedule a Demo
             </Button>
           </div>
