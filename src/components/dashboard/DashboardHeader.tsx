@@ -1,22 +1,21 @@
-
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Download, Filter, Share } from "lucide-react";
-
 interface DashboardHeaderProps {
   title: string;
   description: string;
 }
-
-const DashboardHeader = ({ title, description }: DashboardHeaderProps) => {
-  return (
-    <div className="mb-8">
+const DashboardHeader = ({
+  title,
+  description
+}: DashboardHeaderProps) => {
+  return <div className="mb-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white font-satoshi">
             {title}
           </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">
+          <p className="mt-2 text-slate-50">
             {description}
           </p>
         </div>
@@ -87,8 +86,6 @@ const DashboardHeader = ({ title, description }: DashboardHeaderProps) => {
           <Filter className="h-4 w-4" />
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DashboardHeader;
