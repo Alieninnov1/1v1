@@ -1,28 +1,36 @@
-name: NodeJS with Webpack
+name: Auto Update File and Deploy to Vercel
 
 on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  update-file:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Update File
+        run: |
+          echo "Last updated: $(date)" > updated-file.txt
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add updated-file.txt
+          git commit -m "Automated file update"
+          git push origin main
 
-    - name: Build
-      run: |
-        npm install
-        npx webpack
+  deploy:
+    needs: update-file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        run: npx vercel --prod
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
