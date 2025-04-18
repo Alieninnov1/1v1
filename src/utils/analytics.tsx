@@ -1,3 +1,4 @@
+
 import { Analytics } from '@vercel/analytics/react';
 import { track as vercelTrack } from '@vercel/analytics';
 
@@ -16,7 +17,12 @@ export type EventName =
   | 'modelInteraction'
   | 'curriculumRecommendation'
   | 'skillGapIdentified'
-  | 'appInitError';  // Added this event type
+  | 'appInitError'
+  | 'voteImpactSimulation'
+  | 'grantMatchRequested'
+  | 'signalDaoVote'
+  | 'strainIndexAlert'
+  | 'feedbackSubmitted';  // Added relevant event types for HelixHub
 
 // Define event properties interface
 export interface EventProperties {
@@ -36,6 +42,16 @@ export const trackEvent = (event: EventName, properties?: EventProperties): void
 // For compatibility with the usage in the MatchmakingEngine component
 export const trackMatchAttempt = (urgencyRate: number, result: string): void => {
   trackEvent('skillGapIdentified', { urgencyRate, result });
+};
+
+// Track vote impact simulation
+export const trackVoteImpact = (proposalId: string, impact: number): void => {
+  trackEvent('voteImpactSimulation', { proposalId, impact });
+};
+
+// Track grant match operations
+export const trackGrantMatch = (category: string, amount: number): void => {
+  trackEvent('grantMatchRequested', { category, amount });
 };
 
 // Analytics component for React usage
