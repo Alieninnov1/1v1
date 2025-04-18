@@ -7,6 +7,9 @@ import { SourceStatusBadges } from "./data-scraper/SourceStatusBadges";
 import { CompactView } from "./data-scraper/CompactView";
 import { DataCard } from "./data-scraper/DataCard";
 
+// Re-export types for external usage
+export type { DataSource, ScrapedData, DataScraperProps };
+
 const mockSources: DataSource[] = [
   { id: "src1", name: "LinkedIn Job Trends", status: "active", lastUpdated: "5m ago" },
   { id: "src2", name: "Indeed Skill Analytics", status: "active", lastUpdated: "3h ago" },
