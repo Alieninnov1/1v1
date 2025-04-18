@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   createBrowserRouter,
@@ -17,10 +18,20 @@ import DaoGovernance from "@/pages/DaoGovernance";
 import BlockchainExplorer from "@/pages/BlockchainExplorer";
 import NotFound from "@/pages/NotFound";
 import Landing from "@/pages/Landing";
+import Homepage from "@/pages/Homepage";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// Create a client for React Query
+const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
   {
     path: '/',
+    element: <Homepage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/classic',
     element: <Index />,
     errorElement: <ErrorPage />
   },
@@ -77,7 +88,9 @@ const routes = createBrowserRouter([
 function App() {
   return (
     <React.StrictMode>
-      <RouterProvider router={routes} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={routes} />
+      </QueryClientProvider>
     </React.StrictMode>
   );
 }
