@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const CallToAction = () => {
   return (
-    <section className="bg-helix-purple py-16 sm:py-20">
+    <section className="bg-gradient-to-br from-[#1A1F2C]/90 to-helix-purple/20 backdrop-blur-md border-t border-purple-900/20 py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,15 +22,14 @@ const CallToAction = () => {
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Button 
               size="lg" 
-              variant="secondary" 
-              className="button-hover bg-white text-helix-purple hover:bg-gray-100"
+              className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-500/30 shadow-lg shadow-purple-900/20"
             >
               Join HelixHub
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="button-hover border-white text-white hover:bg-white/10"
+              className="bg-transparent border-purple-500 text-purple-300 hover:bg-purple-900/20 hover:text-purple-200"
             >
               Schedule a Demo
             </Button>
