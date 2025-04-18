@@ -1,4 +1,3 @@
-
 import { Analytics } from '@vercel/analytics/react';
 import { track as vercelTrack } from '@vercel/analytics';
 
@@ -16,7 +15,8 @@ export type EventName =
   | 'dashboardRefreshed'
   | 'modelInteraction'
   | 'curriculumRecommendation'
-  | 'skillGapIdentified';
+  | 'skillGapIdentified'
+  | 'appInitError';  // Added this event type
 
 // Define event properties interface
 export interface EventProperties {

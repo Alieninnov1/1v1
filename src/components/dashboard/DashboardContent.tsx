@@ -15,6 +15,7 @@ import AmbientAudioControl from "./AmbientAudioControl";
 import DashboardBackground from "./DashboardBackground";
 import DashboardActions from "./DashboardActions";
 import DashboardSkillTrends from "./DashboardSkillTrends";
+import { DataScraper } from "@/components/ui/data-scraper";
 
 interface DashboardContentProps {
   activeTab: string;
