@@ -1,7 +1,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Text, Stars, Trail, useTexture } from "@react-three/drei";
-import { useRef, useState, Suspense } from "react";
+import { OrbitControls, Float, Text, Stars, Trail } from "@react-three/drei";
+import { useRef, useState } from "react";
 import { Mesh, Color } from "three";
 import { trackEvent } from "@/utils/analytics";
 
@@ -78,42 +78,6 @@ const Node = ({ position, color, name, size = 1, speed = 0.01 }: NodeProps) => {
   );
 };
 
-interface ConnectorProps {
-  start: [number, number, number];
-  end: [number, number, number];
-  color?: string;
-}
-
-const Connector = ({ start, end, color = "#5E2CA5" }: ConnectorProps) => {
-  const meshRef = useRef<Mesh>(null!);
-  
-  // Calculate the midpoint
-  const midX = (start[0] + end[0]) / 2;
-  const midY = (start[1] + end[1]) / 2;
-  const midZ = (start[2] + end[2]) / 2;
-  
-  // Calculate distance
-  const dx = end[0] - start[0];
-  const dy = end[1] - start[1];
-  const dz = end[2] - start[2];
-  const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-  
-  // Calculate rotation
-  const rotX = Math.atan2(Math.sqrt(dx * dx + dz * dz), dy);
-  const rotZ = Math.atan2(dz, dx);
-  
-  return (
-    <mesh 
-      ref={meshRef} 
-      position={[midX, midY, midZ]}
-      rotation={[rotX, 0, rotZ]}
-    >
-      <cylinderGeometry args={[0.05, 0.05, distance, 8]} />
-      <meshStandardMaterial color={color} transparent opacity={0.6} />
-    </mesh>
-  );
-};
-
 const ThreeDModel = () => {
   const [rotating, setRotating] = useState(true);
   const mainNodePosition: [number, number, number] = [0, 0, 0];
@@ -128,27 +92,17 @@ const ThreeDModel = () => {
         <pointLight position={[10, 10, 10]} intensity={1} />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#5E2CA5" />
         
-        <Suspense fallback={null}>
-          <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
-          
-          {/* Main HelixHub node */}
-          <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.2}>
-            <Node position={mainNodePosition} color="#5E2CA5" name="HelixHub" size={1.2} />
-          </Float>
-          
-          {/* Triple Helix nodes */}
-          <Node position={academiaPosition} color="#9b87f5" name="Academia" />
-          <Node position={industryPosition} color="#7E69AB" name="Industry" />
-          <Node position={governmentPosition} color="#D6BCFA" name="Government" />
-          
-          {/* Connectors */}
-          <Connector start={mainNodePosition} end={academiaPosition} />
-          <Connector start={mainNodePosition} end={industryPosition} />
-          <Connector start={mainNodePosition} end={governmentPosition} />
-          <Connector start={academiaPosition} end={industryPosition} color="#4B5563" />
-          <Connector start={industryPosition} end={governmentPosition} color="#4B5563" />
-          <Connector start={governmentPosition} end={academiaPosition} color="#4B5563" />
-        </Suspense>
+        <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
+        
+        {/* Main HelixHub node */}
+        <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.2}>
+          <Node position={mainNodePosition} color="#5E2CA5" name="HelixHub" size={1.2} />
+        </Float>
+        
+        {/* Triple Helix nodes */}
+        <Node position={academiaPosition} color="#9b87f5" name="Academia" />
+        <Node position={industryPosition} color="#7E69AB" name="Industry" />
+        <Node position={governmentPosition} color="#D6BCFA" name="Government" />
         
         <OrbitControls 
           enableZoom={true}
