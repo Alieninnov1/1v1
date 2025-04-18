@@ -5,6 +5,7 @@ import MainWindow from "@/components/desktop/MainWindow";
 import KnowledgeWindow from "@/components/desktop/KnowledgeWindow";
 import FeedbackWindow from "@/components/desktop/FeedbackWindow";
 import WindowDialog from "@/components/dialog/WindowDialog";
+import { ReactNode } from "react";
 
 interface BasicUIContentProps {
   showKnowledgeBase: boolean;
@@ -14,9 +15,9 @@ interface BasicUIContentProps {
   dialogOpen: boolean;
   setDialogOpen: (open: boolean) => void;
   dialogTitle: string;
-  dialogContent: string;
+  dialogContent: ReactNode;
   setShow3DDemo: (show: boolean) => void;
-  onDialogOpen: (title: string, content: string) => void;
+  onDialogOpen: (title: string, content: ReactNode) => void;
 }
 
 const BasicUIContent = ({

@@ -1,10 +1,11 @@
 
 import { motion } from "framer-motion";
 import { X, Info } from "lucide-react";
+import { ReactNode } from "react";
 
 interface WindowDialogProps {
   title: string;
-  content: string;
+  content: ReactNode;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -50,7 +51,7 @@ const WindowDialog = ({
         <div className="xp-window-content p-6 bg-gradient-to-br from-indigo-900/90 to-purple-900/90 backdrop-blur-md text-indigo-100 border border-indigo-500/20 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
           <div className="flex mb-4">
             <Info className="h-12 w-12 text-blue-400 mr-4" />
-            <p className="leading-relaxed">{content}</p>
+            {content}
           </div>
           <div className="flex justify-end mt-4">
             <button 
