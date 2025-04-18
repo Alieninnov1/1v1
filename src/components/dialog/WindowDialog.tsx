@@ -30,7 +30,7 @@ const WindowDialog = ({
             <X size={10} />
           </button>
         </div>
-        <div className="xp-window-content p-6 bg-indigo-500">
+        <div className="xp-window-content p-6 bg-indigo-800">
           <div className="flex mb-4">
             <Info className="h-12 w-12 text-blue-600 mr-4" />
             <p>{content}</p>
