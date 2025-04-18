@@ -8,7 +8,7 @@ import { CompactView } from "./data-scraper/CompactView";
 import { DataCard } from "./data-scraper/DataCard";
 
 // Explicitly re-export types for external usage
-export { DataSource, ScrapedData, DataScraperProps } from "./data-scraper/types";
+export type { DataSource, ScrapedData, DataScraperProps } from "./data-scraper/types";
 
 const mockSources: DataSource[] = [
   { id: "src1", name: "LinkedIn Job Trends", status: "active", lastUpdated: "5m ago" },

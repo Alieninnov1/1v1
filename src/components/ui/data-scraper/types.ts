@@ -1,20 +1,21 @@
 
-export interface DataSource {
+// Ensure the types are exported
+export type DataSource = {
   id: string;
   name: string;
   status: "active" | "idle" | "error";
   lastUpdated: string;
-}
+};
 
-export interface ScrapedData {
+export type ScrapedData = {
   topic: string;
   keywords: string[];
   volume: number;
   trends: "up" | "down" | "stable";
   source: string;
-}
+};
 
-export interface DataScraperProps {
+export type DataScraperProps = {
   onDataUpdate?: (data: ScrapedData[]) => void;
   isCompact?: boolean;
-}
+};
