@@ -1,55 +1,40 @@
 
+// Vercel Analytics integration for HelixHub
+import { Analytics } from '@vercel/analytics/react';
 import { track as vercelTrack } from '@vercel/analytics';
 
+// Define allowed event names for type safety
 export type EventName = 
-  | 'matchCreated' 
-  | 'matchSaved' 
-  | 'simulationStarted'
+  | 'appLoaded' 
+  | 'pageView' 
+  | 'buttonClick' 
+  | 'formSubmission' 
+  | 'simulationStarted' 
   | 'simulationStopped'
-  | 'feedbackSubmitted'
-  | 'matchAttempt'
+  | 'matchesReset'
   | 'settingsOpened'
   | 'contentExported'
   | 'dashboardRefreshed'
-  | 'matchesReset'
-  | 'appLoaded'
-  | 'appInitError'
-  | 'page_view';
+  | 'modelInteraction'
+  | 'curriculumRecommendation'
+  | 'skillGapIdentified';
 
-interface EventProperties {
-  [key: string]: string | number | boolean | undefined;
+// Define event properties interface
+export interface EventProperties {
+  [key: string]: string | number | boolean | null | undefined;
 }
 
-/**
- * Track custom events with Vercel Analytics
- * @param event The name of the event to track
- * @param properties Optional properties to include with the event
- */
-export const trackEvent = (event: EventName, properties?: EventProperties) => {
+// Track custom events with properties
+export const trackEvent = (event: EventName, properties?: EventProperties): void => {
   try {
+    console.log(`Analytics: ${event}`, properties);
     vercelTrack(event, properties);
-    console.log(`Event tracked: ${event}`, properties);
-  } catch (error) {
-    console.error('Error tracking event:', error);
+  } catch (err) {
+    console.error('Analytics error:', err);
   }
 };
 
-/**
- * Track a page view with Vercel Analytics
- * @param pageName The name of the page being viewed
- */
-export const trackPageView = (pageName: string) => {
-  trackEvent('page_view', { pageName });
-};
-
-/**
- * Track a match attempt with Vercel Analytics
- * @param urgencyRate The urgency rate of the match attempt
- * @param result The result of the match attempt
- */
-export const trackMatchAttempt = (urgencyRate: number, result: string) => {
-  trackEvent('matchAttempt', {
-    urgencyRate,
-    result,
-  });
+// Analytics component for React usage
+export const AnalyticsComponent = () => {
+  return <Analytics />;
 };

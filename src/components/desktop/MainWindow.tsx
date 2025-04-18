@@ -5,6 +5,8 @@ import { useToast } from "@/hooks/use-toast";
 import Hero from "@/components/home/Hero";
 import Features from "@/components/home/Features";
 import CallToAction from "@/components/home/CallToAction";
+import TechStack from "@/components/home/TechStack";
+import CurriculumAIDemo from "@/components/curriculum/CurriculumAIDemo";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ThreeDModel from "@/components/dashboard/ThreeDModel";
 
@@ -70,7 +72,7 @@ const MainWindow = () => {
         <Hero />
         
         {/* 3D Model Showcase */}
-        <div className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-900/40 to-purple-900/40">
+        <div className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-900/40 to-purple-900/40">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-300">
               Interactive 3D Triple Helix Model
@@ -86,6 +88,13 @@ const MainWindow = () => {
         </div>
         
         <Features />
+        
+        {/* AI Curriculum Demo Section */}
+        <CurriculumAIDemo />
+        
+        {/* Tech Stack Section */}
+        <TechStack />
+        
         <CallToAction />
       </div>
     </motion.div>
