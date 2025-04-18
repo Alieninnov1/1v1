@@ -1,0 +1,52 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap');
+
+/* Typography System */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-satoshi tracking-tight;
+}
+
+h1 {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+  background: linear-gradient(to right, #9b87f5, #d6bcfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold;
+  background: linear-gradient(to right, #8b5cf6, #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h3 {
+  @apply text-lg sm:text-xl md:text-2xl font-bold text-helix-purple;
+}
+
+p {
+  @apply text-base sm:text-lg leading-relaxed text-gray-200;
+}
+
+.retro-text {
+  font-family: 'Press Start 2P', monospace;
+  @apply text-sm leading-relaxed;
+}
+
+/* Mobile Optimization */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  p {
+    @apply text-base;
+  }
+}

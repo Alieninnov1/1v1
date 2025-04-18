@@ -1,4 +1,3 @@
-
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -15,39 +14,20 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
   const [scrollY, setScrollY] = useState(0);
   const prevScrollY = useRef(0);
   const isMobile = useIsMobile();
-  
-  // Performance optimization with throttling
-  const throttleScroll = (callback: Function, delay: number) => {
-    let lastCall = 0;
-    return function() {
-      const now = new Date().getTime();
-      if (now - lastCall >= delay) {
-        lastCall = now;
-        callback();
-      }
-    };
-  };
 
   useEffect(() => {
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     setIsReducedMotion(prefersReducedMotion);
-    
-    // Mount animation
     setIsMounted(true);
-    
-    // Add theme class to body
     document.body.classList.add('ethereum-theme');
     
-    // Optimized scroll handler with throttling
-    const handleScroll = throttleScroll(() => {
+    const handleScroll = throttle(() => {
       const currentScrollY = window.scrollY;
-      // Only update state if there's a significant change to reduce renders
       if (Math.abs(currentScrollY - prevScrollY.current) > 5) {
         setScrollY(currentScrollY);
         prevScrollY.current = currentScrollY;
       }
-    }, 16); // ~60fps
+    }, 16);
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     
@@ -57,11 +37,9 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
     };
   }, []);
 
-  // Apply hardware acceleration and 3D transforms only if not reduced motion
   const baseStyles = 'flex flex-col min-h-screen bg-gradient-to-b from-[#151823] to-[#262d4a] text-white';
   const animationStyles = !isReducedMotion && isMounted ? 'fade-in transform-gpu' : '';
   
-  // Calculated parallax style with reduced effect on mobile
   const parallaxStyle = {
     transform: !isReducedMotion 
       ? `translate3d(0, ${scrollY * (isMobile ? 0.02 : 0.05)}px, 0)`
@@ -78,7 +56,6 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
       style={{ 
         transformStyle: !isReducedMotion ? 'preserve-3d' : 'flat',
         perspective: !isReducedMotion ? '1000px' : 'none',
-        height: '100%'
       }}
     >
       {!hideNavFooter && <Navbar />}
@@ -91,6 +68,17 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
       {!hideNavFooter && <Footer />}
     </div>
   );
+};
+
+const throttle = (callback: Function, delay: number) => {
+  let lastCall = 0;
+  return function() {
+    const now = new Date().getTime();
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      callback();
+    }
+  };
 };
 
 export default Layout;
