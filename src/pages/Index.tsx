@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -11,6 +10,7 @@ import AnimatedBackground from "@/components/home/background/AnimatedBackground"
 import BasicUIContent from "@/components/home/basic-ui/BasicUIContent";
 import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
 import { Button } from "@/components/ui/button";
+import { ReactNode } from "react";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
@@ -25,7 +25,6 @@ const Index = () => {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showEnhancedUi, setShowEnhancedUi] = useState(false);
   
-  // Auto-show welcome after boot completes
   useEffect(() => {
     if (!showStartup && bootProgress >= 100) {
       const timer = setTimeout(() => {
@@ -35,14 +34,13 @@ const Index = () => {
     }
   }, [showStartup, bootProgress]);
   
-  // Start showing enhanced UI after welcome is dismissed
   useEffect(() => {
     if (!showWelcome && !showStartup && bootProgress >= 100) {
       setShowEnhancedUi(true);
     }
   }, [showWelcome, showStartup, bootProgress]);
 
-  const openDialog = (title: string, content: string) => {
+  const openDialog = (title: string, content: ReactNode) => {
     setDialogTitle(title);
     setDialogContent(content);
     setDialogOpen(true);

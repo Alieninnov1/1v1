@@ -1,6 +1,20 @@
 
 import React from "react";
-import LandingPage from "@/pages/Landing";
+import Hero from "@/components/home/Hero";
+import Features from "@/components/home/Features";
+import TechStack from "@/components/home/TechStack";
+import CallToAction from "@/components/home/CallToAction";
+import { Layout } from "@/components/layout/Layout";
 
-// This file re-exports the Landing component for routing purposes
-export default LandingPage;
+const Landing = () => {
+  return (
+    <Layout>
+      <Hero />
+      <Features />
+      <TechStack />
+      <CallToAction />
+    </Layout>
+  );
+};
+
+export default Landing;
