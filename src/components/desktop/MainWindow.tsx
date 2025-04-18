@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Computer, Maximize2, Minimize2, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -9,6 +8,7 @@ import TechStack from "@/components/home/TechStack";
 import CurriculumAIDemo from "@/components/curriculum/CurriculumAIDemo";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ThreeDModel from "@/components/dashboard/ThreeDModel";
+import XPDemoWindow from "@/components/demo/XPDemoWindow";
 
 const MainWindow = () => {
   const { toast } = useToast();
@@ -70,6 +70,13 @@ const MainWindow = () => {
       
       <div className="xp-window-content overflow-auto scrollbar-hidden bg-[#0c101d] text-white">
         <Hero />
+        
+        {/* Add XP Demo Section */}
+        <section className="py-16 px-4">
+          <div className="max-w-4xl mx-auto">
+            <XPDemoWindow />
+          </div>
+        </section>
         
         {/* 3D Model Showcase */}
         <div className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-900/40 to-purple-900/40">
