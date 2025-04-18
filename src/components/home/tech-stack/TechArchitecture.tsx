@@ -1,5 +1,5 @@
 
-import { Database, Cpu, Globe, Cube } from "lucide-react";
+import { Database, Cpu, Globe, Box } from "lucide-react";
 import ArchitectureCard from "./ArchitectureCard";
 import HelixModelDemo from "@/components/3d/HelixModelDemo";
 
