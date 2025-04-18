@@ -1,5 +1,5 @@
 
-import { Database, Cpu, Globe, Box } from "lucide-react";
+import { Database, Layers, Cloud, Box } from "lucide-react";
 import ArchitectureCard from "./ArchitectureCard";
 import HelixModelDemo from "@/components/3d/HelixModelDemo";
 
@@ -14,17 +14,32 @@ const TechArchitecture = () => {
           <ArchitectureCard 
             icon={<Database className="h-10 w-10 text-blue-400" />}
             title="Data Layer" 
-            items={["Supabase PostgreSQL", "Redis Cache", "OpenAI Embeddings", "Real-time Subscriptions"]} 
+            items={[
+              "Supabase PostgreSQL",
+              "Redis Cache", 
+              "OpenAI Embeddings",
+              "Real-time Subscriptions"
+            ]} 
           />
           <ArchitectureCard 
-            icon={<Cpu className="h-10 w-10 text-purple-400" />}
+            icon={<Layers className="h-10 w-10 text-purple-400" />}
             title="Application Layer" 
-            items={["React Components", "TanStack Query", "React Context", "Framer Motion"]} 
+            items={[
+              "React Components",
+              "TanStack Query",
+              "React Context",
+              "Framer Motion"
+            ]} 
           />
           <ArchitectureCard 
-            icon={<Globe className="h-10 w-10 text-green-400" />}
+            icon={<Cloud className="h-10 w-10 text-green-400" />}
             title="Deployment Layer" 
-            items={["Vercel Edge Functions", "Cloudflare CDN", "Analytics", "CI/CD Pipeline"]} 
+            items={[
+              "Vercel Edge Functions",
+              "Cloudflare CDN",
+              "Analytics",
+              "CI/CD Pipeline"
+            ]} 
           />
         </div>
       </div>
