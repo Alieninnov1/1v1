@@ -1,27 +1,27 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, MessageSquare } from "lucide-react";
+import { useSkillTrends } from "@/services/apiDataService";
+import { DataScraper } from "@/components/ui/data-scraper";
+import { useToast } from "@/hooks/use-toast";
+import XPFeedbackModal from "@/components/feedback/XPFeedbackModal";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import DashboardTabs from "@/components/dashboard/DashboardTabs";
 import DashboardMetrics from "@/components/dashboard/DashboardMetrics";
 import InteractiveInsights from "@/components/dashboard/InteractiveInsights";
 import LiveDataFeed from "@/components/dashboard/LiveDataFeed";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Cog, Download, RefreshCcw, MessageSquare } from "lucide-react";
-import SkillTile from "@/components/knowledge/SkillTile";
-import { useSkillTrends } from "@/services/apiDataService";
-import { DataScraper } from "@/components/ui/data-scraper";
-import { ScrollAnimation } from "@/components/ui/scroll-animation";
-import { Card } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import XPFeedbackModal from "@/components/feedback/XPFeedbackModal";
-import RealTimeFeedbackWall from "@/components/feedback/RealTimeFeedbackWall";
 import OracleOverlay from "@/components/dashboard/OracleOverlay";
 import SignalVault from "@/components/dashboard/SignalVault";
 import DiscordPortal from "@/components/dashboard/DiscordPortal";
 import AmbientAudioControl from "@/components/dashboard/AmbientAudioControl";
+import DashboardBackground from "@/components/dashboard/DashboardBackground";
+import DashboardActions from "@/components/dashboard/DashboardActions";
+import DashboardSkillTrends from "@/components/dashboard/DashboardSkillTrends";
+import FeedbackModal from "@/components/dashboard/FeedbackModal";
 
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -74,24 +74,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className="relative min-h-screen">
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-800/30 via-indigo-700/20 to-blue-800/30 animate-gradient" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-400/20 via-purple-300/10 to-transparent" />
-          <div className="absolute inset-0">
-            {[...Array(3)].map((_, i) => (
-              <div 
-                key={i} 
-                className={`absolute inset-0 opacity-20 mix-blend-overlay animate-wave-${i + 1}`} 
-                style={{
-                  backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 1000 Q 250 750 500 1000 T 1000 1000 L 1000 0 L 0 0 Z' fill='%23fff'/%3E%3C/svg%3E\")",
-                  backgroundSize: "100% 100%",
-                  animation: `wave ${15 + i * 5}s linear infinite`,
-                  animationDelay: `${i * -5}s`
-                }} 
-              />
-            ))}
-          </div>
-        </div>
+        <DashboardBackground />
 
         <div className="container mx-auto px-4 py-8 relative">
           <div className="md:flex md:justify-between md:items-center mb-6">
@@ -111,26 +94,7 @@ const Dashboard = () => {
               </p>
             </motion.div>
             
-            <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" onClick={() => toast({
-                title: "Settings",
-                description: "Dashboard settings would open here"
-              })}>
-                <Cog size={16} className="mr-1" />
-                Settings
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => toast({
-                title: "Report Downloaded",
-                description: "Dashboard report has been saved"
-              })}>
-                <Download size={16} className="mr-1" />
-                Export
-              </Button>
-              <Button size="sm" onClick={handleRefresh} disabled={isRefreshing}>
-                <RefreshCcw size={16} className={`mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
-                Refresh
-              </Button>
-            </div>
+            <DashboardActions isRefreshing={isRefreshing} onRefresh={handleRefresh} />
           </div>
 
           <OracleOverlay />
@@ -152,26 +116,7 @@ const Dashboard = () => {
           <DashboardMetrics />
 
           <div className="mt-10">
-            <Card className="p-4 bg-black/40 backdrop-blur-sm border border-purple-500/20">
-              <h2 className="text-xl font-bold mb-4 text-white">Live Trending Skills</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {isLoading ? 
-                  Array(4).fill(0).map((_, i) => (
-                    <div key={i} className="animate-pulse bg-gray-800/50 h-32 rounded-lg"></div>
-                  )) : 
-                  skillTrends?.map((skill, idx) => (
-                    <ScrollAnimation key={skill.name} delay={idx * 0.1} type="fade" direction="up">
-                      <SkillTile 
-                        name={skill.name} 
-                        growth={skill.growth} 
-                        demand={skill.demand} 
-                        relevance={skill.relevance} 
-                      />
-                    </ScrollAnimation>
-                  ))
-                }
-              </div>
-            </Card>
+            <DashboardSkillTrends skillTrends={skillTrends} isLoading={isLoading} />
           </div>
           
           <div className="mt-8 mb-8">
@@ -213,27 +158,10 @@ const Dashboard = () => {
         />
         
         {/* Feedback Wall Overlay */}
-        <AnimatePresence>
-          {showFeedbackWall && (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
-              onClick={(e) => e.target === e.currentTarget && setShowFeedbackWall(false)}
-            >
-              <motion.div
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0.9 }}
-                className="w-full max-w-3xl max-h-[80vh]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <RealTimeFeedbackWall />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <FeedbackModal 
+          showFeedbackWall={showFeedbackWall}
+          setShowFeedbackWall={setShowFeedbackWall}
+        />
       </div>
     </Layout>
   );
