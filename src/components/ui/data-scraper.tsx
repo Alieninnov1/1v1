@@ -1,25 +1,11 @@
-
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "@/hooks/use-toast";
-import { RefreshCcw, Search, Database } from "lucide-react";
-import { motion } from "framer-motion";
+import { Search, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-interface DataSource {
-  id: string;
-  name: string;
-  status: "active" | "idle" | "error";
-  lastUpdated: string;
-}
-
-export interface ScrapedData {
-  topic: string;
-  keywords: string[];
-  volume: number;
-  trends: "up" | "down" | "stable";
-  source: string;
-}
+import { toast } from "@/hooks/use-toast";
+import { DataSource, ScrapedData, DataScraperProps } from "./data-scraper/types";
+import { SourceStatusBadges } from "./data-scraper/SourceStatusBadges";
+import { CompactView } from "./data-scraper/CompactView";
+import { DataCard } from "./data-scraper/DataCard";
 
 const mockSources: DataSource[] = [
   { id: "src1", name: "LinkedIn Job Trends", status: "active", lastUpdated: "5m ago" },
@@ -67,22 +53,15 @@ const mockScrapedData: ScrapedData[] = [
   },
 ];
 
-export interface DataScraperProps {
-  onDataUpdate?: (data: ScrapedData[]) => void;
-  isCompact?: boolean;
-}
-
 export function DataScraper({ onDataUpdate, isCompact = false }: DataScraperProps) {
   const [sources, setSources] = useState<DataSource[]>(mockSources);
   const [data, setData] = useState<ScrapedData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   
-  // Simulate initial data load
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
-      // Simulate API request
       await new Promise(resolve => setTimeout(resolve, 1500));
       setData(mockScrapedData);
       setIsLoading(false);
@@ -102,10 +81,8 @@ export function DataScraper({ onDataUpdate, isCompact = false }: DataScraperProp
       description: "Connecting to data sources...",
     });
     
-    // Simulate API request
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    // Simulate updated data
     const updatedSources = sources.map(src => ({
       ...src,
       lastUpdated: src.id === "src5" ? "Just now" : src.lastUpdated,
@@ -137,6 +114,10 @@ export function DataScraper({ onDataUpdate, isCompact = false }: DataScraperProp
     });
   };
   
+  if (isCompact) {
+    return <CompactView sources={sources} isLoading={isLoading} onRefresh={handleRefresh} />;
+  }
+
   const filteredData = searchTerm 
     ? data.filter(item => 
         item.topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -145,55 +126,11 @@ export function DataScraper({ onDataUpdate, isCompact = false }: DataScraperProp
       )
     : data;
   
-  if (isCompact) {
-    return (
-      <div className="xp-window">
-        <div className="xp-title-bar">
-          <div className="flex items-center">
-            <Database size={14} />
-            <span className="ml-2">Live Data Sources</span>
-          </div>
-        </div>
-        <div className="xp-window-content p-3">
-          <div className="flex items-center justify-between mb-3">
-            <Badge variant="outline" className="bg-blue-50 text-blue-800 border-blue-200">
-              {sources.filter(s => s.status === "active").length} Active Sources
-            </Badge>
-            <Button size="sm" variant="outline" className="h-7 text-xs flex gap-1" onClick={handleRefresh} disabled={isLoading}>
-              <RefreshCcw size={12} className={`${isLoading ? "animate-spin" : ""}`} />
-              Refresh
-            </Button>
-          </div>
-          
-          <div className="text-xs space-y-1.5">
-            {sources.slice(0, 3).map(source => (
-              <div key={source.id} className="flex items-center justify-between">
-                <span className="font-medium">{source.name}</span>
-                <div className="flex items-center gap-1.5">
-                  <span>{source.lastUpdated}</span>
-                  <span className={`w-2 h-2 rounded-full ${
-                    source.status === "active" ? "bg-green-500" : 
-                    source.status === "idle" ? "bg-yellow-500" : "bg-red-500"
-                  }`}></span>
-                </div>
-              </div>
-            ))}
-            {sources.length > 3 && (
-              <div className="text-center text-xs text-blue-600 hover:underline cursor-pointer">
-                +{sources.length - 3} more sources
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
   return (
     <div className="xp-window">
       <div className="xp-title-bar">
         <div className="flex items-center">
-          <Database size={14} />
+          <Search size={14} />
           <span className="ml-2">Data Scraper & API Insights</span>
         </div>
       </div>
@@ -211,15 +148,7 @@ export function DataScraper({ onDataUpdate, isCompact = false }: DataScraperProp
           </div>
           
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="bg-green-50 text-green-800 border-green-200">
-              {sources.filter(s => s.status === "active").length} Active
-            </Badge>
-            <Badge variant="outline" className="bg-yellow-50 text-yellow-800 border-yellow-200">
-              {sources.filter(s => s.status === "idle").length} Idle
-            </Badge>
-            <Badge variant="outline" className="bg-red-50 text-red-800 border-red-200">
-              {sources.filter(s => s.status === "error").length} Error
-            </Badge>
+            <SourceStatusBadges sources={sources} />
             <Button size="sm" onClick={handleRefresh} disabled={isLoading}>
               <RefreshCcw size={14} className={`mr-1 ${isLoading ? "animate-spin" : ""}`} />
               Refresh
@@ -229,53 +158,12 @@ export function DataScraper({ onDataUpdate, isCompact = false }: DataScraperProp
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {isLoading ? (
-            // Skeleton loading states
             Array(4).fill(0).map((_, i) => (
               <div key={i} className="animate-pulse bg-gray-100 rounded-md p-3 h-28"></div>
             ))
           ) : (
             filteredData.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * idx }}
-                className="border rounded-md p-3 bg-white hover:shadow-md transition-shadow cursor-pointer"
-                onClick={() => {
-                  toast({
-                    title: item.topic,
-                    description: `Keywords: ${item.keywords.join(", ")}`,
-                  });
-                }}
-              >
-                <div className="flex justify-between items-start">
-                  <h5 className="font-semibold">{item.topic}</h5>
-                  <Badge className={
-                    item.trends === "up" ? "bg-green-100 text-green-800 border-green-200" :
-                    item.trends === "down" ? "bg-red-100 text-red-800 border-red-200" :
-                    "bg-blue-100 text-blue-800 border-blue-200"
-                  }>
-                    {item.trends === "up" ? "↑" : item.trends === "down" ? "↓" : "→"} {item.volume.toLocaleString()}
-                  </Badge>
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {item.keywords.map(kw => (
-                    <span key={kw} className="text-xs bg-gray-100 px-1.5 py-0.5 rounded-full">{kw}</span>
-                  ))}
-                </div>
-                <div className="mt-2 flex justify-between items-center">
-                  <span className="text-xs text-gray-500">Source: {item.source}</span>
-                  <span className={`text-xs ${
-                    item.trends === "up" ? "text-green-600" : 
-                    item.trends === "down" ? "text-red-600" : 
-                    "text-blue-600"
-                  }`}>
-                    {item.trends === "up" ? "Trending up" : 
-                     item.trends === "down" ? "Trending down" : 
-                     "Stable trend"}
-                  </span>
-                </div>
-              </motion.div>
+              <DataCard key={idx} item={item} index={idx} />
             ))
           )}
         </div>
