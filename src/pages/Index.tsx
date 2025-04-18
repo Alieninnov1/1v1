@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -10,14 +11,13 @@ import AnimatedBackground from "@/components/home/background/AnimatedBackground"
 import BasicUIContent from "@/components/home/basic-ui/BasicUIContent";
 import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
 import { Button } from "@/components/ui/button";
-import { ReactNode } from "react";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
   const [bootProgress, setBootProgress] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
-  const [dialogContent, setDialogContent] = useState("");
+  const [dialogContent, setDialogContent] = useState<ReactNode>("");
   const [showKnowledgeBase, setShowKnowledgeBase] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
