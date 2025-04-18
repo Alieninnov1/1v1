@@ -6,6 +6,7 @@ import { toast } from "@/hooks/use-toast";
 import { SourceStatusBadges } from "./data-scraper/SourceStatusBadges";
 import { CompactView } from "./data-scraper/CompactView";
 import { DataCard } from "./data-scraper/DataCard";
+import { DataSource, ScrapedData, DataScraperProps } from "./data-scraper/types";
 
 // Explicitly re-export types for external usage
 export type { DataSource, ScrapedData, DataScraperProps } from "./data-scraper/types";
