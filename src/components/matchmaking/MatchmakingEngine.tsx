@@ -146,27 +146,27 @@ const MatchmakingEngine = ({
   }, [isMatching, animationSpeed, autoMatch]);
 
   return (
-    <div className="xp-window w-full">
-      <div className="xp-title-bar flex justify-between items-center">
+    <div className="xp-window w-full backdrop-blur-md bg-gray-900/60 border border-purple-500/20 rounded-xl shadow-2xl overflow-hidden transition-all hover:border-purple-500/30">
+      <div className="xp-title-bar flex justify-between items-center bg-gradient-to-r from-purple-900/80 to-indigo-900/80 p-3 border-b border-purple-500/30">
         <div className="flex items-center">
-          <ArrowRightLeft size={14} className="mr-2" />
-          <span>Curriculum-Industry Matchmaking Engine</span>
+          <ArrowRightLeft size={16} className="mr-2 text-purple-300" />
+          <span className="font-semibold text-white/90">Curriculum-Industry Matchmaking Engine</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[10px] bg-[#ececec] text-black px-1 rounded">LIVE DEMO</span>
+          <span className="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">LIVE DEMO</span>
         </div>
       </div>
 
       <div className="xp-window-content p-4">
-        <div className="mb-6 bg-gradient-to-r from-[#e7f0fd] to-[#f5f9ff] p-4 rounded-lg border border-[#c1d9f9] shadow-inner">
-          <div className="flex flex-wrap justify-between items-center gap-2">
+        <div className="mb-6 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-4 rounded-lg border border-purple-500/20 shadow-inner">
+          <div className="flex flex-wrap justify-between items-center gap-3">
             <div>
-              <h3 className="text-sm font-semibold mb-1 flex items-center">
-                <Sparkles size={16} className="text-yellow-500 mr-1" />
+              <h3 className="text-sm font-semibold mb-1 flex items-center text-white">
+                <Sparkles size={16} className="text-yellow-400 mr-2" />
                 Live Matchmaking Demo
               </h3>
-              <p className="text-xs text-gray-600">
-                Watching curriculum needs align with industry demands in real-time
+              <p className="text-xs text-gray-300">
+                Watch curriculum needs align with industry demands in real-time
               </p>
             </div>
             
@@ -175,7 +175,7 @@ const MatchmakingEngine = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  className="text-red-600 border-red-200 hover:bg-red-50"
+                  className="text-red-400 border-red-500/30 hover:bg-red-900/20 hover:border-red-500/50"
                   onClick={handleStopMatching}
                 >
                   Stop Engine
@@ -183,7 +183,7 @@ const MatchmakingEngine = ({
               ) : (
                 <Button 
                   size="sm"
-                  className="bg-[#92CD00] hover:bg-[#7DB600] text-white"
+                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-lg shadow-green-900/20"
                   onClick={handleStartMatching}
                 >
                   Start Engine
@@ -193,15 +193,17 @@ const MatchmakingEngine = ({
               <Button 
                 size="sm" 
                 variant="outline"
+                className="bg-black/30 hover:bg-black/40 border-purple-500/20 hover:border-purple-500/40"
                 onClick={handleCreateMatch}
               >
-                <PlusCircle size={14} className="mr-1" /> 
+                <PlusCircle size={14} className="mr-1 text-purple-300" /> 
                 New Match
               </Button>
               
               <Button
                 size="sm"
                 variant="ghost"
+                className="text-gray-300 hover:text-white hover:bg-gray-800/50"
                 onClick={handleResetMatches}
               >
                 <RotateCcw size={14} className="mr-1" />
@@ -210,16 +212,16 @@ const MatchmakingEngine = ({
             </div>
           </div>
           
-          <div className="mt-3 grid grid-cols-3 gap-3 text-center">
-            <div className="bg-white rounded-lg p-3 border shadow-sm">
-              <div className="text-xs text-gray-500">Matches Generated</div>
-              <div className="text-xl font-semibold text-helix-purple">{matchCount}</div>
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+            <div className="bg-black/40 rounded-lg p-3 border border-purple-500/20 shadow-sm backdrop-blur-sm">
+              <div className="text-xs text-gray-400">Matches Generated</div>
+              <div className="text-xl font-semibold text-purple-300">{matchCount}</div>
             </div>
-            <div className="bg-white rounded-lg p-3 border shadow-sm">
-              <div className="text-xs text-gray-500">Engine Status</div>
+            <div className="bg-black/40 rounded-lg p-3 border border-purple-500/20 shadow-sm backdrop-blur-sm">
+              <div className="text-xs text-gray-400">Engine Status</div>
               <div className="text-sm font-medium">
                 {isMatching ? (
-                  <span className="text-green-600 flex items-center justify-center">
+                  <span className="text-green-400 flex items-center justify-center">
                     <span className="relative flex h-2 w-2 mr-1">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -227,13 +229,13 @@ const MatchmakingEngine = ({
                     Active
                   </span>
                 ) : (
-                  <span className="text-amber-600">Standby</span>
+                  <span className="text-amber-400">Standby</span>
                 )}
               </div>
             </div>
-            <div className="bg-white rounded-lg p-3 border shadow-sm">
-              <div className="text-xs text-gray-500">Match Quality</div>
-              <div className="text-sm font-medium text-blue-600">
+            <div className="bg-black/40 rounded-lg p-3 border border-purple-500/20 shadow-sm backdrop-blur-sm">
+              <div className="text-xs text-gray-400">Match Quality</div>
+              <div className="text-sm font-medium text-blue-400">
                 {matches.length > 0 ? 
                   `${Math.round(matches.reduce((acc, match) => acc + match.matchScore, 0) / matches.length)}%` : 
                   "N/A"}
@@ -251,30 +253,30 @@ const MatchmakingEngine = ({
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className={`rounded-lg border p-3 ${
-                    match.isNew ? 'animate-pulse border-blue-300 bg-blue-50' : 'bg-white'
+                  transition={{ duration: 0.3, type: 'spring', stiffness: 200, damping: 20 }}
+                  className={`rounded-lg border p-3 backdrop-blur-sm ${
+                    match.isNew ? 'animate-pulse border-blue-400/50 bg-blue-900/20' : 'bg-black/40 border-purple-500/20'
                   }`}
                 >
                   <div className="flex flex-wrap justify-between">
                     <div className="mb-2 md:mb-0">
                       <div className="flex items-center mb-1">
-                        <School size={16} className="text-helix-purple mr-2" />
-                        <span className="font-medium">{match.skillName}</span>
+                        <School size={16} className="text-purple-400 mr-2" />
+                        <span className="font-medium text-white">{match.skillName}</span>
                       </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Building2 size={14} className="mr-2" />
+                      <div className="flex items-center text-sm text-gray-300">
+                        <Building2 size={14} className="mr-2 text-gray-400" />
                         <span>{match.industryNeed}</span>
                       </div>
                     </div>
                     
                     <div className="flex flex-col items-end">
                       <div className="flex items-center">
-                        <span className="text-sm font-medium mr-2">Match:</span>
+                        <span className="text-sm font-medium mr-2 text-gray-300">Match:</span>
                         <Badge className={
-                          match.matchScore >= 85 ? "bg-green-100 text-green-800" :
-                          match.matchScore >= 60 ? "bg-blue-100 text-blue-800" :
-                          "bg-amber-100 text-amber-800"
+                          match.matchScore >= 85 ? "bg-green-900/30 text-green-300 border border-green-500/30" :
+                          match.matchScore >= 60 ? "bg-blue-900/30 text-blue-300 border border-blue-500/30" :
+                          "bg-amber-900/30 text-amber-300 border border-amber-500/30"
                         }>
                           {match.matchScore}%
                         </Badge>
@@ -282,7 +284,7 @@ const MatchmakingEngine = ({
                       
                       <div className="text-xs mt-1">
                         {match.actionRequired && (
-                          <span className="text-amber-600 flex items-center">
+                          <span className="text-amber-400 flex items-center">
                             <CheckCircle2 size={12} className="mr-1" />
                             {match.actionRequired}
                           </span>
@@ -296,12 +298,12 @@ const MatchmakingEngine = ({
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center py-10 text-gray-500"
+                className="text-center py-10 text-gray-400"
               >
                 <div className="flex flex-col items-center">
-                  <ArrowRightLeft size={40} className="text-gray-300 mb-2" />
+                  <ArrowRightLeft size={40} className="text-gray-600 mb-2" />
                   <p className="mb-1">No matches generated yet</p>
-                  <p className="text-sm text-gray-400">Click "Start Engine" to begin matching curriculum with industry needs</p>
+                  <p className="text-sm text-gray-500">Click "Start Engine" to begin matching curriculum with industry needs</p>
                 </div>
               </motion.div>
             )}

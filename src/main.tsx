@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`App mounted in ${loadTime}ms`);
         
         // Track app load performance
-        trackEvent('appLoaded' as any, { 
+        trackEvent('appLoaded', { 
           loadTime,
           isMobile: 'ontouchstart' in window,
           viewport: `${window.innerWidth}x${window.innerHeight}`
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Failed to initialize app:', error);
       
       // Track app initialization error
-      trackEvent('appInitError' as any, { 
+      trackEvent('appInitError', { 
         error: String(error)
       });
       

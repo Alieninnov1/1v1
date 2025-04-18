@@ -1,12 +1,20 @@
 
 import { track as vercelTrack } from '@vercel/analytics';
 
-type EventName = 
+export type EventName = 
   | 'matchCreated' 
   | 'matchSaved' 
-  | 'simulationStarted' 
+  | 'simulationStarted'
+  | 'simulationStopped'
   | 'feedbackSubmitted'
-  | 'matchAttempt';
+  | 'matchAttempt'
+  | 'settingsOpened'
+  | 'contentExported'
+  | 'dashboardRefreshed'
+  | 'matchesReset'
+  | 'appLoaded'
+  | 'appInitError'
+  | 'page_view';
 
 interface EventProperties {
   [key: string]: string | number | boolean | undefined;
@@ -31,7 +39,7 @@ export const trackEvent = (event: EventName, properties?: EventProperties) => {
  * @param pageName The name of the page being viewed
  */
 export const trackPageView = (pageName: string) => {
-  trackEvent('page_view' as EventName, { pageName });
+  trackEvent('page_view', { pageName });
 };
 
 /**

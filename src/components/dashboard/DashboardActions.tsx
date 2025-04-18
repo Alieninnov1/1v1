@@ -34,16 +34,31 @@ const DashboardActions = ({ isRefreshing, onRefresh }: DashboardActionsProps) =>
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      <Button variant="outline" size="sm" onClick={handleSettingsClick}>
-        <Cog size={16} className="mr-1" />
+    <div className="flex flex-wrap items-center gap-2 sm:space-x-2">
+      <Button 
+        variant="outline" 
+        size="sm" 
+        onClick={handleSettingsClick}
+        className="backdrop-blur-sm bg-black/30 border-purple-500/20 hover:bg-black/40 hover:border-purple-500/30 transition-all"
+      >
+        <Cog size={16} className="mr-1 text-purple-300" />
         Settings
       </Button>
-      <Button variant="outline" size="sm" onClick={handleExportClick}>
-        <Download size={16} className="mr-1" />
+      <Button 
+        variant="outline" 
+        size="sm" 
+        onClick={handleExportClick}
+        className="backdrop-blur-sm bg-black/30 border-purple-500/20 hover:bg-black/40 hover:border-purple-500/30 transition-all"
+      >
+        <Download size={16} className="mr-1 text-purple-300" />
         Export
       </Button>
-      <Button size="sm" onClick={handleRefreshClick} disabled={isRefreshing}>
+      <Button 
+        size="sm" 
+        onClick={handleRefreshClick} 
+        disabled={isRefreshing}
+        className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-900/20"
+      >
         <RefreshCcw size={16} className={`mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
         Refresh
       </Button>
