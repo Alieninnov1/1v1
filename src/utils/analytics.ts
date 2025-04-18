@@ -34,6 +34,7 @@ export const trackEvent = (event: EventName, properties?: EventProperties): void
 };
 
 // Analytics component for React usage
-export const AnalyticsComponent = () => {
+export const AnalyticsComponent = (): JSX.Element => {
   return <Analytics />;
 };
+
