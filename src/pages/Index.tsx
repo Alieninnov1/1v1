@@ -17,7 +17,7 @@ const Index = () => {
   const [bootProgress, setBootProgress] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
-  const [dialogContent, setDialogContent] = useState<ReactNode>("");
+  const [dialogContent, setDialogContent] = useState<ReactNode>(null);
   const [showKnowledgeBase, setShowKnowledgeBase] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
