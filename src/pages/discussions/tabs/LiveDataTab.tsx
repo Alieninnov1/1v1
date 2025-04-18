@@ -2,7 +2,7 @@
 import { DataScraper } from "@/components/ui/data-scraper";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrapedData } from "@/components/ui/data-scraper";
+import type { ScrapedData } from "@/components/ui/data-scraper/types";
 import { Badge } from "@/components/ui/badge";
 import { Database, Filter, TrendingUp } from "lucide-react";
 
