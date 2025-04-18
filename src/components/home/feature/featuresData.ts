@@ -23,7 +23,7 @@ export const features = [
     description: "Break down silos and foster collaboration between education, industry, and policymakers."
   },
   {
-    icon: <Shield className="h-10 w-10 text-helix-purple bg-indigo-300" />,
+    icon: <Shield className="h-10 w-10 text-helix-purple" />,
     title: "Data-Driven Decisions",
     description: "Make informed decisions backed by real-world data and stakeholder feedback."
   },

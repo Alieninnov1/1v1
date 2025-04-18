@@ -1,11 +1,11 @@
 
 import Hero from "@/components/home/Hero";
-import Features from "@/components/home/Features";
-import CallToAction from "@/components/home/CallToAction";
-import TechStack from "@/components/home/TechStack";
-import CurriculumAIDemo from "@/components/curriculum/CurriculumAIDemo";
 import DemoSection from "@/components/sections/DemoSection";
 import TripleHelixSection from "@/components/sections/TripleHelixSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import CurriculumSection from "@/components/sections/CurriculumSection";
+import TechStackSection from "@/components/sections/TechStackSection";
+import CallToActionSection from "@/components/sections/CallToActionSection";
 
 const WindowContent = () => {
   return (
@@ -13,10 +13,10 @@ const WindowContent = () => {
       <Hero />
       <DemoSection />
       <TripleHelixSection />
-      <Features />
-      <CurriculumAIDemo />
-      <TechStack />
-      <CallToAction />
+      <FeaturesSection />
+      <CurriculumSection />
+      <TechStackSection />
+      <CallToActionSection />
     </div>
   );
 };
