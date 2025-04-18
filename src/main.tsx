@@ -1,8 +1,7 @@
-
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import { trackEvent } from './utils/analytics.ts';
+import { trackEvent } from './utils/analytics';
 
 // Performance optimization with asynchronous loading
 document.addEventListener('DOMContentLoaded', () => {
