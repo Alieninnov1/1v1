@@ -1,4 +1,4 @@
-name: Auto Update File and Deploy to Vercel
+name: Auto Update and Deploy to Vercel
 
 on:
   schedule:
@@ -9,28 +9,34 @@ on:
 
 jobs:
   update-file:
+    name: Update Timestamp File
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Update File
+      - name: Update Timestamp File
         run: |
-          echo "Last updated: $(date)" > updated-file.txt
-          git config user.name "GitHub Actions"
+          echo "Last updated: $(date -u)" > updated-file.txt
+          git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add updated-file.txt
-          git commit -m "Automated file update"
-          git push origin main
+          git commit -m "Automated file update at $(date -u)"
+          git push origin main || echo "No changes to commit"
 
   deploy:
+    name: Deploy to Vercel
     needs: update-file
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
       - name: Deploy to Vercel
-        run: npx vercel --prod
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
