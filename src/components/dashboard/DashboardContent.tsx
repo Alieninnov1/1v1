@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DataScraper } from "@/components/ui/data-scraper";
 import { useSkillTrends } from "@/services/apiDataService";
 import DashboardHeader from "./DashboardHeader";
 import DashboardTabs from "./DashboardTabs";
@@ -14,7 +15,6 @@ import AmbientAudioControl from "./AmbientAudioControl";
 import DashboardBackground from "./DashboardBackground";
 import DashboardActions from "./DashboardActions";
 import DashboardSkillTrends from "./DashboardSkillTrends";
-import { DataScraper } from "@/components/ui/data-scraper";
 
 interface DashboardContentProps {
   activeTab: string;
