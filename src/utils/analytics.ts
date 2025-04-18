@@ -33,8 +33,12 @@ export const trackEvent = (event: EventName, properties?: EventProperties): void
   }
 };
 
+// For compatibility with the usage in the MatchmakingEngine component
+export const trackMatchAttempt = (urgencyRate: number, result: string): void => {
+  trackEvent('skillGapIdentified', { urgencyRate, result });
+};
+
 // Analytics component for React usage
 export const AnalyticsComponent = (): JSX.Element => {
   return <Analytics />;
 };
-
