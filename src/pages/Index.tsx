@@ -18,6 +18,7 @@ const Index = () => {
   const [showKnowledgeBase, setShowKnowledgeBase] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [show3DDemo, setShow3DDemo] = useState(false);
 
   // Auto-show welcome after boot completes
   useEffect(() => {
@@ -33,6 +34,11 @@ const Index = () => {
     setDialogTitle(title);
     setDialogContent(content);
     setDialogOpen(true);
+    
+    // If it's the 3D demo dialog, set the demo flag
+    if (title.includes("3D")) {
+      setShow3DDemo(true);
+    }
   };
 
   return (
@@ -45,7 +51,7 @@ const Index = () => {
           setShowStartup={setShowStartup}
         />
       ) : (
-        <div className="min-h-screen bg-gradient-to-b from-[#151823] to-[#262d4a] p-4 pb-16 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-[#151823] to-[#262d4a] p-4 pb-16 md:pb-4 relative overflow-hidden">
           {/* Animated network nodes in background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-800/10 via-transparent to-transparent"></div>
@@ -99,17 +105,20 @@ const Index = () => {
             title={dialogTitle}
             content={dialogContent}
             isOpen={dialogOpen}
-            onClose={() => setDialogOpen(false)}
+            onClose={() => {
+              setDialogOpen(false);
+              setShow3DDemo(false);
+            }}
           />
           
           <WindowDialog
             title="Welcome to HelixHub Decentralized Network"
-            content="HelixHub connects academia, industry, and government via a decentralized blockchain network. Governance is handled by the HelixDAO, ensuring transparent and democratic decision-making. Explore the desktop icons to discover features of the platform."
+            content="HelixHub connects academia, industry, and government via a triple helix model. Explore how these three sectors collaborate to drive innovation and address skill gaps in real-time. Try our interactive 3D model to visualize these complex relationships."
             isOpen={showWelcome}
             onClose={() => setShowWelcome(false)}
           />
           
-          <div className="fixed bottom-0 left-0 right-0 z-50">
+          <div className="fixed bottom-0 left-0 right-0 z-50 pb-safe-area">
             <Taskbar />
           </div>
         </div>

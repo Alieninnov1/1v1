@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import DesktopIcon from "./DesktopIcon";
-import { BookOpen, FileText, BarChart3, Users, MessageSquare, Bookmark, Cpu } from "lucide-react";
+import { BookOpen, FileText, BarChart3, Users, MessageSquare, Bookmark, Cpu, Box } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface DesktopIconGridProps {
@@ -55,6 +55,12 @@ const DesktopIconGrid = ({ onKnowledgeBaseClick, onFeedbackClick, onDialogOpen }
       icon: <Users size={isMobile ? 28 : 32} className="text-teal-400" />,
       onClick: onFeedbackClick,
       position: { x: 0, y: 6 }
+    },
+    {
+      name: "3D Demo",
+      icon: <Box size={isMobile ? 28 : 32} className="text-indigo-400" />,
+      onClick: () => onDialogOpen("3D Interactive Demo", "This is an advanced 3D demo of the HelixHub Triple Helix Model."),
+      position: { x: 0, y: 7 }
     }
   ];
   
@@ -72,23 +78,37 @@ const DesktopIconGrid = ({ onKnowledgeBaseClick, onFeedbackClick, onDialogOpen }
     show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 300 } }
   };
 
+  // Responsive grid layout
+  const gridLayout = isMobile 
+    ? "grid-cols-2 gap-2 pt-16" 
+    : "grid-cols-1 gap-4";
+
   return (
     <motion.div 
-      className="grid grid-cols-1 gap-4 absolute top-4 left-4 z-10"
+      className={`grid ${gridLayout} absolute top-4 left-4 z-10`}
       variants={container}
       initial="hidden"
       animate="show"
-      style={{ filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.3))' }}
+      style={{ 
+        filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.3))',
+        maxWidth: isMobile ? '160px' : '100px'
+      }}
     >
       {icons.map((icon, index) => (
-        <motion.div key={icon.name} variants={item} className="mobile-tap-highlight">
+        <motion.div 
+          key={icon.name} 
+          variants={item} 
+          className="mobile-tap-highlight"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <DesktopIcon
             name={icon.name}
             icon={icon.icon}
             onClick={icon.onClick}
-            style={{
-              marginLeft: icon.position.x * (isMobile ? 60 : 80),
-              marginTop: icon.position.y * (isMobile ? 4 : 8)
+            style={isMobile ? {} : {
+              marginLeft: icon.position.x * (isMobile ? 0 : 80),
+              marginTop: icon.position.y * (isMobile ? 0 : 8)
             }}
           />
         </motion.div>

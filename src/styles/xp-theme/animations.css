@@ -103,6 +103,56 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
+/* Starfield animation */
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Window dragging animation */
+.xp-window-drag {
+  transition: transform 0.1s ease-out;
+}
+
+.xp-window-drag:active {
+  transition: none;
+  cursor: grabbing;
+}
+
+/* Taskbar peek animation */
+.xp-taskbar-peek {
+  animation: taskbarPeek 0.3s ease-out forwards;
+}
+
+@keyframes taskbarPeek {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* XP startup sound animation */
+.xp-startup-sound {
+  animation: xpStartupPulse 2s ease-in-out;
+}
+
+@keyframes xpStartupPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .xp-window-appear,
@@ -110,12 +160,15 @@
   .xp-button-click,
   .xp-error-shake,
   .xp-minimize,
-  .xp-maximize {
+  .xp-maximize,
+  .xp-taskbar-peek,
+  .xp-startup-sound {
     animation: none !important;
   }
   
   .xp-desktop-icon-hover,
-  .xp-taskbar-btn-hover {
+  .xp-taskbar-btn-hover,
+  .xp-window-drag {
     transition: none !important;
   }
 }

@@ -1,15 +1,16 @@
 
 /* Taskbar Styling */
 .xp-taskbar {
-  background: linear-gradient(to bottom, #2a92fb, #0155b7);
+  background: linear-gradient(to bottom, #245edc, #1547a6);
   border-top: 1px solid #fff;
   box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
+  padding: 0 4px;
   z-index: 50;
+  user-select: none;
 }
 
 .xp-start-button {
@@ -22,7 +23,8 @@
   margin-left: 2px;
   display: flex;
   align-items: center;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
   transition: all 0.2s;
 }
 
@@ -35,14 +37,63 @@
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
 }
 
+.xp-window-button-taskbar {
+  background: transparent;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 32px;
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.xp-window-button-taskbar:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.xp-window-button-taskbar.active {
+  background: linear-gradient(to bottom, #2A6CB7, #1F5196);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  border: 1px solid #1F5196;
+}
+
 .xp-clock {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
   color: white;
   font-size: 0.7rem;
-  padding: 0 8px;
+  padding: 4px 8px;
   height: 70%;
   display: flex;
   align-items: center;
   margin-left: auto;
+  border-radius: 2px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .xp-taskbar {
+    height: 32px;
+    padding: 0 2px;
+  }
+  
+  .xp-start-button {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+  
+  .xp-window-button-taskbar {
+    padding: 0 4px;
+    height: 28px;
+  }
+  
+  .xp-clock {
+    padding: 2px 4px;
+  }
+}
+
+/* Safe area padding for mobile devices with notches */
+.pb-safe-area {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
