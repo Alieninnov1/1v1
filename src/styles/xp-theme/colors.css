@@ -1,0 +1,25 @@
+
+:root {
+  --xp-blue: linear-gradient(180deg, #2A6CB7 0%, #15428B 100%);
+  --xp-title: linear-gradient(180deg, #0A246A 0%, #A6CAF0 100%);
+  --xp-button: linear-gradient(180deg, #FFFFFF 0%, #ECE9D8 100%);
+  --xp-button-hover: linear-gradient(180deg, #FFE7A2 0%, #FED17E 100%);
+  --xp-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  --xp-inset: inset 1px 1px 0px rgba(255, 255, 255, 0.7), 
+              inset -1px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile-first responsive breakpoints */
+@media (max-width: 640px) {
+  :root {
+    --window-padding: 0.5rem;
+    --title-font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 641px) {
+  :root {
+    --window-padding: 1rem;
+    --title-font-size: 1rem;
+  }
+}

@@ -26,3 +26,28 @@
   border-top: 1px solid #c7c7c7;
   -webkit-overflow-scrolling: touch;
 }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .xp-window {
+    border-radius: 6px;
+    margin: 0.5rem;
+  }
+
+  .xp-title-bar {
+    padding: 0.3rem;
+    font-size: 0.6rem;
+  }
+
+  .xp-window-content {
+    padding: 0.5rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .xp-window-button {
+    padding: 0.5rem;
+    min-height: 44px; /* iOS minimum touch target */
+  }
+}
