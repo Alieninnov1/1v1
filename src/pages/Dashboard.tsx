@@ -1,10 +1,10 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"; // Add AnimatePresence to the import
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MessageSquare } from "lucide-react";
+import { ArrowLeft, MessageSquare, ChevronDown } from "lucide-react";
 import { useSkillTrends } from "@/services/apiDataService";
 import { DataScraper } from "@/components/ui/data-scraper";
 import { useToast } from "@/hooks/use-toast";
@@ -30,6 +30,8 @@ const Dashboard = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   const [showFeedbackWall, setShowFeedbackWall] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+  const dashboardRef = useRef<HTMLDivElement>(null);
   
   const {
     data: skillTrends,
@@ -55,6 +57,26 @@ const Dashboard = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Hide intro after delay or scroll
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowIntro(false);
+    }, 4000);
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShowIntro(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleRefresh = async () => {
     setIsRefreshing(true);
     toast({
@@ -71,9 +93,72 @@ const Dashboard = () => {
     }, 1000);
   };
 
+  const handleSkipIntro = () => {
+    setShowIntro(false);
+    // Scroll to dashboard content
+    dashboardRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Layout>
-      <div className="relative min-h-screen">
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1, type: "spring" }}
+              className="relative w-64 h-64"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-blue-600/20 rounded-full blur-2xl animate-pulse"></div>
+              <img 
+                src="/lovable-uploads/261b8a7f-e6a4-4b35-b826-2641f23da6d7.png"
+                alt="HelixHub Logo" 
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="mt-8 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300"
+            >
+              HelixHub
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="mt-2 text-gray-400 max-w-md text-center"
+            >
+              Uniting academia, industry, and government in real-time
+            </motion.p>
+
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              onClick={handleSkipIntro}
+              className="mt-12 flex flex-col items-center cursor-pointer group"
+            >
+              <span className="text-purple-400 text-sm mb-2 group-hover:text-purple-300">Start Here</span>
+              <ChevronDown 
+                size={24} 
+                className="text-purple-400 animate-bounce group-hover:text-purple-300" 
+              />
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative min-h-screen" ref={dashboardRef}>
         <DashboardBackground />
 
         <div className="container mx-auto px-4 py-8 relative">
