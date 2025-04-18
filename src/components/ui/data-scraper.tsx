@@ -1,8 +1,8 @@
+
 import { useEffect, useState } from "react";
 import { Search, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { DataSource, ScrapedData, DataScraperProps } from "./data-scraper/types";
 import { SourceStatusBadges } from "./data-scraper/SourceStatusBadges";
 import { CompactView } from "./data-scraper/CompactView";
 import { DataCard } from "./data-scraper/DataCard";
