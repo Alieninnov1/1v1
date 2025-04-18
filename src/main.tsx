@@ -2,6 +2,7 @@
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import { trackEvent } from './utils/analytics.ts';
 
 // Performance optimization with asynchronous loading
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,10 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (rootElement.contains(loadingPlaceholder)) {
           rootElement.removeChild(loadingPlaceholder);
         }
-        console.log(`App mounted in ${Math.round(performance.now() - start)}ms`);
+        const loadTime = Math.round(performance.now() - start);
+        console.log(`App mounted in ${loadTime}ms`);
+        
+        // Track app load performance
+        trackEvent('appLoaded' as any, { 
+          loadTime,
+          isMobile: 'ontouchstart' in window,
+          viewport: `${window.innerWidth}x${window.innerHeight}`
+        });
       }, 300);
     } catch (error) {
       console.error('Failed to initialize app:', error);
+      
+      // Track app initialization error
+      trackEvent('appInitError' as any, { 
+        error: String(error)
+      });
       
       // Show error message if the app fails to load
       rootElement.innerHTML = `

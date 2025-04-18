@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { skillsData, industriesData } from "./matchmakingData";
+import { trackEvent, trackMatchAttempt } from "@/utils/analytics";
 
 export interface MatchResult {
   id: string;
@@ -59,6 +60,10 @@ const MatchmakingEngine = ({
     if (score < 60) action = "Curriculum Update Needed";
     else if (score < 75) action = "Minor Alignment Recommended";
     
+    // Track the match attempt for analytics
+    const urgencyRate = (100 - score) / 100;
+    trackMatchAttempt(parseFloat(urgencyRate.toFixed(2)), relevance.toLowerCase());
+    
     return {
       id: `match-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
       skillName: skill.name,
@@ -76,6 +81,8 @@ const MatchmakingEngine = ({
     if (isMatching) return;
     
     setIsMatching(true);
+    trackEvent('simulationStarted', { type: 'matchmaking', automated: autoMatch });
+    
     toast({
       title: "Matchmaking Engine Started",
       description: "Analyzing curriculum against industry needs in real-time",
@@ -87,6 +94,8 @@ const MatchmakingEngine = ({
     if (!isMatching) return;
     
     setIsMatching(false);
+    trackEvent('simulationStopped', { matchesGenerated: matchCount });
+    
     toast({
       title: "Matchmaking Engine Paused",
       description: `Generated ${matchCount} curriculum-industry matches`,
@@ -97,6 +106,8 @@ const MatchmakingEngine = ({
   const handleResetMatches = () => {
     setMatches([]);
     setMatchCount(0);
+    trackEvent('matchesReset', { previousCount: matchCount });
+    
     toast({
       title: "Matchmaking Reset",
       description: "All matches have been cleared",
