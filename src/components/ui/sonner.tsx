@@ -1,13 +1,14 @@
-import { useTheme } from "next-themes"
-import { Toaster as Sonner, toast } from "sonner"
 
-type ToasterProps = React.ComponentProps<typeof Sonner>
+import { useTheme } from "next-themes"
+import { Toaster as SonnerToaster } from "sonner"
+
+type ToasterProps = React.ComponentProps<typeof SonnerToaster>
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
 
   return (
-    <Sonner
+    <SonnerToaster
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
       toastOptions={{
@@ -25,5 +26,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
     />
   )
 }
+
+// Fix: Export the toast function from sonner directly
+// instead of re-exporting it which causes the React error
+import { toast } from "sonner"
 
 export { Toaster, toast }
