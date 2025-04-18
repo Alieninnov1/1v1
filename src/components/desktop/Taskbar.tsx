@@ -7,6 +7,7 @@ import TaskbarButton from "./taskbar/TaskbarButton";
 import StartMenu from "./taskbar/StartMenu";
 import TaskbarClock from "./taskbar/TaskbarClock";
 import { useLocation, useNavigate } from "react-router-dom";
+import { trackEvent } from "@/utils/analytics";
 
 const Taskbar = () => {
   const [showStartMenu, setShowStartMenu] = useState(false);
@@ -53,6 +54,7 @@ const Taskbar = () => {
 
   const toggleStartMenu = () => {
     setShowStartMenu(!showStartMenu);
+    trackEvent('buttonClick', { button: 'startMenu', action: showStartMenu ? 'close' : 'open' });
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -93,6 +95,7 @@ const Taskbar = () => {
               onClick={() => {
                 if (window.path !== location.pathname) {
                   navigate(window.path);
+                  trackEvent('buttonClick', { button: 'taskbarNav', destination: window.path });
                 }
               }}
             />
