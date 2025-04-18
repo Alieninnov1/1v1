@@ -27,7 +27,7 @@ const features = [{
   description: "Accelerate the pace of innovation with streamlined communication and feedback channels."
 }];
 const Features = () => {
-  return <section className="py-16 sm:py-24 bg-indigo-400">
+  return <section className="py-16 sm:py-24 bg-indigo-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.div initial={{
@@ -41,10 +41,10 @@ const Features = () => {
         }} transition={{
           duration: 0.5
         }}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white font-satoshi mb-6">
+            <h2 className="text-3xl font-satoshi mb-6 sm:text-3xl font-bold text-indigo-800">
               Powerful Features to Drive Collaboration
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-lg text-slate-950 font-thin">
               HelixHub provides tools and insights to bridge the gap between education, workforce needs, and policy making.
             </p>
           </motion.div>
@@ -66,10 +66,10 @@ const Features = () => {
               <Card className="h-full card-hover border-none shadow-card rounded-xl overflow-hidden">
                 <CardHeader className="pb-2">
                   <div className="mb-4">{feature.icon}</div>
-                  <CardTitle className="text-xl font-satoshi text-violet-900">{feature.title}</CardTitle>
+                  <CardTitle className="text-xl font-satoshi text-indigo-950 font-medium">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gray-600 dark:text-gray-300 text-base">
+                  <CardDescription className="text-blue-900 text-base">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
