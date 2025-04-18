@@ -1,11 +1,14 @@
+
 import { motion } from "framer-motion";
 import { X, Info } from "lucide-react";
+
 interface WindowDialogProps {
   title: string;
   content: string;
   isOpen: boolean;
   onClose: () => void;
 }
+
 const WindowDialog = ({
   title,
   content,
@@ -13,14 +16,20 @@ const WindowDialog = ({
   onClose
 }: WindowDialogProps) => {
   if (!isOpen) return null;
-  return <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50">
-      <motion.div initial={{
-      opacity: 0,
-      scale: 0.9
-    }} animate={{
-      opacity: 1,
-      scale: 1
-    }} className="xp-window max-w-md">
+  
+  return (
+    <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50">
+      <motion.div 
+        initial={{
+          opacity: 0,
+          scale: 0.9
+        }} 
+        animate={{
+          opacity: 1,
+          scale: 1
+        }} 
+        className="xp-window max-w-md"
+      >
         <div className="xp-title-bar">
           <div className="flex items-center">
             <Info size={14} />
@@ -42,6 +51,8 @@ const WindowDialog = ({
           </div>
         </div>
       </motion.div>
-    </div>;
+    </div>
+  );
 };
+
 export default WindowDialog;

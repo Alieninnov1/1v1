@@ -12,7 +12,7 @@ const quotes = [
 ];
 
 const OracleOverlay = () => {
-  const [activeQuote, setActiveQuote] = useState(1);
+  const [activeQuote, setActiveQuote] = useState(0);  // Changed from 1 to 0 as array index should start at 0
   const [isHighlighted, setIsHighlighted] = useState(false);
   
   useEffect(() => {

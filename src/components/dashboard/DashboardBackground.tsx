@@ -34,13 +34,13 @@ const DashboardBackground = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: loaded ? 0.25 : 0, y: 0 }}
             transition={{ duration: 2, delay: i * 0.5 }}
-            className={`absolute inset-0 opacity-20 mix-blend-overlay`} 
+            className="absolute inset-0 opacity-20 mix-blend-overlay" 
             style={{
               backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 1000 Q 250 750 500 1000 T 1000 1000 L 1000 0 L 0 0 Z' fill='%23fff'/%3E%3C/svg%3E\")",
               backgroundSize: "100% 100%",
               animation: `wave ${15 + i * 5}s linear infinite`,
               animationDelay: `${i * -5}s`
-            }} 
+            }}
           />
         ))}
       </div>
