@@ -1,3 +1,4 @@
+
 import { Database, Cpu, Globe, Layers, Server, Shield, LineChart } from "lucide-react";
 import ArchitectureCard from "./ArchitectureCard";
 import HelixModelDemo from "@/components/3d/HelixModelDemo";
