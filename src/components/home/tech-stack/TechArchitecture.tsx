@@ -1,4 +1,3 @@
-
 import { Database, Cpu, Globe, Layers, Server, Shield, LineChart } from "lucide-react";
 import ArchitectureCard from "./ArchitectureCard";
 import HelixModelDemo from "@/components/3d/HelixModelDemo";
@@ -13,7 +12,6 @@ const TechArchitecture = () => {
       </div>
       
       <div className="bg-gray-800/30 p-6 rounded-xl border border-purple-500/20 relative overflow-hidden">
-        {/* Background design elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
         
