@@ -6,10 +6,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "@/utils/analytics";
 
-// Import components
-import TaskbarButton from "./taskbar/TaskbarButton";
-import TaskbarClock from "./taskbar/TaskbarClock";
-import StartMenu from "./taskbar/StartMenu";
+// Update import paths to match the desktop component structure
+import TaskbarButton from "@/components/desktop/taskbar/TaskbarButton";
+import TaskbarClock from "@/components/desktop/taskbar/TaskbarClock";
+import StartMenu from "@/components/desktop/taskbar/StartMenu";
 
 const XPTaskbar = () => {
   const [showStartMenu, setShowStartMenu] = useState(false);
