@@ -4,7 +4,7 @@ import { RefObject } from 'react';
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
-  offset?: [string, string];
+  offset?: ["start end", "end start"] | [string, string];
   inputRange?: number[];
   outputRange?: number[] | string[];
 };
@@ -20,10 +20,10 @@ export const useScrollAnimation = ({
     offset,
   });
 
-  const transformValue: MotionValue = useTransform(
+  const transformValue = useTransform(
     scrollYProgress,
     inputRange,
-    outputRange
+    outputRange as any
   );
 
   return {
