@@ -145,7 +145,6 @@ const Index = () => {
             }
             isOpen={showWelcome}
             onClose={() => setShowWelcome(false)}
-            className="xp-window"
           />
           
           <OnboardingWizard 

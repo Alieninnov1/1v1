@@ -163,12 +163,12 @@ const XPTaskbar = () => {
   
   const handleStartClick = () => {
     setShowStartMenu(!showStartMenu);
-    trackEvent('click', { category: 'button', action: showStartMenu ? 'close' : 'open', label: 'startButton' });
+    trackEvent('startMenu', { category: 'button', action: showStartMenu ? 'close' : 'open', label: 'startButton' });
   };
   
   const handleWindowClick = (path: string) => {
     navigate(path);
-    trackEvent('click', { category: 'navigation', destination: path, source: 'taskbar' });
+    trackEvent('navigation', { category: 'navigation', destination: path, source: 'taskbar' });
   };
   
   const showSystemTray = () => {

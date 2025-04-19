@@ -1,0 +1,41 @@
+
+/* Animation utilities and accessibility */
+.xp-smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .xp-window-appear,
+  .xp-start-menu-appear,
+  .xp-button-click,
+  .xp-error-shake,
+  .xp-minimize,
+  .xp-maximize,
+  .xp-taskbar-peek,
+  .xp-startup-sound,
+  .xp-glow,
+  .xp-progress-bar,
+  .xp-tooltip-appear,
+  .xp-notification-bubble,
+  .xp-loading-spinner,
+  .xp-button-shine::after {
+    animation: none !important;
+  }
+  
+  .xp-desktop-icon-hover,
+  .xp-taskbar-btn-hover,
+  .xp-window-drag,
+  .xp-hover-reveal {
+    transition: none !important;
+  }
+}
