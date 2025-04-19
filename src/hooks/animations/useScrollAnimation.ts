@@ -2,11 +2,17 @@
 import { useScroll, useTransform, MotionValue } from 'framer-motion';
 import { RefObject } from 'react';
 
-type OffsetValue = [string, string] | number[] | undefined;
+// Define the exact types that framer-motion expects for ScrollOffset
+type Edge = "start" | "end" | "center";
+type ScrollOffset = 
+  | [Edge | number | string, Edge | number | string] 
+  | Edge 
+  | number 
+  | undefined;
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
-  offset?: OffsetValue;
+  offset?: ScrollOffset;
   inputRange?: number[];
   outputRange?: any[];
 };
@@ -19,7 +25,7 @@ export const useScrollAnimation = ({
 }: ScrollAnimationConfig = {}) => {
   const { scrollYProgress } = useScroll({
     target,
-    offset: offset as [string, string],
+    offset,
   });
 
   const transformValue = useTransform(
