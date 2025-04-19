@@ -5,11 +5,9 @@ import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "@/utils/analytics";
-
-// Update import paths to match the desktop component structure
-import TaskbarButton from "@/components/desktop/taskbar/TaskbarButton";
-import TaskbarClock from "@/components/desktop/taskbar/TaskbarClock";
-import StartMenu from "@/components/desktop/taskbar/StartMenu";
+import TaskbarButton from "@/components/xp/taskbar/TaskbarButton";
+import TaskbarClock from "@/components/xp/taskbar/TaskbarClock";
+import StartMenu from "@/components/xp/taskbar/StartMenu";
 
 const XPTaskbar = () => {
   const [showStartMenu, setShowStartMenu] = useState(false);
@@ -23,14 +21,10 @@ const XPTaskbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Set initial windows based on current route
   useEffect(() => {
     const path = location.pathname;
-    
-    // Clear windows first to avoid duplicates
     setOpenWindows([]);
     
-    // Add windows based on current route
     if (path === "/") {
       setOpenWindows([
         { id: "main", label: "HelixHub Explorer", icon: Computer, path: "/" }
