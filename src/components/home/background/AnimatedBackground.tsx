@@ -13,26 +13,25 @@ const AnimatedBackground = ({ children }: AnimatedBackgroundProps) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-800/10 via-transparent to-transparent"></div>
         
         {/* Animated particles */}
-        {Array.from({ length: 50 }).map((_, i) => (
+        {Array.from({ length: 30 }).map((_, i) => (
           <div 
             key={i}
             className="absolute rounded-full bg-white/10"
             style={{
-              width: Math.random() * 5 + 2 + 'px',
-              height: Math.random() * 5 + 2 + 'px',
+              width: Math.random() * 4 + 2 + 'px',
+              height: Math.random() * 4 + 2 + 'px',
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
               opacity: Math.random() * 0.5 + 0.2,
-              animation: `float ${Math.random() * 20 + 15}s linear infinite`,
-              animationDelay: `${Math.random() * 8}s`
+              animation: `float ${Math.random() * 10 + 15}s linear infinite`,
+              animationDelay: `${Math.random() * 5}s`
             }}
           ></div>
         ))}
 
-        {/* Lens flare effects */}
+        {/* Lens flare effect */}
         <div className="absolute top-1/4 -right-24 w-96 h-96 rounded-full bg-purple-600/10 blur-3xl"></div>
         <div className="absolute bottom-1/4 -left-24 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl"></div>
-        <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 w-96 h-96 rounded-full bg-indigo-600/10 blur-3xl"></div>
         
         {/* Grid lines */}
         <div className="absolute inset-0" style={{ 

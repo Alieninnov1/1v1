@@ -22,11 +22,7 @@ export type EventName =
   | 'grantMatchRequested'
   | 'signalDaoVote'
   | 'strainIndexAlert'
-  | 'feedbackSubmitted'
-  | 'navigation'        // Added for navigation events
-  | 'startMenuToggle'   // Added for start menu interactions
-  | 'systemTrayClick'   // Added for system tray clicks
-  | 'desktopInteraction'; // Added for desktop interactions
+  | 'feedbackSubmitted';  // Added relevant event types for HelixHub
 
 // Define event properties interface
 export interface EventProperties {

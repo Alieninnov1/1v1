@@ -6,9 +6,4 @@
 @import './desktop.css';
 @import './start-menu.css';
 @import './mobile.css';
-@import './animations/transitions.css';
-@import './animations/interactions.css';
-@import './animations/feedback.css';
-@import './animations/notifications.css';
-@import './animations/loading.css';
-@import './animations/utilities.css';
+@import './animations.css';

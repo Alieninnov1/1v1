@@ -8,15 +8,13 @@ interface WindowDialogProps {
   content: ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  className?: string; // Add optional className prop
 }
 
 const WindowDialog = ({
   title,
   content,
   isOpen,
-  onClose,
-  className = ""
+  onClose
 }: WindowDialogProps) => {
   if (!isOpen) return null;
   
@@ -36,7 +34,7 @@ const WindowDialog = ({
           damping: 15,
           stiffness: 300
         }}
-        className={`xp-window max-w-md overflow-hidden ${className}`}
+        className="xp-window max-w-md overflow-hidden"
       >
         <div className="xp-title-bar bg-gradient-to-r from-indigo-900 to-purple-900 border-b border-purple-500/50">
           <div className="flex items-center">
