@@ -1,16 +1,18 @@
 
 import { useState, useEffect, ReactNode } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import BootScreen from "@/components/boot/BootScreen";
 import WindowDialog from "@/components/dialog/WindowDialog";
-import Taskbar from "@/components/desktop/Taskbar";
+import XPTaskbar from "@/components/xp/XPTaskbar";
 import OnboardingWizard from "@/components/onboarding/OnboardingWizard";
-import AnimatedBackground from "@/components/home/background/AnimatedBackground";
+import XPBackground from "@/components/xp/XPBackground";
 import BasicUIContent from "@/components/home/basic-ui/BasicUIContent";
 import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
+import XPDesktopIcons from "@/components/xp/XPDesktopIcons";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
@@ -49,6 +51,13 @@ const Index = () => {
       setShow3DDemo(true);
     }
   };
+  
+  const handleDoubleClick = (x: number, y: number) => {
+    toast({
+      title: "Desktop Interaction",
+      description: `Clicked at position X:${x.toFixed(0)}, Y:${y.toFixed(0)}`
+    });
+  };
 
   return (
     <Layout hideNavFooter={true}>
@@ -60,7 +69,7 @@ const Index = () => {
           setShowStartup={setShowStartup}
         />
       ) : (
-        <AnimatedBackground>
+        <XPBackground>
           <AnimatePresence>
             {!showEnhancedUi ? (
               <BasicUIContent 
@@ -80,22 +89,64 @@ const Index = () => {
             )}
           </AnimatePresence>
           
+          {/* Desktop Icons */}
+          <motion.div
+            className="absolute left-4 top-4 z-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <XPDesktopIcons />
+          </motion.div>
+          
+          {/* Welcome Dialog */}
           <WindowDialog
-            title="Welcome to HelixHub Decentralized Network"
+            title="Welcome to HelixHub Explorer"
             content={
               <>
-                <p className="mb-4">HelixHub connects academia, industry, and government via a triple helix model. Explore how these three sectors collaborate to drive innovation and address skill gaps in real-time. Try our interactive 3D model to visualize these complex relationships.</p>
-                <div className="flex justify-end">
-                  <Link to="/landing">
-                    <Button variant="outline" className="bg-transparent border-purple-500/30 text-white hover:bg-purple-900/20">
-                      View Investor Landing Page
+                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 p-2">
+                  <div className="flex-shrink-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-3 rounded-full">
+                    <img 
+                      src="/lovable-uploads/261b8a7f-e6a4-4b35-b826-2641f23da6d7.png" 
+                      alt="HelixHub Logo" 
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain" 
+                    />
+                  </div>
+                  
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-blue-900">Welcome to HelixHub!</h2>
+                    <p className="mb-4 text-sm text-gray-700">
+                      HelixHub connects academia, industry, and government via a triple helix model. 
+                      Explore how these three sectors collaborate to drive innovation and address 
+                      skill gaps in real-time.
+                    </p>
+                    <p className="text-sm text-gray-700 mb-4">
+                      Try our interactive 3D model to visualize these complex relationships or 
+                      browse through the desktop icons to explore different modules.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="border-t border-gray-200 mt-2 pt-2">
+                  <div className="flex justify-end gap-2">
+                    <Link to="/landing">
+                      <Button variant="outline" className="bg-gradient-to-b from-white to-gray-100 border border-gray-300 text-gray-800 hover:from-gray-100 hover:to-gray-200">
+                        View Landing Page
+                      </Button>
+                    </Link>
+                    <Button 
+                      className="bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
+                      onClick={() => setShowWelcome(false)}
+                    >
+                      Start Exploring
                     </Button>
-                  </Link>
+                  </div>
                 </div>
               </>
             }
             isOpen={showWelcome}
             onClose={() => setShowWelcome(false)}
+            className="xp-window"
           />
           
           <OnboardingWizard 
@@ -103,10 +154,9 @@ const Index = () => {
             onClose={() => setShowOnboarding(false)}
           />
           
-          <div className="fixed bottom-0 left-0 right-0 z-50 pb-safe-area">
-            <Taskbar />
-          </div>
-        </AnimatedBackground>
+          {/* Taskbar at bottom */}
+          <XPTaskbar />
+        </XPBackground>
       )}
     </Layout>
   );

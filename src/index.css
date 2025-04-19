@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import './styles/base.css';
 @import './styles/scrollbar.css';
@@ -7,12 +8,29 @@
 @import './styles/cards.css';
 @import './styles/ethereum-theme.css';
 
+/* Custom XP theme properties */
+:root {
+  --xp-blue: #245edc;
+  --xp-blue-dark: #0c3b9c;
+  --xp-green: #36ad36;
+  --xp-green-hover: #45c545;
+  --xp-border: #7b9ebd;
+  --xp-desktop: #235cdc;
+  --xp-taskbar: linear-gradient(to bottom, #245edc, #1547a6);
+  --xp-window-header: linear-gradient(to right, #0155b7, #036ffc);
+  --xp-button: linear-gradient(to bottom, #FFFFFF 0%, #E9E9E9 100%);
+  --xp-button-hover: linear-gradient(to bottom, #F0F0F0 0%, #DDDDDD 100%);
+  --xp-button-active: linear-gradient(to bottom, #E0E0E0 0%, #EEEEEE 100%);
+  --xp-font: 'Tahoma', sans-serif;
+}
+
 /* Dynamic background animation */
 body {
   background: linear-gradient(-45deg, #1A1F2C, #2d364c, #323a4d, #546079);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   overflow-x: hidden;
+  font-family: var(--xp-font);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -40,6 +58,7 @@ h1, h2, h3 {
   transition: transform 0.3s ease;
   transform: translateZ(0);
   will-change: transform;
+  font-family: var(--xp-font);
 }
 
 h1:hover, h2:hover, h3:hover {
@@ -82,44 +101,123 @@ h1:hover, h2:hover, h3:hover {
   box-shadow: 0 20px 30px rgba(155, 135, 245, 0.2);
 }
 
-/* Wavy background animation - 21st.dev style */
-.bg-mesh-pattern {
+/* Windows XP specific styles */
+.xp-desktop {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"), linear-gradient(to bottom, rgba(35, 92, 220, 0.8), rgba(18, 49, 119, 0.8));
+  background-attachment: fixed;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
 
-.bg-mesh-pattern::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.2;
+.xp-icon {
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease;
 }
 
-/* Optimized loading and performance */
-img, svg {
-  transform: translateZ(0);
-  will-change: transform;
+.xp-icon:hover {
+  transform: scale(1.1);
 }
 
-/* Touch device optimizations */
-@media (hover: hover) {
-  .no-hover-on-touch {
-    display: block;
-  }
-  
-  .hover-only-on-touch {
-    display: none;
-  }
+.xp-window {
+  border-radius: 8px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+  background-color: #f0f0f0;
+  border: 1px solid var(--xp-border);
+  overflow: hidden;
 }
 
+.xp-window-header {
+  background: var(--xp-window-header);
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.xp-button {
+  background: var(--xp-button);
+  border: 1px solid var(--xp-border);
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-family: var(--xp-font);
+  font-size: 0.9rem;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.xp-button:hover {
+  background: var(--xp-button-hover);
+}
+
+.xp-button:active {
+  background: var(--xp-button-active);
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.xp-taskbar {
+  background: var(--xp-taskbar);
+  border-top: 1px solid #3e8df8;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 6px;
+}
+
+.xp-start-button {
+  background: linear-gradient(to bottom, #5ab752, #2d9a27);
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 4px 12px;
+  height: 28px;
+  margin-right: 6px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.xp-start-button:hover {
+  background: linear-gradient(to bottom, #6bcc62, #38b332);
+}
+
+.xp-desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.xp-desktop-icon-label {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-size: 0.8rem;
+  margin-top: 4px;
+  max-width: 70px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Optimizations for touch devices */
 @media (hover: none) {
-  .no-hover-on-touch {
-    display: none;
-  }
-  
-  .hover-only-on-touch {
-    display: block;
+  .xp-button, .xp-desktop-icon {
+    padding: 8px 12px;
+    min-height: 44px; /* iOS minimum touch target */
   }
 }
 
@@ -127,24 +225,6 @@ img, svg {
 .opt-img {
   content-visibility: auto;
   object-fit: cover;
-}
-
-/* Print styles for better document printing */
-@media print {
-  body {
-    background: white;
-    color: black;
-  }
-  
-  .xp-window {
-    break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid #000;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
 }
 
 /* New animations */
@@ -203,4 +283,145 @@ img, svg {
 
 .button-hover:hover::before {
   left: 100%;
+}
+
+/* XP Notifications */
+.xp-notification {
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  background: white;
+  border: 1px solid var(--xp-border);
+  border-radius: 4px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  max-width: 300px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* CRT screen effect */
+.crt-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.crt-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 11;
+  pointer-events: none;
+  animation: flicker 0.3s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.27861; }
+  5% { opacity: 0.34769; }
+  10% { opacity: 0.23604; }
+  15% { opacity: 0.90626; }
+  20% { opacity: 0.18128; }
+  25% { opacity: 0.83891; }
+  30% { opacity: 0.65583; }
+  35% { opacity: 0.67807; }
+  40% { opacity: 0.26559; }
+  45% { opacity: 0.84693; }
+  50% { opacity: 0.96019; }
+  55% { opacity: 0.08594; }
+  60% { opacity: 0.20313; }
+  65% { opacity: 0.71988; }
+  70% { opacity: 0.53455; }
+  75% { opacity: 0.37288; }
+  80% { opacity: 0.71428; }
+  85% { opacity: 0.70419; }
+  90% { opacity: 0.7003; }
+  95% { opacity: 0.36108; }
+  100% { opacity: 0.24387; }
+}
+
+/* Modern glass effect with XP styling */
+.xp-glass {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(123, 158, 189, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .xp-taskbar {
+    height: 44px;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  .xp-start-button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+  
+  .xp-desktop-icon {
+    margin: 8px;
+  }
+  
+  .xp-desktop-icon-label {
+    font-size: 0.7rem;
+    max-width: 60px;
+  }
+  
+  .xp-window-header {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Print styles for better document printing */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .xp-window {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
 }
