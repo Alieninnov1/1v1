@@ -2,9 +2,11 @@
 import { useScroll, useTransform, MotionValue } from 'framer-motion';
 import { RefObject } from 'react';
 
+type OffsetValue = [string, string] | number[] | undefined;
+
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
-  offset?: ["start end", "end start"] | [number, number];
+  offset?: OffsetValue;
   inputRange?: number[];
   outputRange?: any[];
 };
@@ -17,7 +19,7 @@ export const useScrollAnimation = ({
 }: ScrollAnimationConfig = {}) => {
   const { scrollYProgress } = useScroll({
     target,
-    offset,
+    offset: offset as [string, string],
   });
 
   const transformValue = useTransform(
