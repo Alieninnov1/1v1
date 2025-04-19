@@ -5,15 +5,14 @@ import HelixModelDemo from "@/components/3d/HelixModelDemo";
 const Hero = () => {
   return (
     <section className="bg-gradient-to-br from-gray-900 to-helix-purple900 py-16 sm:py-20 md:py-28 relative overflow-hidden">
-      {/* Background gradient effects */}
+      {/* Background with subtle gradient */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 mix-blend-overlay"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 mix-blend-overlay"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Hero text */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -28,7 +27,6 @@ const Hero = () => {
             </p>
           </motion.div>
 
-          {/* Interactive 3D Model */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

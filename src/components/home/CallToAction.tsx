@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const CallToAction = () => {
   return (
-    <section className="bg-gradient-to-br from-[#1A1F2C]/90 to-helix-purple/20 backdrop-blur-md border-t border-purple-900/20 py-16 sm:py-20">
+    <section className="bg-gradient-to-br from-[#1A1F2C] to-helix-purple/10 border-t border-purple-900/20 py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ const CallToAction = () => {
           <div className="inline-block">
             <a 
               href="/dashboard" 
-              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1"
+              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg"
             >
               Explore Platform
             </a>
