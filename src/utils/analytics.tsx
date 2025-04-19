@@ -1,3 +1,4 @@
+
 import { Analytics } from '@vercel/analytics/react';
 import { track as vercelTrack } from '@vercel/analytics';
 
@@ -21,7 +22,11 @@ export type EventName =
   | 'grantMatchRequested'
   | 'signalDaoVote'
   | 'strainIndexAlert'
-  | 'feedbackSubmitted';  // Added relevant event types for HelixHub
+  | 'feedbackSubmitted'
+  | 'navigation'        // Added for navigation events
+  | 'startMenuToggle'   // Added for start menu interactions
+  | 'systemTrayClick'   // Added for system tray clicks
+  | 'desktopInteraction'; // Added for desktop interactions
 
 // Define event properties interface
 export interface EventProperties {

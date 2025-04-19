@@ -1,3 +1,4 @@
+
 import { useState, useEffect, ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
 import XPDesktopIcons from "@/components/xp/XPDesktopIcons";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { trackEvent } from "@/utils/analytics";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
@@ -49,6 +51,8 @@ const Index = () => {
     if (title.includes("3D")) {
       setShow3DDemo(true);
     }
+    
+    trackEvent('desktopInteraction', { action: 'openDialog', dialogTitle: title });
   };
   
   const handleDoubleClick = (x: number, y: number) => {
@@ -56,6 +60,8 @@ const Index = () => {
       title: "Desktop Interaction",
       description: `Clicked at position X:${x.toFixed(0)}, Y:${y.toFixed(0)}`
     });
+    
+    trackEvent('desktopInteraction', { action: 'doubleClick', x: parseInt(x.toFixed(0)), y: parseInt(y.toFixed(0)) });
   };
 
   return (

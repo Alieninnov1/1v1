@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -26,7 +27,7 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   const handleNavigation = (path: string) => {
     navigate(path);
     onClose();
-    trackEvent('click', { category: 'navigation', destination: path, source: 'startMenu' });
+    trackEvent('navigation', { category: 'navigation', destination: path, source: 'startMenu' });
   };
   
   const menuWidth = isMobile ? "w-48" : "w-56";
@@ -163,12 +164,12 @@ const XPTaskbar = () => {
   
   const handleStartClick = () => {
     setShowStartMenu(!showStartMenu);
-    trackEvent('startMenu', { category: 'button', action: showStartMenu ? 'close' : 'open', label: 'startButton' });
+    trackEvent('startMenuToggle', { action: showStartMenu ? 'close' : 'open', label: 'startButton' });
   };
   
   const handleWindowClick = (path: string) => {
     navigate(path);
-    trackEvent('navigation', { category: 'navigation', destination: path, source: 'taskbar' });
+    trackEvent('navigation', { destination: path, source: 'taskbar' });
   };
   
   const showSystemTray = () => {
@@ -176,6 +177,7 @@ const XPTaskbar = () => {
       title: "System Tray",
       description: "System notifications would appear here"
     });
+    trackEvent('systemTrayClick', { action: 'open' });
   };
 
   return (
