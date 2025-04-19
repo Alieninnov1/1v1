@@ -1,13 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Menu, Computer, BookOpen, BarChart3, MessageSquare, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "@/utils/analytics";
-import TaskbarButton from "@/components/desktop/taskbar/TaskbarButton";
-import TaskbarClock from "@/components/desktop/taskbar/TaskbarClock";
-import StartMenu from "@/components/desktop/taskbar/StartMenu";
+import TaskbarButton from "@/components/xp/taskbar/TaskbarButton";
+import TaskbarClock from "@/components/xp/taskbar/TaskbarClock";
+import StartMenu from "@/components/xp/taskbar/StartMenu";
 
 const XPTaskbar = () => {
   const [showStartMenu, setShowStartMenu] = useState(false);

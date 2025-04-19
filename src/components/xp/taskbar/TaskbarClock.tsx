@@ -1,63 +1,33 @@
-
-import { useState, useEffect } from "react";
-import { Volume2, Wifi, Clock } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useIsMobile } from "@/hooks/use-mobile";
+import React, { useState, useEffect } from 'react';
+import { Clock } from "lucide-react";
 
 const TaskbarClock = () => {
-  const [currentTime, setCurrentTime] = useState<string>("");
-  const [currentDate, setCurrentDate] = useState<string>("");
-  const { toast } = useToast();
-  const isMobile = useIsMobile();
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const updateDateTime = () => {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, "0");
-      const ampm = hours >= 12 ? "PM" : "AM";
-      const formattedHours = hours % 12 || 12;
-      setCurrentTime(`${formattedHours}:${minutes} ${ampm}`);
+    const intervalId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
 
-      const options: Intl.DateTimeFormatOptions = {
-        month: 'short',
-        day: 'numeric',
-        year: '2-digit'
-      };
-      setCurrentDate(now.toLocaleDateString(undefined, options));
-    };
-
-    updateDateTime();
-    const interval = setInterval(updateDateTime, 60000);
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, []);
 
+  const formatTime = (date: Date) => {
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    return `${hours}:${formattedMinutes} ${ampm}`;
+  };
+
   return (
-    <div className="xp-clock flex items-center gap-2 px-2 bg-gradient-to-b from-blue-800 to-blue-900 rounded-sm shadow-inner border-l border-blue-700">
-      {!isMobile && (
-        <>
-          <Volume2
-            size={14}
-            className="cursor-pointer text-blue-100 hover:text-white transition-colors"
-            onClick={() => toast({
-              title: "Volume",
-              description: "Volume controls would appear here"
-            })}
-          />
-          <Wifi
-            size={14}
-            className="cursor-pointer text-blue-100 hover:text-white transition-colors"
-            onClick={() => toast({
-              title: "Network",
-              description: "Network settings would appear here"
-            })}
-          />
-        </>
-      )}
-      <div className="flex flex-col items-end">
-        <span className="text-[10px] leading-none text-blue-100">{currentDate}</span>
-        <span className="text-[11px] font-bold leading-none text-blue-50">{currentTime}</span>
-      </div>
+    <div className="xp-clock">
+      <Clock size={14} className="mr-1" />
+      {formatTime(time)}
     </div>
   );
 };
