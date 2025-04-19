@@ -1,4 +1,3 @@
-
 import { useState, useEffect, ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -11,6 +10,8 @@ import AnimatedBackground from "@/components/home/background/AnimatedBackground"
 import BasicUIContent from "@/components/home/basic-ui/BasicUIContent";
 import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
 import { Button } from "@/components/ui/button";
+import FixSubmission from "@/components/fix/FixSubmission";
+import MicroFundingWallet from "@/components/wallet/MicroFundingWallet";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
@@ -61,6 +62,11 @@ const Index = () => {
         />
       ) : (
         <AnimatedBackground>
+          <div className="container mx-auto px-4 py-8 grid gap-6 md:grid-cols-2">
+            <FixSubmission />
+            <MicroFundingWallet />
+          </div>
+          
           <AnimatePresence>
             {!showEnhancedUi ? (
               <BasicUIContent 
