@@ -1,28 +1,24 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import './styles/base.css';
 @import './styles/scrollbar.css';
 @import './styles/animations.css';
 @import './styles/xp-theme/index.css';
 @import './styles/cards.css';
 @import './styles/ethereum-theme.css';
-@import './styles/brutalist.css';
 
 /* Dynamic background animation */
 body {
-  background: linear-gradient(-45deg, #121420, #1D1F35, #262D4A, #5E2CA5);
+  background: linear-gradient(-45deg, #1A1F2C, #2d364c, #323a4d, #546079);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
   body {
     animation: none;
-    background: #121420;
+    background: #1A1F2C;
   }
 }
 
@@ -40,42 +36,97 @@ body {
 
 /* 3D text effects with better performance */
 h1, h2, h3 {
-  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
   transform: translateZ(0);
   will-change: transform;
 }
 
-@media (hover: hover) {
-  h1:hover, h2:hover, h3:hover {
-    transform: translateZ(30px);
+h1:hover, h2:hover, h3:hover {
+  transform: translateZ(20px);
+}
+
+/* Responsive padding adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  h1, h2, h3 {
+    /* Reduce text shadow on mobile for performance */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Optimize tap targets for mobile */
+  button, a {
+    padding: 0.5rem;
   }
 }
 
-/* Brutalist code font */
-code, pre {
-  font-family: 'Space Mono', monospace;
-  background: #0C0D16;
-  border-left: 4px solid #5E2CA5;
-  padding: 1rem;
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding: 2rem;
+  }
 }
 
-/* Brutalist visual enhancements */
-.brutalist-divider {
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #5E2CA5, transparent);
-  margin: 2rem 0;
+/* Enhanced card animations with better performance */
+.eth-card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.brutalist-panel {
-  border: 2px solid #5E2CA5;
-  background: linear-gradient(135deg, rgba(14,14,22,0.8) 0%, rgba(32,30,50,0.8) 100%);
-  box-shadow: 6px 6px 0px rgba(0,0,0,0.4);
-  transform: rotate(-1deg);
+.eth-card:hover {
+  transform: translateY(-5px) rotateX(5deg);
+  box-shadow: 0 20px 30px rgba(155, 135, 245, 0.2);
 }
 
-.brutalist-shadow {
-  box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+/* Wavy background animation - 21st.dev style */
+.bg-mesh-pattern {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-mesh-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.2;
+}
+
+/* Optimized loading and performance */
+img, svg {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Touch device optimizations */
+@media (hover: hover) {
+  .no-hover-on-touch {
+    display: block;
+  }
+  
+  .hover-only-on-touch {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .no-hover-on-touch {
+    display: none;
+  }
+  
+  .hover-only-on-touch {
+    display: block;
+  }
+}
+
+/* Image optimizations */
+.opt-img {
+  content-visibility: auto;
+  object-fit: cover;
 }
 
 /* Print styles for better document printing */
@@ -93,21 +144,5 @@ code, pre {
   
   .no-print {
     display: none !important;
-  }
-}
-
-/* Mobile optimizations */
-@media (max-width: 640px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  h1, h2, h3 {
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
-  }
-  
-  .brutalist-panel {
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
   }
 }

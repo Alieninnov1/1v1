@@ -1,3 +1,4 @@
+
 import { useState, useEffect, ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -10,15 +11,13 @@ import AnimatedBackground from "@/components/home/background/AnimatedBackground"
 import BasicUIContent from "@/components/home/basic-ui/BasicUIContent";
 import EnhancedUIContent from "@/components/home/enhanced-ui/EnhancedUIContent";
 import { Button } from "@/components/ui/button";
-import FixSubmission from "@/components/fix/FixSubmission";
-import MicroFundingWallet from "@/components/wallet/MicroFundingWallet";
 
 const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
   const [bootProgress, setBootProgress] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
-  const [dialogContent, setDialogContent] = useState<ReactNode>(null);
+  const [dialogContent, setDialogContent] = useState<ReactNode>("");
   const [showKnowledgeBase, setShowKnowledgeBase] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
@@ -62,11 +61,6 @@ const Index = () => {
         />
       ) : (
         <AnimatedBackground>
-          <div className="container mx-auto px-4 py-8 grid gap-6 md:grid-cols-2">
-            <FixSubmission />
-            <MicroFundingWallet />
-          </div>
-          
           <AnimatePresence>
             {!showEnhancedUi ? (
               <BasicUIContent 
