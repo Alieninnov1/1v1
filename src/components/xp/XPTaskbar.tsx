@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackEvent } from "@/utils/analytics";
 
-// XP Start Menu component
 const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -28,7 +26,7 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   const handleNavigation = (path: string) => {
     navigate(path);
     onClose();
-    trackEvent('navigation', { destination: path, source: 'startMenu' });
+    trackEvent('click', { category: 'navigation', destination: path, source: 'startMenu' });
   };
   
   const menuWidth = isMobile ? "w-48" : "w-56";
@@ -38,7 +36,6 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             className="fixed inset-0 z-40"
             initial={{ opacity: 0 }}
@@ -47,7 +44,6 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             onClick={onClose}
           />
           
-          {/* Start Menu */}
           <motion.div
             className={`absolute left-0 bottom-[36px] ${menuWidth} ${menuHeight} bg-gradient-to-br from-blue-100 to-blue-50 border border-gray-400 shadow-lg rounded-t-md z-50 overflow-hidden`}
             initial={{ y: 20, opacity: 0 }}
@@ -55,7 +51,6 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             exit={{ y: 20, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
-            {/* Header */}
             <div className="bg-gradient-to-r from-blue-700 to-blue-600 p-2 flex items-center">
               <div className="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center mr-2 border-2 border-white">
                 <Computer size={16} className="text-white" />
@@ -63,7 +58,6 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               <span className="text-white font-bold">HelixHub Explorer</span>
             </div>
             
-            {/* Menu items */}
             <div className="p-1">
               {menuItems.map((item) => (
                 <motion.div
@@ -80,7 +74,6 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               ))}
             </div>
             
-            {/* Footer */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-blue-100 to-blue-200 p-2 border-t border-gray-300">
               <div className="flex items-center justify-between">
                 <div className="flex items-center text-xs text-gray-600">
@@ -100,7 +93,6 @@ const XPStartMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   );
 };
 
-// XP Taskbar Button component
 interface XPTaskbarButtonProps {
   icon: React.ReactNode;
   label: string;
@@ -133,7 +125,6 @@ const XPTaskbarButton = ({ icon, label, active = false, onClick }: XPTaskbarButt
   );
 };
 
-// Main XP Taskbar component
 const XPTaskbar = () => {
   const [currentTime, setCurrentTime] = useState("");
   const [showStartMenu, setShowStartMenu] = useState(false);
@@ -159,11 +150,9 @@ const XPTaskbar = () => {
     return () => clearInterval(timeInterval);
   }, []);
   
-  // Update active windows based on current route
   useEffect(() => {
     const path = location.pathname;
     
-    // Set the current page as an active window
     if (path !== "/") {
       const routeName = path.substring(1);
       setActiveWindows([routeName]);
@@ -174,12 +163,12 @@ const XPTaskbar = () => {
   
   const handleStartClick = () => {
     setShowStartMenu(!showStartMenu);
-    trackEvent('interaction', { element: 'startButton', action: showStartMenu ? 'close' : 'open' });
+    trackEvent('click', { category: 'button', action: showStartMenu ? 'close' : 'open', label: 'startButton' });
   };
   
   const handleWindowClick = (path: string) => {
     navigate(path);
-    trackEvent('navigation', { destination: path, source: 'taskbar' });
+    trackEvent('click', { category: 'navigation', destination: path, source: 'taskbar' });
   };
   
   const showSystemTray = () => {
@@ -199,7 +188,6 @@ const XPTaskbar = () => {
         animate={{ y: 0 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 20 }}
       >
-        {/* Start Button */}
         <button
           className="xp-start-button"
           onClick={handleStartClick}
@@ -209,7 +197,6 @@ const XPTaskbar = () => {
           <span className="ml-1">Start</span>
         </button>
         
-        {/* Active Windows */}
         <div className="flex-1 h-full flex items-center overflow-x-auto no-scrollbar">
           <XPTaskbarButton
             icon={<Home size={isMobile ? 12 : 14} />}
@@ -258,7 +245,6 @@ const XPTaskbar = () => {
           )}
         </div>
         
-        {/* System Tray */}
         <div 
           className="flex items-center bg-blue-700/80 h-full px-2 rounded-sm cursor-pointer"
           onClick={showSystemTray}
