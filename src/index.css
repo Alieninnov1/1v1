@@ -7,11 +7,11 @@
 @import './styles/cards.css';
 @import './styles/ethereum-theme.css';
 
-/* Dynamic background animation */
+/* Optimized background animation with reduced intensity */
 body {
   background: linear-gradient(-45deg, #1A1F2C, #2d364c, #323a4d, #546079);
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientBG 25s ease infinite;
   overflow-x: hidden;
 }
 
@@ -22,6 +22,7 @@ body {
   }
 }
 
+/* Slower, more subtle animation */
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
@@ -34,17 +35,13 @@ body {
   }
 }
 
-/* 3D text effects with better performance */
+/* Simplified 3D text effects */
 h1, h2, h3 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   transform: translateZ(0);
-  will-change: transform;
 }
 
-h1:hover, h2:hover, h3:hover {
-  transform: translateZ(20px);
-}
+/* Removed hover transform effect that was causing jankiness */
 
 /* Responsive padding adjustments */
 @media (max-width: 640px) {
@@ -52,37 +49,45 @@ h1:hover, h2:hover, h3:hover {
     padding: 1rem;
   }
   
-  h1, h2, h3 {
-    /* Reduce text shadow on mobile for performance */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 2rem);
   }
   
   /* Optimize tap targets for mobile */
   button, a {
     padding: 0.5rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .container {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 }
 
-/* Enhanced card animations with better performance */
+/* Optimized card animations with better performance */
 .eth-card {
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transform: translateZ(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
   backface-visibility: hidden;
 }
 
 .eth-card:hover {
-  transform: translateY(-5px) rotateX(5deg);
-  box-shadow: 0 20px 30px rgba(155, 135, 245, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(155, 135, 245, 0.1);
 }
 
-/* Wavy background animation - 21st.dev style */
+/* Simplified wavy background pattern */
 .bg-mesh-pattern {
   position: relative;
   overflow: hidden;
@@ -92,44 +97,51 @@ h1:hover, h2:hover, h3:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.2;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.1;
 }
 
-/* Optimized loading and performance */
+/* Optimized image loading */
 img, svg {
   transform: translateZ(0);
-  will-change: transform;
 }
 
-/* Touch device optimizations */
+/* Improve touch device interactions */
 @media (hover: hover) {
-  .no-hover-on-touch {
-    display: block;
+  .hover-controls {
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
   
-  .hover-only-on-touch {
-    display: none;
+  .hover-container:hover .hover-controls {
+    opacity: 1;
   }
 }
 
 @media (hover: none) {
-  .no-hover-on-touch {
-    display: none;
-  }
-  
-  .hover-only-on-touch {
-    display: block;
+  .hover-controls {
+    opacity: 1;
   }
 }
 
-/* Image optimizations */
+/* Optimize image loading with content visibility */
 .opt-img {
   content-visibility: auto;
   object-fit: cover;
 }
 
-/* Print styles for better document printing */
+/* Improved responsive font sizing using clamp */
+.responsive-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.5;
+}
+
+.responsive-heading {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  line-height: 1.2;
+}
+
+/* Print styles */
 @media print {
   body {
     background: white;
@@ -144,5 +156,22 @@ img, svg {
   
   .no-print {
     display: none !important;
+  }
+}
+
+/* Minimal layout shift prevention */
+.content-placeholder {
+  min-height: 1rem;
+}
+
+/* Better scrolling experience */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

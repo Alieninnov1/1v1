@@ -4,9 +4,9 @@ import { RefObject } from 'react';
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
-  offset?: [string, string];
+  offset?: ["start end", "end start"] | [number, number];
   inputRange?: number[];
-  outputRange?: number[] | string[];
+  outputRange?: any[];
 };
 
 export const useScrollAnimation = ({
