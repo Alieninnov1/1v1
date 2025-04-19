@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Menu, Computer, BookOpen, BarChart3, MessageSquare, Home } from "lucide-react";
 import { motion } from "framer-motion";
@@ -64,13 +65,13 @@ const XPTaskbar = () => {
       )}
       
       <motion.div 
-        className="xp-taskbar bg-gradient-to-b from-blue-700 to-blue-900 fixed bottom-0 left-0 right-0 z-50"
+        className="xp-taskbar fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg bg-black/60 border-t-2 border-helix-purple"
         initial={{ y: 40 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
       >
         <button 
-          className="xp-start-button flex items-center" 
+          className="xp-start-button bg-helix-purple hover:bg-helix-purple/80 text-white flex items-center font-bold" 
           onClick={toggleStartMenu}
           aria-label="Open Start Menu"
         >

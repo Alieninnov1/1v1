@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
 const TaskbarClock = () => {
   const [time, setTime] = useState(new Date());
@@ -25,10 +27,13 @@ const TaskbarClock = () => {
   };
 
   return (
-    <div className="xp-clock">
-      <Clock size={14} className="mr-1" />
-      {formatTime(time)}
-    </div>
+    <motion.div 
+      className="xp-clock flex items-center px-3 py-1 bg-helix-purple/30 backdrop-blur-md text-white border-l border-helix-purple/50"
+      whileHover={{ backgroundColor: 'rgba(94, 44, 165, 0.5)' }}
+    >
+      <Clock size={14} className="mr-2" />
+      <span className="font-mono text-sm">{formatTime(time)}</span>
+    </motion.div>
   );
 };
 

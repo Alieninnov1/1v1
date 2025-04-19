@@ -2,13 +2,15 @@
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+import { BookOpen, BarChart3, Building2, Layers, MessageSquare, User, Settings, LogOut, Home } from "lucide-react";
+import { trackEvent } from "@/utils/analytics";
 
 interface StartMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const StartMenu = ({ isOpen }: StartMenuProps) => {
+const StartMenu = ({ isOpen, onClose }: StartMenuProps) => {
   const { toast } = useToast();
 
   const startMenuVariants = {
@@ -29,6 +31,11 @@ const StartMenu = ({ isOpen }: StartMenuProps) => {
     }
   };
 
+  const handleItemClick = (name: string) => {
+    trackEvent('buttonClick', { button: 'startMenuItem', item: name });
+    onClose();
+  };
+
   return (
     <motion.div 
       className="xp-start-menu" 
@@ -38,115 +45,105 @@ const StartMenu = ({ isOpen }: StartMenuProps) => {
       variants={startMenuVariants}
     >
       <div className="xp-start-header flex items-center">
-        <div className="bg-white/20 rounded-full h-10 w-10 mr-2 flex items-center justify-center text-xl font-bold text-white">
+        <div className="bg-helix-purple rounded-md h-10 w-10 mr-2 flex items-center justify-center text-xl font-bold text-white">
           H
         </div>
         <div className="font-semibold">HelixHub User</div>
       </div>
-      <div className="bg-white p-1">
-        <StartMenuContent />
+
+      <div className="grid grid-cols-1 sm:grid-cols-5">
+        <div className="col-span-3 p-2 space-y-1">
+          <StartMenuItem
+            icon={<BarChart3 size={18} />}
+            label="Dashboard"
+            bgColor="bg-blue-600"
+            href="/dashboard"
+            onClick={() => handleItemClick('Dashboard')}
+          />
+          <StartMenuItem
+            icon={<Layers size={18} />}
+            label="Knowledge Base"
+            bgColor="bg-purple-600"
+            href="/knowledge"
+            onClick={() => handleItemClick('Knowledge')}
+          />
+          <div className="border-t border-gray-700 my-1"></div>
+          <StartMenuItem
+            icon={<BookOpen size={18} />}
+            label="Academia"
+            bgColor="bg-green-600"
+            href="/academia"
+            onClick={() => handleItemClick('Academia')}
+          />
+          <StartMenuItem
+            icon={<Home size={18} />}
+            label="Government"
+            bgColor="bg-amber-600"
+            href="/government"
+            onClick={() => handleItemClick('Government')}
+          />
+          <StartMenuItem
+            icon={<MessageSquare size={18} />}
+            label="Discussions"
+            bgColor="bg-rose-600"
+            href="/discussions"
+            onClick={() => handleItemClick('Discussions')}
+          />
+        </div>
+
+        <div className="col-span-2 bg-black/30 p-2">
+          <div className="text-xs font-semibold text-gray-400 mb-1 uppercase">Quick Access</div>
+          <SideMenuItem 
+            icon={<User size={16} />}
+            label="Profile" 
+            onClick={() => {
+              toast({ title: "Profile", description: "Opening profile settings" });
+              handleItemClick('Profile');
+            }} 
+          />
+          <SideMenuItem 
+            icon={<Settings size={16} />}
+            label="Settings" 
+            onClick={() => {
+              toast({ title: "Settings", description: "Opening app settings" });
+              handleItemClick('Settings');
+            }} 
+          />
+          <div className="border-t border-gray-700 my-1"></div>
+          <SideMenuItem 
+            icon={<LogOut size={16} />}
+            label="Log Off" 
+            onClick={() => {
+              toast({ title: "Log Off", description: "Logging off..." });
+              handleItemClick('LogOff');
+            }} 
+          />
+        </div>
       </div>
+
+      <footer className="p-2 text-xs text-gray-500 flex justify-between border-t border-gray-800">
+        <div>&copy; 2025 HelixHub</div>
+        <div>v1.0.0</div>
+      </footer>
     </motion.div>
   );
 };
 
-const StartMenuContent = () => {
-  const { toast } = useToast();
-  
-  return (
-    <>
-      <div className="flex flex-col sm:flex-row">
-        <StartMenuMainSection toast={toast} />
-        <StartMenuPlaces />
-      </div>
-      <div className="border-t border-gray-300 mt-1"></div>
-      <StartMenuFooter toast={toast} />
-    </>
-  );
-};
-
-const StartMenuMainSection = ({ toast }: { toast: any }) => (
-  <div className="w-full sm:w-48 space-y-1 p-2 bg-indigo-900">
-    <StartMenuItem
-      icon="e"
-      label="Internet"
-      bgColor="bg-blue-500"
-      onClick={() => toast({
-        title: "Internet",
-        description: "Opening Internet Explorer"
-      })}
-    />
-    <StartMenuItem
-      icon="@"
-      label="E-mail"
-      bgColor="bg-blue-400"
-      onClick={() => toast({
-        title: "Email",
-        description: "Opening Outlook Express"
-      })}
-    />
-    <div className="border-t border-gray-300 my-1"></div>
-    <StartMenuItem
-      icon="D"
-      label="Dashboard"
-      bgColor="bg-green-500"
-      href="/dashboard"
-    />
-    <StartMenuItem
-      icon="K"
-      label="Knowledge Base"
-      bgColor="bg-purple-500"
-      href="/knowledge"
-    />
-  </div>
-);
-
-const StartMenuPlaces = () => (
-  <div className="w-full sm:w-32 p-2 space-y-1 bg-indigo-900">
-    <div className="text-sm font-bold text-blue-800 bg-slate-50">My Places</div>
-    <PlaceLink href="/academia" label="Academia" />
-    <PlaceLink href="/industry" label="Industry" />
-    <PlaceLink href="/government" label="Government" />
-    <PlaceLink href="/discussions" label="Discussions" />
-  </div>
-);
-
-const StartMenuFooter = ({ toast }: { toast: any }) => (
-  <div className="flex justify-between p-1 bg-indigo-950">
-    <StartMenuItem
-      label="Log Off"
-      onClick={() => toast({
-        title: "Log Off",
-        description: "Logging off..."
-      })}
-    />
-    <StartMenuItem
-      label="Shut Down"
-      onClick={() => toast({
-        title: "Shut Down",
-        description: "Shutting down..."
-      })}
-    />
-  </div>
-);
-
 interface StartMenuItemProps {
-  icon?: string;
+  icon: React.ReactNode;
   label: string;
   bgColor?: string;
   onClick?: () => void;
   href?: string;
 }
 
-const StartMenuItem = ({ icon, label, bgColor, onClick, href }: StartMenuItemProps) => {
+const StartMenuItem = ({ icon, label, bgColor = "bg-gray-700", onClick, href }: StartMenuItemProps) => {
   const content = (
-    <div className="xp-start-item flex items-center p-1.5 cursor-pointer rounded-sm transition-colors hover:bg-blue-100">
-      {icon && (
-        <div className={`${bgColor || ''} w-7 h-7 rounded flex items-center justify-center text-white mr-2`}>
-          <span className="text-xs">{icon}</span>
-        </div>
-      )}
-      <span className="text-sm">{label}</span>
+    <div className="xp-start-item flex items-center p-2 cursor-pointer rounded-sm transition-all hover:translate-x-1">
+      <div className={`${bgColor} w-8 h-8 rounded flex items-center justify-center text-white mr-3`}>
+        {icon}
+      </div>
+      <span className="text-sm font-medium">{label}</span>
     </div>
   );
 
@@ -157,13 +154,14 @@ const StartMenuItem = ({ icon, label, bgColor, onClick, href }: StartMenuItemPro
   return <div onClick={onClick}>{content}</div>;
 };
 
-const PlaceLink = ({ href, label }: { href: string; label: string }) => (
-  <Link 
-    to={href} 
-    className="xp-start-item flex items-center p-1.5 hover:bg-blue-200 cursor-pointer text-sm rounded-sm transition-colors"
+const SideMenuItem = ({ icon, label, onClick }: { icon: React.ReactNode, label: string, onClick: () => void }) => (
+  <div 
+    onClick={onClick}
+    className="xp-start-item flex items-center p-1.5 hover:bg-helix-purple/30 cursor-pointer text-sm rounded-sm transition-colors group"
   >
+    <div className="mr-2 text-gray-400 group-hover:text-white">{icon}</div>
     <span>{label}</span>
-  </Link>
+  </div>
 );
 
 export default StartMenu;
