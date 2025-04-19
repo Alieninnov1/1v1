@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Index from "@/pages/Index";
 import ErrorPage from "@/pages/ErrorPage";
 import Academia from "@/pages/Academia";
@@ -18,6 +19,16 @@ import DaoGovernance from "@/pages/DaoGovernance";
 import BlockchainExplorer from "@/pages/BlockchainExplorer";
 import NotFound from "@/pages/NotFound";
 import Landing from "@/pages/Landing";
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const routes = createBrowserRouter([
   {
@@ -78,7 +89,9 @@ const routes = createBrowserRouter([
 function App() {
   return (
     <React.StrictMode>
-      <RouterProvider router={routes} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={routes} />
+      </QueryClientProvider>
     </React.StrictMode>
   );
 }
