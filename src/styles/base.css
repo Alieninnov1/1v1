@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,17 +28,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#0f1221] text-[#f7f8fc];
     font-family: 'Inter', 'Tahoma', sans-serif;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh;
-    height: 100%;
-    overflow-x: hidden;
-    position: relative;
-    width: 100%;
     background: linear-gradient(to bottom, #151823, #1d2235);
     color: #f0f4ff;
   }
@@ -57,3 +47,4 @@
     }
   }
 }
+
