@@ -69,12 +69,13 @@ const PolicySandbox = () => {
                     <li>Simulate outcomes of policy proposals</li>
                     <li>Analyze impacts on system stability</li>
                   </ul>
-                  <button 
+                  <TabsTrigger 
+                    value="vote-impact" 
                     onClick={() => setActiveTab("vote-impact")}
                     className="inline-flex items-center px-4 py-2 bg-helix-purple text-white rounded-md hover:bg-purple-700 transition-colors mt-2"
                   >
                     Try Vote Impact Simulator
-                  </button>
+                  </TabsTrigger>
                 </CardContent>
               </Card>
               
@@ -93,12 +94,13 @@ const PolicySandbox = () => {
                     <li>Get AI-matched funding recommendations</li>
                     <li>View alignment scores and deadlines</li>
                   </ul>
-                  <button 
+                  <TabsTrigger 
+                    value="grants" 
                     onClick={() => setActiveTab("grants")}
                     className="inline-flex items-center px-4 py-2 bg-helix-purple text-white rounded-md hover:bg-purple-700 transition-colors mt-2"
                   >
                     Try Grant Matchmaker
-                  </button>
+                  </TabsTrigger>
                 </CardContent>
               </Card>
             </motion.div>
