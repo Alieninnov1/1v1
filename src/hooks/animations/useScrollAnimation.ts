@@ -5,11 +5,21 @@ import { RefObject } from 'react';
 // Define proper type for Framer Motion's edge values
 type Edge = "start" | "end" | "center";
 
-// Define proper type for Framer Motion's scroll offset using Framer Motion compatible values
+// Update the FramerScrollOffset type to be compatible with Framer Motion's ScrollOffset
+// This is crucial for fixing the type error
 type FramerScrollOffset = 
   | [string | number, string | number]
-  | string
-  | number;
+  | Edge
+  | `${number} ${number}`
+  | `${number} ${Edge}`
+  | `${Edge} ${number}`
+  | "start start"
+  | "start end"
+  | "end start"
+  | "end end"
+  | "center center"
+  | `${number}px ${number}px`
+  | `${number}% ${number}%`;
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
@@ -29,9 +39,7 @@ export const useScrollAnimation = ({
   inputRange = [0, 1],
   outputRange = [0, 1],
 }: ScrollAnimationConfig = {}) => {
-  // Here we use the offset directly without type assertion
-  // The type conflict is resolved by matching our custom FramerScrollOffset
-  // to what framer-motion expects internally
+  // The offset is now correctly typed to match Framer Motion's expectations
   const { scrollYProgress } = useScroll({
     target,
     offset,
