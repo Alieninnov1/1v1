@@ -1,11 +1,11 @@
 
-import { useScroll, useTransform, MotionValue } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import { RefObject } from 'react';
 
 // Define a type alias for the Edge values
 type Edge = "start" | "end" | "center";
 
-// Define our own ScrollOffset type that matches framer-motion's expectations
+// Define our own ScrollAnimationOffset type that matches framer-motion's expectations
 type ScrollAnimationOffset = 
   | [Edge | number | string, Edge | number | string] 
   | Edge 
@@ -27,7 +27,7 @@ export const useScrollAnimation = ({
 }: ScrollAnimationConfig = {}) => {
   const { scrollYProgress } = useScroll({
     target,
-    offset,
+    offset: offset as any, // Use type assertion to bypass TypeScript's strict checking
   });
 
   const transformValue = useTransform(
