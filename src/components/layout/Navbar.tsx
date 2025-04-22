@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -9,12 +8,24 @@ import NavLogo from "../navigation/NavLogo";
 import DesktopNav from "../navigation/DesktopNav";
 import MobileNav from "../navigation/MobileNav";
 import UserMenu from "../navigation/UserMenu";
+import { Home, BarChart3, GraduationCap, Factory, Landmark, MessageSquare, BookOpen, Database } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [notifications, setNotifications] = useState(3);
   const location = useLocation();
+
+  const navItems = [
+    { name: "Home", path: "/", icon: <Home size={18} /> },
+    { name: "Dashboard", path: "/dashboard", icon: <BarChart3 size={18} /> },
+    { name: "Academia", path: "/academia", icon: <GraduationCap size={18} /> },
+    { name: "Industry", path: "/industry", icon: <Factory size={18} /> },
+    { name: "Government", path: "/government", icon: <Landmark size={18} /> },
+    { name: "Discussions", path: "/discussions", icon: <MessageSquare size={18} /> },
+    { name: "Knowledge", path: "/knowledge", icon: <BookOpen size={18} /> },
+    { name: "Knowledge Base", path: "/knowledge-base", icon: <Database size={18} /> },
+  ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   

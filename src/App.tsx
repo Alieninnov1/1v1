@@ -1,58 +1,68 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AnalyticsComponent } from '@/utils/analytics';
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/Dashboard";
-import Discussions from "./pages/Discussions";
-import Industry from "./pages/Industry";
-import Government from "./pages/Government";
-import Academia from "./pages/Academia";
-import Knowledge from "./pages/Knowledge";
-import PolicySandbox from "./pages/PolicySandbox";
-import DaoGovernance from "./pages/DaoGovernance";
-import BlockchainExplorer from "./pages/BlockchainExplorer";
-import TokenEconomics from "./pages/TokenEconomics";
+import { Toaster } from "@/components/ui/toaster";
 
-// Create a client with default options optimized for performance
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      retry: 1,
-    },
-  },
-});
+// Pages
+import Index from "@/pages/Index";
+import Dashboard from "@/pages/Dashboard";
+import Academia from "@/pages/Academia";
+import Industry from "@/pages/Industry";
+import Government from "@/pages/Government";
+import PolicySandbox from "@/pages/PolicySandbox";
+import TokenEconomics from "@/pages/TokenEconomics";
+import DaoGovernance from "@/pages/DaoGovernance";
+import BlockchainExplorer from "@/pages/BlockchainExplorer";
+import Discussions from "@/pages/Discussions";
+import Knowledge from "@/pages/Knowledge";
+import KnowledgeBasePage from "@/pages/KnowledgeBase";
+import NotFound from "@/pages/NotFound";
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <SonnerToaster />
-      <AnalyticsComponent />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/discussions" element={<Discussions />} />
-          <Route path="/industry" element={<Industry />} />
-          <Route path="/government" element={<Government />} />
-          <Route path="/academia" element={<Academia />} />
-          <Route path="/knowledge" element={<Knowledge />} />
-          <Route path="/policy-sandbox" element={<PolicySandbox />} />
-          <Route path="/dao-governance" element={<DaoGovernance />} />
-          <Route path="/blockchain-explorer" element={<BlockchainExplorer />} />
-          <Route path="/token-economics" element={<TokenEconomics />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+// Boot screen components
+import BootScreen from "@/components/boot/BootScreen";
+
+// Create a client
+const queryClient = new QueryClient();
+
+function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        {loading ? (
+          <BootScreen />
+        ) : (
+          <>
+            <Analytics />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/academia" element={<Academia />} />
+              <Route path="/industry" element={<Industry />} />
+              <Route path="/government" element={<Government />} />
+              <Route path="/policy-sandbox" element={<PolicySandbox />} />
+              <Route path="/token-economics" element={<TokenEconomics />} />
+              <Route path="/dao-governance" element={<DaoGovernance />} />
+              <Route path="/blockchain-explorer" element={<BlockchainExplorer />} />
+              <Route path="/discussions" element={<Discussions />} />
+              <Route path="/knowledge" element={<Knowledge />} />
+              <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster />
+          </>
+        )}
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;
