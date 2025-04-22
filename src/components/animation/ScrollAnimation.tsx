@@ -13,7 +13,7 @@ export interface ScrollAnimationProps extends MotionProps {
   delay?: number;
   duration?: number;
   threshold?: number;
-  offset?: [string, string];
+  offset?: ["start end", "end start"] | ["start center", "end start"] | ["center end", "end start"];
   className?: string;
   once?: boolean;
 }
@@ -42,7 +42,7 @@ export const ScrollAnimation = ({
   
   const { scrollYProgress } = useScrollAnimation({
     target: ref,
-    offset,
+    offset: offset as ["start end", "end start"], // Cast to satisfy TypeScript
   });
 
   // Define animation variants based on type and direction

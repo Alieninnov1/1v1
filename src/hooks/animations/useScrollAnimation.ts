@@ -8,6 +8,15 @@ type Edge = "start" | "end" | "center";
 // Fix the type definition to exactly match Framer Motion's ScrollOffset type
 type ScrollOffset = 
   | [
+      | "start start"
+      | "start end" 
+      | "start center"
+      | "end start"
+      | "end end"
+      | "end center"
+      | "center start"
+      | "center end"
+      | "center center"
       | `${number} ${number}`
       | `${number} start` 
       | `${number} end`
@@ -15,15 +24,19 @@ type ScrollOffset =
       | `start ${number}`
       | `end ${number}`
       | `center ${number}`
-      | "start start"
-      | "start end" 
-      | "end start"
-      | "end end"
-      | "center center"
       | `${number}px ${number}px`
       | `${number}% ${number}%`
       | `${number}vh ${number}vh`
       | `${number}vw ${number}vw`,
+      | "start start"
+      | "start end" 
+      | "start center"
+      | "end start"
+      | "end end"
+      | "end center"
+      | "center start"
+      | "center end"
+      | "center center"
       | `${number} ${number}`
       | `${number} start` 
       | `${number} end`
@@ -31,11 +44,6 @@ type ScrollOffset =
       | `start ${number}`
       | `end ${number}`
       | `center ${number}`
-      | "start start"
-      | "start end" 
-      | "end start"
-      | "end end"
-      | "center center"
       | `${number}px ${number}px`
       | `${number}% ${number}%`
       | `${number}vh ${number}vh`
@@ -63,7 +71,7 @@ export const useScrollAnimation = ({
   // Use the correctly typed offset parameter
   const { scrollYProgress } = useScroll({
     target,
-    offset,
+    offset: offset as ScrollOffset, 
   });
 
   const transformValue = useTransform(
