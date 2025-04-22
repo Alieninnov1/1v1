@@ -1,92 +1,92 @@
 
 import { motion } from "framer-motion";
-import HelixModelDemo from "@/components/3d/HelixModelDemo";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { ScrollAnimation } from "@/components/animation/ScrollAnimation";
-import { useIsMobile } from "@/hooks/use-mobile";
+
+const proofConcepts = [
+  {
+    label: "Academia",
+    desc: "Live curriculum benchmarking & student skill tracking.",
+    color: "from-blue-500 via-purple-400 to-purple-700",
+    icon: "🎓",
+  },
+  {
+    label: "Industry",
+    desc: "Realtime workforce needs, employer feedback, talent signals.",
+    color: "from-orange-400 via-yellow-300 to-blue-400",
+    icon: "💼",
+  },
+  {
+    label: "Government",
+    desc: "Policy modeling, grant impact, regional resource overlays.",
+    color: "from-indigo-500 via-purple-600 to-blue-600",
+    icon: "🏛️",
+  },
+];
 
 const Hero = () => {
-  const isMobile = useIsMobile();
-
   return (
-    <section className="relative min-h-[90vh] py-12 sm:py-16 md:py-24 lg:py-28 flex items-center overflow-hidden">
-      {/* Optimized background for better performance */}
-      <div className="absolute inset-0 bg-[#0c101d]">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/10 via-transparent to-[#0c101d]"></div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <ScrollAnimation type="fade" direction="up" className="text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-satoshi leading-tight">
-              <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300">
-                Synchronizing Innovation Networks
-              </span>
-            </h1>
-            <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              HelixHub creates dynamic ecosystems where education, workforce, and policy collaborate to drive innovation through real-time data and predictive analytics.
-            </p>
-            
-            <div className="mt-6 sm:mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button 
-                asChild
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
-              >
-                <a href="#features">
-                  Explore Features
-                </a>
-              </Button>
-              <Button 
-                asChild
-                variant="outline"
-                className="px-6 py-3 bg-transparent border border-purple-500/30 text-white rounded-lg hover:bg-purple-500/10 transition-all duration-300"
-              >
-                <a href="/dashboard">
-                  View Dashboard <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </ScrollAnimation>
-
-          {/* Optimized 3D model rendering for crisp display */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative order-first lg:order-last"
-          >
-            <div className="aspect-square w-full max-w-md mx-auto">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10 blur-3xl"></div>
-              <div className="transform-gpu will-change-transform">
-                <HelixModelDemo />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Simplified scrolling indicator with better performance */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+    <section className="relative min-h-screen py-16 bg-[#1A1F2C] flex flex-col justify-center items-center overflow-x-hidden">
+      {/* POC headline */}
+      <motion.h1
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9 }}
+        className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300"
+        style={{ textShadow: "none" }}
       >
-        <motion.div 
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-          className="flex flex-col items-center"
+        Triple Helix Proof of Concept
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, delay: 0.3 }}
+        className="max-w-2xl mx-auto text-lg text-center text-gray-300 mb-8"
+        style={{ textShadow: "none" }}
+      >
+        Explore a clear prototype aligning <span className="text-purple-200 font-semibold">Academia</span>, <span className="text-blue-200 font-semibold">Industry</span>, and <span className="text-indigo-200 font-semibold">Government</span> as live, interacting blocks.
+      </motion.p>
+      {/* High-res, crisp triple helix placeholder */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.4 }}
+        className="mb-10"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80"
+          alt="Sharp Proof of Concept Demo"
+          className="rounded-lg shadow-xl mx-auto h-52 md:h-72 w-auto object-contain"
+          style={{ imageRendering: "crisp-edges" }}
+        />
+      </motion.div>
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
+        {proofConcepts.map((item, idx) => (
+          <motion.div
+            key={item.label}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 + idx * 0.09, duration: 0.6 }}
+            className={`rounded-xl p-6 min-h-[180px] flex flex-col items-center bg-gradient-to-br ${item.color} shadow-md`}
+            style={{ backdropFilter: "none" }}
+          >
+            <div className="text-4xl mb-3">{item.icon}</div>
+            <h3 className="font-bold text-xl text-white mb-1">{item.label}</h3>
+            <p className="text-gray-100 text-center text-base">{item.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+        className="mt-10 text-center"
+      >
+        <a
+          href="#features"
+          className="inline-flex items-center px-7 py-3 text-base font-semibold rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md hover:shadow-lg hover:from-purple-700 hover:to-indigo-700 transition-all"
         >
-          <div className="h-12 w-6 rounded-full border-2 border-purple-500/30 flex items-start justify-center p-1">
-            <motion.div 
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              className="w-2 h-2 rounded-full bg-purple-400"
-            />
-          </div>
-          <p className="text-purple-400/70 text-xs mt-2">Scroll to explore</p>
-        </motion.div>
+          Explore Features <ArrowRight className="ml-3 h-5 w-5" />
+        </a>
       </motion.div>
     </section>
   );
