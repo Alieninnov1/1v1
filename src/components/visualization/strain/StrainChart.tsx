@@ -8,7 +8,7 @@ interface StrainChartProps {
 }
 
 const StrainChart = ({ data }: StrainChartProps) => {
-  const fadeAnimation = useFadeAnimation(0.2);
+  const fadeAnimation = useFadeAnimation({ delay: 0.2 });
 
   return (
     <motion.div

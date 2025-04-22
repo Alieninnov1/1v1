@@ -14,7 +14,7 @@ interface StrainMetricsProps {
 }
 
 const StrainMetrics = ({ currentData }: StrainMetricsProps) => {
-  const fadeAnimation = useFadeAnimation(0.2);
+  const fadeAnimation = useFadeAnimation({ delay: 0.2 });
   
   const getStrainStatusClass = (strainIndex: number) => {
     if (strainIndex < 1) return "text-green-400";

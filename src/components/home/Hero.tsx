@@ -6,8 +6,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
   const titleAnimation = useFadeAnimation();
-  const contentAnimation = useFadeAnimation(0.2);
-  const modelAnimation = useFadeAnimation(0.4);
+  const contentAnimation = useFadeAnimation({ delay: 0.2 });
+  const modelAnimation = useFadeAnimation({ delay: 0.4 });
   const isMobile = useIsMobile();
 
   return (

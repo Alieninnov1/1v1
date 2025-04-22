@@ -2,19 +2,18 @@
 import { useScroll, useTransform } from 'framer-motion';
 import { RefObject } from 'react';
 
-// Define a proper type for Framer Motion's edge values
+// Define proper type for Framer Motion's edge values
 type Edge = "start" | "end" | "center";
 
-// Define proper type for Framer Motion's scroll offset
-type ScrollOffset = 
-  | [Edge | number | string, Edge | number | string]
-  | Edge
-  | number
-  | string;
+// Define proper type for Framer Motion's scroll offset using Framer Motion compatible values
+type FramerScrollOffset = 
+  | [string | number, string | number]
+  | string
+  | number;
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
-  offset?: ScrollOffset;
+  offset?: FramerScrollOffset;
   inputRange?: number[];
   outputRange?: any[];
 };
