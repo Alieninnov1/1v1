@@ -9,8 +9,18 @@ interface WelcomeDialogProps {
 const WelcomeDialog = ({ isOpen, onClose }: WelcomeDialogProps) => {
   return (
     <WindowDialog
-      title="Welcome to HelixHub Decentralized Network"
-      content="HelixHub connects academia, industry, and government via a triple helix model. Explore how these three sectors collaborate to drive innovation and address skill gaps in real-time. Try our interactive 3D model to visualize these complex relationships."
+      title="Welcome to HelixHub: Collaborative Innovation Network"
+      content="HelixHub is a dynamic platform that unites academia, industry, and government through a powerful Triple Helix model. 
+
+Our mission is to drive innovation by creating real-time connections between educational institutions, businesses, and policymakers. Explore how collaboration can address skill gaps, accelerate learning, and create meaningful societal impact.
+
+Key Features:
+• Interactive 3D Visualization of Sector Interconnections
+• Real-time Feedback and Skill Alignment
+• AI-Powered Curriculum and Grant Recommendations
+• Policy Impact Simulations
+
+Start exploring and be part of the innovation ecosystem!"
       isOpen={isOpen}
       onClose={onClose}
     />
@@ -18,3 +28,4 @@ const WelcomeDialog = ({ isOpen, onClose }: WelcomeDialogProps) => {
 };
 
 export default WelcomeDialog;
+
