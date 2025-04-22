@@ -17,7 +17,7 @@ const DiscussionHeader = () => {
               <MessageSquare className="h-7 w-7" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold mb-0 bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200">
+              <h1 className="text-3xl font-bold mb-0 text-white">
                 Triple Helix Discussions
               </h1>
               <p className="text-purple-100 mt-1 text-lg">
@@ -27,7 +27,7 @@ const DiscussionHeader = () => {
           </div>
         </div>
         
-        <div className="pt-6 pb-4 px-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <div className="pt-6 pb-4 px-6 bg-white dark:bg-gray-800">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-center gap-3 border-l-4 border-purple-600 pl-3 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-r">
               <MessageSquare className="h-5 w-5 text-purple-600 dark:text-purple-400" />

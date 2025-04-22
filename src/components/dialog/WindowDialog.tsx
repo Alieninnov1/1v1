@@ -18,7 +18,7 @@ const WindowDialog = ({
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -40,7 +40,7 @@ const WindowDialog = ({
           </button>
         </div>
         
-        <div className="p-5 bg-white text-gray-800 shadow-xl">
+        <div className="p-5 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-xl">
           <p className="leading-relaxed">{content}</p>
         </div>
       </motion.div>

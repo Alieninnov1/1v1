@@ -79,19 +79,18 @@ h3 {
 
 /* Clear card animations with better performance */
 .eth-card {
-  transform: translateZ(0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
   backface-visibility: hidden;
-  border: 1px solid rgba(155, 135, 245, 0.2);
+  border: 1px solid rgba(155, 135, 245, 0.3);
   border-radius: 12px;
-  background: rgba(29, 34, 53, 0.9);
+  background: rgba(29, 34, 53, 0.95);
 }
 
 .eth-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(155, 135, 245, 0.2);
-  border-color: rgba(155, 135, 245, 0.3);
+  border-color: rgba(155, 135, 245, 0.4);
 }
 
 /* Crisp static background pattern */
@@ -104,7 +103,6 @@ h3 {
 
 /* Optimized image loading */
 img, svg {
-  transform: translateZ(0);
   backface-visibility: hidden;
   image-rendering: crisp-edges; /* Sharper image rendering */
   -webkit-image-rendering: crisp-edges;

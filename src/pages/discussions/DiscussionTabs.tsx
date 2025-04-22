@@ -37,7 +37,7 @@ const DiscussionTabs = ({ activeTab, setActiveTab }: DiscussionTabsProps) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
-        <div className="flex md:hidden justify-between px-2 py-1 items-center bg-gradient-to-r from-purple-700 to-indigo-700 rounded-t-lg text-white">
+        <div className="flex md:hidden justify-between px-2 py-1 items-center bg-purple-700 rounded-t-lg text-white">
           <button 
             className="flex items-center gap-1 px-2 py-1 hover:bg-white/10 rounded-md transition-colors"
             onClick={() => setShowSidebar(!showSidebar)}
@@ -55,8 +55,8 @@ const DiscussionTabs = ({ activeTab, setActiveTab }: DiscussionTabsProps) => {
             whileTap={{ scale: 0.97 }}
             className={`flex items-center justify-center gap-2 rounded-t-lg px-4 py-3 text-sm font-medium transition-all duration-200 ${
               activeTab === tab.id 
-                ? "bg-white text-purple-800 border-b-0 shadow-inner" 
-                : "bg-gray-200 text-gray-700 hover:bg-gray-100"
+                ? "bg-white text-purple-800 border-b-0 shadow-inner dark:bg-gray-800 dark:text-white" 
+                : "bg-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
             }`}
           >
             {tab.icon}
