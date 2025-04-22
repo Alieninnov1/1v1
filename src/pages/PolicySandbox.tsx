@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
 import VoteImpactSim from "@/components/voting/VoteImpactSim";
 import MatchGrants from "@/components/grants/MatchGrants";
+import { Button } from "@/components/ui/button";
 import { BeakerIcon, FolderHeart, LayoutDashboard, ScrollText } from "lucide-react";
 
 const PolicySandbox = () => {
@@ -69,13 +70,12 @@ const PolicySandbox = () => {
                     <li>Simulate outcomes of policy proposals</li>
                     <li>Analyze impacts on system stability</li>
                   </ul>
-                  <TabsTrigger 
-                    value="vote-impact" 
+                  <Button 
                     onClick={() => setActiveTab("vote-impact")}
                     className="inline-flex items-center px-4 py-2 bg-helix-purple text-white rounded-md hover:bg-purple-700 transition-colors mt-2"
                   >
                     Try Vote Impact Simulator
-                  </TabsTrigger>
+                  </Button>
                 </CardContent>
               </Card>
               
@@ -94,13 +94,12 @@ const PolicySandbox = () => {
                     <li>Get AI-matched funding recommendations</li>
                     <li>View alignment scores and deadlines</li>
                   </ul>
-                  <TabsTrigger 
-                    value="grants" 
+                  <Button 
                     onClick={() => setActiveTab("grants")}
                     className="inline-flex items-center px-4 py-2 bg-helix-purple text-white rounded-md hover:bg-purple-700 transition-colors mt-2"
                   >
                     Try Grant Matchmaker
-                  </TabsTrigger>
+                  </Button>
                 </CardContent>
               </Card>
             </motion.div>
