@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import InsightCard from "./InsightCard";
 
 interface InsightCardListProps {
-  insights: Array<{
+  insights: ReadonlyArray<{
     title: string;
     description: string;
     icon: any;

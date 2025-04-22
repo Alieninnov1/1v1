@@ -45,7 +45,7 @@ const InteractiveInsights = () => {
             ...insightsData[2],
             description: `Regional skill gap analysis shows ${skillTrends[4].name} needs growing by ${skillTrends[4].growth}% annually.`
           }
-        ]
+        ] as const
       : insightsData;
 
   return (
