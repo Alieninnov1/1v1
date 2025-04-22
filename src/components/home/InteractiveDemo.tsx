@@ -57,7 +57,7 @@ const InteractiveDemo = () => {
           Start Demo <ArrowRight size={18} className="ml-2" />
         </Button>
       ) : !completed ? (
-        <Button aria-label="Complete interactive demo" onClick={handleComplete} variant="success" className="mt-2">
+        <Button aria-label="Complete interactive demo" onClick={handleComplete} variant="secondary" className="mt-2">
           Complete Demo <Check size={18} className="ml-2" />
         </Button>
       ) : (
