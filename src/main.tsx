@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.style.backgroundColor = "#0f1221";
   document.body.style.color = "#f7f8fc";
   
-  // Apply GPU acceleration optimization
+  // Apply GPU acceleration optimization with proper TypeScript syntax
   document.documentElement.style.transform = 'translateZ(0)';
-  document.documentElement.style.backfaceVisibility = 'hidden';
-  document.documentElement.style.webkitFontSmoothing = 'antialiased';
+  // Use proper camelCase and type assertion for non-standard CSS properties
+  (document.documentElement.style as any).backfaceVisibility = 'hidden';
+  (document.documentElement.style as any).WebkitFontSmoothing = 'antialiased';
 
   // Performance optimization for touch devices
   if ('ontouchstart' in window) {

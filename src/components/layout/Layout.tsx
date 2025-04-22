@@ -1,5 +1,5 @@
 
-import { ReactNode, useState, useEffect, useRef } from 'react';
+import { ReactNode, useState, useEffect, useRef, CSSProperties } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -38,12 +38,17 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
   const baseStyles = 'flex flex-col min-h-screen bg-[#0c101d] text-white';
   const animationStyles = !isReducedMotion && isMounted ? 'fade-in transform-gpu' : '';
   
-  // Remove parallax effect which causes blurry rendering
-  const parallaxStyle = isReducedMotion ? {} : {
+  // Define parallax style with proper TypeScript typing
+  const parallaxStyle: CSSProperties = isReducedMotion ? {} : {
     willChange: 'transform',
-    backfaceVisibility: 'hidden',
-    WebkitFontSmoothing: 'antialiased',
-    MozOsxFontSmoothing: 'grayscale'
+    // Use type-safe values for these properties
+    transform: 'translateZ(0)',
+    // For vendor prefixed or non-standard properties, use type assertion
+    ...(({
+      backfaceVisibility: 'hidden',
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'grayscale'
+    } as unknown) as CSSProperties)
   };
 
   return (
