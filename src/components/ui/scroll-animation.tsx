@@ -1,6 +1,6 @@
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
+import { ReactNode, useRef, useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ScrollAnimationProps {
@@ -11,8 +11,15 @@ interface ScrollAnimationProps {
   type?: "fade" | "slide" | "scale" | "stagger";
   direction?: "up" | "down" | "left" | "right";
   distance?: number;
+  once?: boolean;
+  threshold?: number;
+  staggerChildren?: number;
+  staggerDirection?: "forward" | "reverse";
 }
 
+/**
+ * Performance-optimized scroll animation component
+ */
 export const ScrollAnimation = ({
   children,
   delay = 0,
@@ -21,14 +28,41 @@ export const ScrollAnimation = ({
   type = "fade",
   direction = "up",
   distance = 20,
+  once = true,
+  threshold = 0.1,
+  staggerChildren,
+  staggerDirection = "forward",
 }: ScrollAnimationProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once, amount: threshold });
   const isMobile = useIsMobile();
+  const [hasAnimated, setHasAnimated] = useState(false);
   
-  // Reduce animation intensity on mobile devices
+  // Use a throttled mobile distance to improve performance on mobile
   const mobileDistance = isMobile ? distance * 0.6 : distance;
   
-  // Set up animation variants based on type and direction
+  useEffect(() => {
+    if (isInView && !hasAnimated) {
+      const timer = setTimeout(() => {
+        setHasAnimated(true);
+      }, delay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, delay, hasAnimated]);
+  
+  // Get the appropriate animation variants based on type and direction
   const getVariants = () => {
+    // Check for reduced motion preference
+    if (typeof window !== 'undefined') {
+      const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+      if (prefersReducedMotion) {
+        return {
+          hidden: { opacity: 0.9 },
+          visible: { opacity: 1 }
+        };
+      }
+    }
+    
     switch (type) {
       case "fade":
         return {
@@ -48,7 +82,7 @@ export const ScrollAnimation = ({
             opacity: 1, 
             x: 0, 
             y: 0,
-            transition: { duration, delay }
+            transition: { duration, delay, type: "spring", bounce: 0.2 }
           }
         };
       case "scale":
@@ -68,7 +102,7 @@ export const ScrollAnimation = ({
             y: 0,
             transition: { 
               duration, 
-              delay: delay + (i * 0.1) 
+              delay: delay + (i * (staggerChildren || 0.1)) 
             }
           })
         };
@@ -84,45 +118,56 @@ export const ScrollAnimation = ({
 
   return (
     <motion.div
+      ref={ref}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      animate={isInView ? "visible" : "hidden"}
       variants={variants}
       className={className}
-      custom={delay}
+      custom={staggerDirection === "reverse" ? -1 : 1}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>
   );
 };
 
+/**
+ * Container component for staggered animations
+ */
 export const StaggerContainer = ({ 
   children, 
   delayChildren = 0.1,
   staggerChildren = 0.1,
-  className = "" 
+  className = "",
+  once = true,
+  threshold = 0.1
 }: { 
   children: ReactNode; 
   delayChildren?: number;
   staggerChildren?: number;
   className?: string;
+  once?: boolean;
+  threshold?: number;
 }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once, amount: threshold });
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         delayChildren,
-        staggerChildren
+        staggerChildren,
       }
     }
   };
 
   return (
     <motion.div
+      ref={ref}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
       className={className}
     >
