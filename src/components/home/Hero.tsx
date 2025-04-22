@@ -1,67 +1,91 @@
 
 import { motion } from "framer-motion";
 import HelixModelDemo from "@/components/3d/HelixModelDemo";
-import { useFadeAnimation } from "@/hooks/animations";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { ScrollAnimation } from "@/components/animation/ScrollAnimation";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
-  const titleAnimation = useFadeAnimation();
-  const contentAnimation = useFadeAnimation({ delay: 0.2 });
-  const modelAnimation = useFadeAnimation({ delay: 0.4 });
   const isMobile = useIsMobile();
 
   return (
-    <section className="bg-[#0f1221] py-12 sm:py-16 md:py-24 lg:py-28 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="relative min-h-[90vh] py-12 sm:py-16 md:py-24 lg:py-28 flex items-center overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-[#0c101d]">
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/20 via-transparent to-[#0c101d]"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NGgtNHYyaDR2NGgyVjZoNFY0aC00ek02IDM0di00SDR2NEgwdjJoNHY0aDJ2LTRoNHYtMkg2ek02IDRWMEg0djRIMHYyaDR2NGgyVjZoNFY0SDZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <motion.h1 
-              {...titleAnimation}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-satoshi leading-tight"
-            >
-              Synchronizing Innovation Networks
-            </motion.h1>
-            <motion.p 
-              {...contentAnimation}
-              className="mt-4 sm:mt-6 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
-            >
+          <ScrollAnimation type="fade" direction="up" className="text-center lg:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-satoshi leading-tight">
+              <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-300">
+                Synchronizing Innovation Networks
+              </span>
+            </h1>
+            <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               HelixHub creates dynamic ecosystems where education, workforce, and policy collaborate to drive innovation through real-time data and predictive analytics.
-            </motion.p>
+            </p>
             
-            {isMobile ? null : (
-              <motion.div 
-                {...contentAnimation}
-                className="mt-6 sm:mt-8 flex flex-wrap gap-4 justify-center lg:justify-start"
+            <div className="mt-6 sm:mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
+              <Button 
+                asChild
+                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
               >
-                <a 
-                  href="#features" 
-                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
-                >
+                <a href="#features">
                   Explore Features
                 </a>
-                <a 
-                  href="#demo" 
-                  className="px-6 py-3 bg-transparent border border-purple-500/30 text-white rounded-lg hover:bg-purple-500/10 transition-all duration-300"
-                >
-                  View Demo
+              </Button>
+              <Button 
+                asChild
+                variant="outline"
+                className="px-6 py-3 bg-transparent border border-purple-500/30 text-white rounded-lg hover:bg-purple-500/10 transition-all duration-300"
+              >
+                <a href="/dashboard">
+                  View Dashboard <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
-              </motion.div>
-            )}
-          </div>
+              </Button>
+            </div>
+          </ScrollAnimation>
 
           <motion.div 
-            {...modelAnimation}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="relative order-first lg:order-last"
           >
             <div className="aspect-square w-full max-w-md mx-auto">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 blur-3xl animate-pulse"></div>
               <HelixModelDemo />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Subtle overlay gradient */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#0f1221] to-transparent"></div>
+      {/* Subtle scrolling indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="flex flex-col items-center"
+        >
+          <div className="h-12 w-6 rounded-full border-2 border-purple-500/30 flex items-start justify-center p-1">
+            <motion.div 
+              animate={{ y: [0, 12, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }}
+              className="w-2 h-2 rounded-full bg-purple-400"
+            />
+          </div>
+          <p className="text-purple-400/70 text-xs mt-2">Scroll to explore</p>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

@@ -2,53 +2,19 @@
 import { useScroll, useTransform } from 'framer-motion';
 import { RefObject } from 'react';
 
-// Define proper type for Framer Motion's edge values
+// Define valid string literal types for Framer Motion's edge values
 type Edge = "start" | "end" | "center";
+type EdgeOffset = `${number}%` | `${number}px` | `${number}vh` | `${number}vw` | number;
 
-// Fix the type definition to exactly match Framer Motion's ScrollOffset type
-type ScrollOffset = 
-  | [
-      | "start start"
-      | "start end" 
-      | "start center"
-      | "end start"
-      | "end end"
-      | "end center"
-      | "center start"
-      | "center end"
-      | "center center"
-      | `${number} ${number}`
-      | `${number} start` 
-      | `${number} end`
-      | `${number} center`
-      | `start ${number}`
-      | `end ${number}`
-      | `center ${number}`
-      | `${number}px ${number}px`
-      | `${number}% ${number}%`
-      | `${number}vh ${number}vh`
-      | `${number}vw ${number}vw`,
-      | "start start"
-      | "start end" 
-      | "start center"
-      | "end start"
-      | "end end"
-      | "end center"
-      | "center start"
-      | "center end"
-      | "center center"
-      | `${number} ${number}`
-      | `${number} start` 
-      | `${number} end`
-      | `${number} center`
-      | `start ${number}`
-      | `end ${number}`
-      | `center ${number}`
-      | `${number}px ${number}px`
-      | `${number}% ${number}%`
-      | `${number}vh ${number}vh`
-      | `${number}vw ${number}vw`
-    ];
+// Define the combined edge values
+type EdgeCombo = 
+  | `${Edge} ${Edge}`
+  | `${Edge} ${EdgeOffset}`
+  | `${EdgeOffset} ${Edge}`
+  | `${EdgeOffset} ${EdgeOffset}`;
+
+// Define the ScrollOffset type to match exactly what Framer Motion expects
+type ScrollOffset = [EdgeCombo, EdgeCombo];
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
@@ -71,7 +37,7 @@ export const useScrollAnimation = ({
   // Use the correctly typed offset parameter
   const { scrollYProgress } = useScroll({
     target,
-    offset: offset as ScrollOffset, 
+    offset: offset as ScrollOffset,
   });
 
   const transformValue = useTransform(

@@ -6,6 +6,11 @@ import { useScrollAnimation } from "@/hooks/animations/useScrollAnimation";
 export type AnimationDirection = "up" | "down" | "left" | "right";
 export type AnimationType = "fade" | "slide" | "scale" | "transform";
 
+type ValidOffset = 
+  | ["start end", "end start"]
+  | ["start center", "end start"]
+  | ["center end", "end start"];
+
 export interface ScrollAnimationProps extends MotionProps {
   children: ReactNode;
   type?: AnimationType;
@@ -13,7 +18,7 @@ export interface ScrollAnimationProps extends MotionProps {
   delay?: number;
   duration?: number;
   threshold?: number;
-  offset?: ["start end", "end start"] | ["start center", "end start"] | ["center end", "end start"];
+  offset?: ValidOffset;
   className?: string;
   once?: boolean;
 }
@@ -42,7 +47,7 @@ export const ScrollAnimation = ({
   
   const { scrollYProgress } = useScrollAnimation({
     target: ref,
-    offset: offset as ["start end", "end start"], // Cast to satisfy TypeScript
+    offset: offset as ["start end", "end start"], 
   });
 
   // Define animation variants based on type and direction

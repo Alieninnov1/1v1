@@ -1,7 +1,9 @@
+
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface LayoutProps {
   children: ReactNode;
@@ -37,12 +39,13 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
     };
   }, []);
 
-  const baseStyles = 'flex flex-col min-h-screen bg-gradient-to-b from-[#151823] to-[#262d4a] text-white';
+  const baseStyles = 'flex flex-col min-h-screen bg-[#0c101d] text-white';
   const animationStyles = !isReducedMotion && isMounted ? 'fade-in transform-gpu' : '';
   
+  // Apply subtle parallax effect based on scroll position
   const parallaxStyle = {
     transform: !isReducedMotion 
-      ? `translate3d(0, ${scrollY * (isMobile ? 0.02 : 0.05)}px, 0)`
+      ? `translate3d(0, ${scrollY * (isMobile ? 0.01 : 0.03)}px, 0)`
       : 'none',
     transition: !isReducedMotion
       ? 'transform 0.1s cubic-bezier(0.215, 0.61, 0.355, 1)'
@@ -58,14 +61,48 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
         perspective: !isReducedMotion ? '1000px' : 'none',
       }}
     >
-      {!hideNavFooter && <Navbar />}
+      <AnimatePresence mode="wait">
+        {!hideNavFooter && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Navbar />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
       <main 
         className="flex-grow relative overflow-hidden"
         style={!isReducedMotion ? parallaxStyle : {}}
       >
-        {children}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key="content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       </main>
-      {!hideNavFooter && <Footer />}
+      
+      <AnimatePresence mode="wait">
+        {!hideNavFooter && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            <Footer />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
