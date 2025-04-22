@@ -5,25 +5,46 @@ import { RefObject } from 'react';
 // Define proper type for Framer Motion's edge values
 type Edge = "start" | "end" | "center";
 
-// Update the FramerScrollOffset type to be compatible with Framer Motion's ScrollOffset
-// This is crucial for fixing the type error
-type FramerScrollOffset = 
-  | [string | number, string | number]
-  | Edge
-  | `${number} ${number}`
-  | `${number} ${Edge}`
-  | `${Edge} ${number}`
-  | "start start"
-  | "start end"
-  | "end start"
-  | "end end"
-  | "center center"
-  | `${number}px ${number}px`
-  | `${number}% ${number}%`;
+// Fix the type definition to exactly match Framer Motion's ScrollOffset type
+type ScrollOffset = 
+  | [
+      | `${number} ${number}`
+      | `${number} start` 
+      | `${number} end`
+      | `${number} center`
+      | `start ${number}`
+      | `end ${number}`
+      | `center ${number}`
+      | "start start"
+      | "start end" 
+      | "end start"
+      | "end end"
+      | "center center"
+      | `${number}px ${number}px`
+      | `${number}% ${number}%`
+      | `${number}vh ${number}vh`
+      | `${number}vw ${number}vw`,
+      | `${number} ${number}`
+      | `${number} start` 
+      | `${number} end`
+      | `${number} center`
+      | `start ${number}`
+      | `end ${number}`
+      | `center ${number}`
+      | "start start"
+      | "start end" 
+      | "end start"
+      | "end end"
+      | "center center"
+      | `${number}px ${number}px`
+      | `${number}% ${number}%`
+      | `${number}vh ${number}vh`
+      | `${number}vw ${number}vw`
+    ];
 
 type ScrollAnimationConfig = {
   target?: RefObject<HTMLElement>;
-  offset?: FramerScrollOffset;
+  offset?: ScrollOffset;
   inputRange?: number[];
   outputRange?: any[];
 };
@@ -39,7 +60,7 @@ export const useScrollAnimation = ({
   inputRange = [0, 1],
   outputRange = [0, 1],
 }: ScrollAnimationConfig = {}) => {
-  // The offset is now correctly typed to match Framer Motion's expectations
+  // Use the correctly typed offset parameter
   const { scrollYProgress } = useScroll({
     target,
     offset,
