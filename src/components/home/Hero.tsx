@@ -11,10 +11,9 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[90vh] py-12 sm:py-16 md:py-24 lg:py-28 flex items-center overflow-hidden">
-      {/* Background Elements - simplified for better performance */}
+      {/* Optimized background for better performance */}
       <div className="absolute inset-0 bg-[#0c101d]">
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/10 via-transparent to-[#0c101d]"></div>
-        <div className="absolute inset-0 opacity-20"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -50,23 +49,24 @@ const Hero = () => {
             </div>
           </ScrollAnimation>
 
-          {/* Simplified 3D model rendering for better performance */}
+          {/* Optimized 3D model rendering for crisp display */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative order-first lg:order-last"
-            style={{ willChange: 'transform', backfaceVisibility: 'hidden' }}
           >
             <div className="aspect-square w-full max-w-md mx-auto">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10 blur-3xl"></div>
-              <HelixModelDemo />
+              <div className="transform-gpu will-change-transform">
+                <HelixModelDemo />
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Subtle scrolling indicator - simplified animation */}
+      {/* Simplified scrolling indicator with better performance */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -18,13 +18,16 @@ const IntroAnimation = ({ onSkip }: IntroAnimationProps) => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, type: "spring" }}
-        className="relative w-64 h-64"
+        className="relative w-64 h-64 transform-gpu"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-blue-600/20 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-blue-600/20 rounded-full blur-2xl"></div>
         <img 
           src="/lovable-uploads/261b8a7f-e6a4-4b35-b826-2641f23da6d7.png"
           alt="HelixHub Logo" 
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain transform-gpu"
+          style={{
+            imageRendering: 'high-quality'
+          }}
         />
       </motion.div>
 
@@ -32,7 +35,7 @@ const IntroAnimation = ({ onSkip }: IntroAnimationProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="mt-8 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300"
+        className="mt-8 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300 transform-gpu"
       >
         HelixHub
       </motion.h1>

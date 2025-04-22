@@ -38,17 +38,15 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
   const baseStyles = 'flex flex-col min-h-screen bg-[#0c101d] text-white';
   const animationStyles = !isReducedMotion && isMounted ? 'fade-in transform-gpu' : '';
   
-  // Define parallax style with proper TypeScript typing
+  // Define parallax style with properly typed CSS properties
   const parallaxStyle: CSSProperties = isReducedMotion ? {} : {
     willChange: 'transform',
-    // Use type-safe values for these properties
     transform: 'translateZ(0)',
-    // For vendor prefixed or non-standard properties, use type assertion
-    ...(({
+    ...({
       backfaceVisibility: 'hidden',
       WebkitFontSmoothing: 'antialiased',
       MozOsxFontSmoothing: 'grayscale'
-    } as unknown) as CSSProperties)
+    } as unknown as CSSProperties)
   };
 
   return (

@@ -29,7 +29,7 @@ const InteractiveInsights = () => {
     };
   }, []);
 
-  // Enhanced insights with real API data
+  // Enhanced insights with real API data - fixed type comparison error
   const enhancedInsights = skillTrends && skillTrends.length >= 5
     ? [
         {
