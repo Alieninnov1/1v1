@@ -24,12 +24,8 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
     document.body.classList.add('ethereum-theme');
     
     const handleScroll = throttle(() => {
-      const currentScrollY = window.scrollY;
-      if (Math.abs(currentScrollY - prevScrollY.current) > 5) {
-        setScrollY(currentScrollY);
-        prevScrollY.current = currentScrollY;
-      }
-    }, 16);
+      setScrollY(window.scrollY);
+    }, 100); // Increased throttle time to reduce calculations
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     
@@ -42,15 +38,12 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
   const baseStyles = 'flex flex-col min-h-screen bg-[#0c101d] text-white';
   const animationStyles = !isReducedMotion && isMounted ? 'fade-in transform-gpu' : '';
   
-  // Apply subtle parallax effect based on scroll position
-  const parallaxStyle = {
-    transform: !isReducedMotion 
-      ? `translate3d(0, ${scrollY * (isMobile ? 0.01 : 0.03)}px, 0)`
-      : 'none',
-    transition: !isReducedMotion
-      ? 'transform 0.1s cubic-bezier(0.215, 0.61, 0.355, 1)'
-      : 'none',
-    willChange: !isReducedMotion ? 'transform' : 'auto'
+  // Remove parallax effect which causes blurry rendering
+  const parallaxStyle = isReducedMotion ? {} : {
+    willChange: 'transform',
+    backfaceVisibility: 'hidden',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale'
   };
 
   return (
@@ -75,8 +68,8 @@ const Layout = ({ children, hideNavFooter = false }: LayoutProps) => {
       </AnimatePresence>
       
       <main 
-        className="flex-grow relative overflow-hidden"
-        style={!isReducedMotion ? parallaxStyle : {}}
+        className="flex-grow relative"
+        style={parallaxStyle}
       >
         <AnimatePresence mode="wait">
           <motion.div

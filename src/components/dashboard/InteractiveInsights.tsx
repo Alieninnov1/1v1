@@ -30,23 +30,22 @@ const InteractiveInsights = () => {
   }, []);
 
   // Enhanced insights with real API data
-  const enhancedInsights =
-    skillTrends && skillTrends.length >= 5
-      ? [
-          {
-            ...insightsData[0],
-            description: `Curriculum adjustments based on ${skillTrends[0].name} and ${skillTrends[1].name} with ${skillTrends[0].growth}% growth.`
-          },
-          {
-            ...insightsData[1],
-            description: `ML-powered recommendations focusing on ${skillTrends[2].name} and ${skillTrends[3].name} - high demand areas.`
-          },
-          {
-            ...insightsData[2],
-            description: `Regional skill gap analysis shows ${skillTrends[4].name} needs growing by ${skillTrends[4].growth}% annually.`
-          }
-        ]
-      : [];
+  const enhancedInsights = skillTrends && skillTrends.length >= 5
+    ? [
+        {
+          ...insightsData[0],
+          description: `Curriculum adjustments based on ${skillTrends[0].name} and ${skillTrends[1].name} with ${skillTrends[0].growth}% growth.`
+        },
+        {
+          ...insightsData[1],
+          description: `ML-powered recommendations focusing on ${skillTrends[2].name} and ${skillTrends[3].name} - high demand areas.`
+        },
+        {
+          ...insightsData[2],
+          description: `Regional skill gap analysis shows ${skillTrends[4].name} needs growing by ${skillTrends[4].growth}% annually.`
+        }
+      ]
+    : [];
 
   return (
     <div
@@ -57,12 +56,12 @@ const InteractiveInsights = () => {
         <InsightSkeletons count={3} />
       ) : (
         <InsightCardList
-          insights={isVisible ? enhancedInsights : insightsData}
+          insights={isVisible && enhancedInsights.length > 0 ? enhancedInsights : insightsData}
         />
       )}
-      {!isLoading && isVisible && enhancedInsights.length === 0 && (
+      {!isLoading && isVisible && enhancedInsights.length === 0 && skillTrends && skillTrends.length > 0 && (
         <div className="col-span-3 text-center text-gray-500 py-12">
-          No insights available at this time.
+          No enhanced insights available at this time.
         </div>
       )}
     </div>
@@ -70,4 +69,3 @@ const InteractiveInsights = () => {
 };
 
 export default InteractiveInsights;
-

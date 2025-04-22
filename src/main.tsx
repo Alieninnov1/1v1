@@ -1,3 +1,4 @@
+
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
@@ -9,7 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add page transition class for smoother loading
   document.documentElement.classList.add('page-transition', 'ethereum-theme');
-  document.body.classList.add('bg-dark');
+  
+  // Set body styles directly to avoid FOUC (Flash of Unstyled Content)
+  document.body.style.backgroundColor = "#0f1221";
+  document.body.style.color = "#f7f8fc";
+  
+  // Apply GPU acceleration optimization
+  document.documentElement.style.transform = 'translateZ(0)';
+  document.documentElement.style.backfaceVisibility = 'hidden';
+  document.documentElement.style.webkitFontSmoothing = 'antialiased';
 
   // Performance optimization for touch devices
   if ('ontouchstart' in window) {
@@ -20,20 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const rootElement = document.getElementById("root");
 
   if (rootElement) {
-    // Show loading indicator while the app is initializing
-    const loadingPlaceholder = document.createElement('div');
-    loadingPlaceholder.className = 'fixed inset-0 flex items-center justify-center bg-[#151823] text-white';
-    loadingPlaceholder.innerHTML = `
-      <div class="flex flex-col items-center">
-        <div class="w-16 h-16 border-4 border-t-purple-600 border-r-transparent border-b-blue-600 border-l-transparent rounded-full animate-spin"></div>
-        <p class="mt-4 font-medium">Loading HelixHub...</p>
-      </div>
-    `;
-    
-    // Only show placeholder if the app takes longer than 200ms to load
-    const placeholderTimeout = setTimeout(() => {
-      rootElement.appendChild(loadingPlaceholder);
-    }, 200);
+    // No need to create a loading placeholder - it causes flashing
     
     // Enable faster click response on mobile
     if ('ontouchstart' in window) {
@@ -45,13 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const root = createRoot(rootElement);
       root.render(<App />);
       
-      // Cleanup and performance logging
-      setTimeout(() => {
+      // Performance logging
+      window.requestAnimationFrame(() => {
         document.documentElement.classList.remove('page-transition');
-        clearTimeout(placeholderTimeout);
-        if (rootElement.contains(loadingPlaceholder)) {
-          rootElement.removeChild(loadingPlaceholder);
-        }
+        
         const loadTime = Math.round(performance.now() - start);
         console.log(`App mounted in ${loadTime}ms`);
         
@@ -61,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
           isMobile: 'ontouchstart' in window,
           viewport: `${window.innerWidth}x${window.innerHeight}`
         });
-      }, 300);
+      });
     } catch (error) {
       console.error('Failed to initialize app:', error);
       

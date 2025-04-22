@@ -11,10 +11,10 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[90vh] py-12 sm:py-16 md:py-24 lg:py-28 flex items-center overflow-hidden">
-      {/* Background Elements */}
+      {/* Background Elements - simplified for better performance */}
       <div className="absolute inset-0 bg-[#0c101d]">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/20 via-transparent to-[#0c101d]"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NGgtNHYyaDR2NGgyVjZoNFY0aC00ek02IDM0di00SDR2NEgwdjJoNHY0aDJ2LTRoNHYtMkg2ek02IDRWMEg0djRIMHYyaDR2NGgyVjZoNFY0SDZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/10 via-transparent to-[#0c101d]"></div>
+        <div className="absolute inset-0 opacity-20"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -50,21 +50,23 @@ const Hero = () => {
             </div>
           </ScrollAnimation>
 
+          {/* Simplified 3D model rendering for better performance */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative order-first lg:order-last"
+            style={{ willChange: 'transform', backfaceVisibility: 'hidden' }}
           >
             <div className="aspect-square w-full max-w-md mx-auto">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 blur-3xl animate-pulse"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10 blur-3xl"></div>
               <HelixModelDemo />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Subtle scrolling indicator */}
+      {/* Subtle scrolling indicator - simplified animation */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -72,14 +74,14 @@ const Hero = () => {
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
       >
         <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
           className="flex flex-col items-center"
         >
           <div className="h-12 w-6 rounded-full border-2 border-purple-500/30 flex items-start justify-center p-1">
             <motion.div 
-              animate={{ y: [0, 12, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
               className="w-2 h-2 rounded-full bg-purple-400"
             />
           </div>
