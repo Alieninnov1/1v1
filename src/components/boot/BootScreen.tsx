@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
 
-interface BootScreenProps {
+export interface BootScreenProps {
   showStartup: boolean;
   bootProgress: number;
   setBootProgress: React.Dispatch<React.SetStateAction<number>>;

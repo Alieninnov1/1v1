@@ -1,5 +1,6 @@
+
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -28,6 +29,8 @@ const queryClient = new QueryClient();
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [bootProgress, setBootProgress] = useState(0);
+  const [showStartup, setShowStartup] = useState(true);
 
   useEffect(() => {
     // Simulate loading delay
@@ -38,9 +41,14 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         {loading ? (
-          <BootScreen />
+          <BootScreen 
+            showStartup={showStartup}
+            bootProgress={bootProgress}
+            setBootProgress={setBootProgress}
+            setShowStartup={setShowStartup}
+          />
         ) : (
-          <>
+          <BrowserRouter>
             <Analytics />
             <Routes>
               <Route path="/" element={<Index />} />
@@ -58,7 +66,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Toaster />
-          </>
+          </BrowserRouter>
         )}
       </ThemeProvider>
     </QueryClientProvider>
