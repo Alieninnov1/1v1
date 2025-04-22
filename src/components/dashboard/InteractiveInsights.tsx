@@ -1,15 +1,14 @@
-
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import InsightCard from "./InsightCard";
 import { insightsData } from "./insightsData";
 import { useSkillTrends } from "@/services/apiDataService";
+import { ChartBar } from "lucide-react";
 
 const InteractiveInsights = () => {
   const { data: skillTrends, isLoading } = useSkillTrends();
   const [isVisible, setIsVisible] = useState(false);
 
-  // Lazily load content when component becomes visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,7 +32,6 @@ const InteractiveInsights = () => {
     };
   }, []);
 
-  // Enhanced insights with real API data
   const enhancedInsights = skillTrends && skillTrends.length > 0
     ? [
         {
@@ -54,7 +52,6 @@ const InteractiveInsights = () => {
   return (
     <div id="insights-container" className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
       {isLoading && !isVisible ? (
-        // Skeleton loading state
         Array.from({ length: 3 }).map((_, index) => (
           <div 
             key={index} 
