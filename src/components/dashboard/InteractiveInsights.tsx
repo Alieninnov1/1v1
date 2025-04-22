@@ -60,7 +60,7 @@ const InteractiveInsights = () => {
           insights={isVisible ? enhancedInsights : insightsData}
         />
       )}
-      {!isLoading && isVisible && (!enhancedInsights || enhancedInsights.length === 0) && (
+      {!isLoading && isVisible && enhancedInsights.length === 0 && (
         <div className="col-span-3 text-center text-gray-500 py-12">
           No insights available at this time.
         </div>
