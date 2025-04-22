@@ -1,7 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { MessageSquare, Users, Database } from "lucide-react";
+import { MessageSquare, Users, Database, ArrowRight } from "lucide-react";
 
 const DiscussionHeader = () => {
   return (
@@ -11,37 +10,52 @@ const DiscussionHeader = () => {
       transition={{ duration: 0.5 }}
       className="mb-8"
     >
-      <Card className="border-0 shadow-lg">
-        <CardHeader className="bg-gradient-to-r from-purple-700 to-purple-900 text-white">
-          <div className="flex items-center gap-3">
-            <div className="bg-white/20 p-2 rounded-full">
-              <MessageSquare className="h-6 w-6" />
+      <div className="rounded-xl overflow-hidden shadow-lg border border-purple-500/20">
+        <div className="bg-gradient-to-r from-purple-700 to-purple-900 p-6 text-white">
+          <div className="flex items-center gap-4">
+            <div className="bg-white/20 p-3 rounded-full">
+              <MessageSquare className="h-7 w-7" />
             </div>
             <div>
-              <CardTitle className="text-2xl md:text-3xl">Triple Helix Discussions</CardTitle>
-              <p className="text-purple-100 mt-1">
+              <h1 className="text-3xl font-bold mb-0 bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200">
+                Triple Helix Discussions
+              </h1>
+              <p className="text-purple-100 mt-1 text-lg">
                 Collaborative conversations between academia, industry, and policymakers
               </p>
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="pt-6 bg-gradient-to-r from-gray-50 to-white">
+        </div>
+        
+        <div className="pt-6 pb-4 px-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-3 border-l-4 border-purple-600 pl-3 py-1">
-              <MessageSquare className="h-5 w-5 text-purple-600" />
-              <p className="text-gray-700 text-sm">Share insights and provide feedback</p>
+            <div className="flex items-center gap-3 border-l-4 border-purple-600 pl-3 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-r">
+              <MessageSquare className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+              <p className="text-gray-700 dark:text-gray-300 font-medium">
+                Share insights and provide feedback
+              </p>
             </div>
-            <div className="flex items-center gap-3 border-l-4 border-blue-600 pl-3 py-1">
-              <Users className="h-5 w-5 text-blue-600" />
-              <p className="text-gray-700 text-sm">Bridge skill gaps across stakeholders</p>
+            <div className="flex items-center gap-3 border-l-4 border-blue-600 pl-3 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-r">
+              <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <p className="text-gray-700 dark:text-gray-300 font-medium">
+                Bridge skill gaps across stakeholders
+              </p>
             </div>
-            <div className="flex items-center gap-3 border-l-4 border-green-600 pl-3 py-1">
-              <Database className="h-5 w-5 text-green-600" />
-              <p className="text-gray-700 text-sm">Enhance curriculum alignment with data</p>
+            <div className="flex items-center gap-3 border-l-4 border-green-600 pl-3 py-2 bg-green-50 dark:bg-green-900/20 rounded-r">
+              <Database className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <p className="text-gray-700 dark:text-gray-300 font-medium">
+                Enhance curriculum with real-time data
+              </p>
             </div>
           </div>
-        </CardContent>
-      </Card>
+          
+          <div className="mt-4 flex justify-end">
+            <a href="#" className="inline-flex items-center text-purple-600 hover:text-purple-800 text-sm font-medium">
+              View research paper <ArrowRight className="ml-1 h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 };

@@ -1,9 +1,9 @@
 
 /* Component Styles */
 .glass-panel {
-  background: rgba(29, 34, 53, 0.7);
+  background: rgba(29, 34, 53, 0.9);
   border-radius: 12px;
-  border: 1px solid rgba(155, 135, 245, 0.1);
+  border: 1px solid rgba(155, 135, 245, 0.2);
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.2),
     0 2px 4px -1px rgba(0, 0, 0, 0.1),
@@ -12,8 +12,8 @@
 
 .feature-card {
   @apply p-6 rounded-xl transition-all duration-300;
-  background: rgba(29, 34, 53, 0.7);
-  border: 1px solid rgba(155, 135, 245, 0.15);
+  background: rgba(29, 34, 53, 0.9);
+  border: 1px solid rgba(155, 135, 245, 0.2);
   box-shadow: 
     0 4px 20px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -22,7 +22,7 @@
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: 
-    0 10px 30px rgba(155, 135, 245, 0.15),
+    0 10px 30px rgba(155, 135, 245, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -34,4 +34,35 @@
 .parallax-layer {
   transform: translateZ(0);
   will-change: transform;
+}
+
+/* Card designs */
+.helix-card {
+  @apply rounded-xl border border-purple-500/20 bg-[#1A1F2C]/80 p-5 shadow-lg transition-all;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.helix-card:hover {
+  @apply border-purple-500/40;
+  box-shadow: 0 8px 30px rgba(155, 135, 245, 0.15);
+}
+
+/* Button styles */
+.helix-button {
+  @apply px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 
+    text-white font-medium transition-all hover:from-purple-700 hover:to-indigo-700
+    active:scale-95;
+}
+
+/* List styles */
+.helix-list {
+  @apply space-y-2;
+}
+
+.helix-list-item {
+  @apply flex items-start gap-2 py-1.5;
+}
+
+.helix-list-item-icon {
+  @apply text-purple-400 mt-0.5 flex-shrink-0;
 }
