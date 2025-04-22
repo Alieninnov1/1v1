@@ -26,7 +26,7 @@ const IntroAnimation = ({ onSkip }: IntroAnimationProps) => {
           alt="HelixHub Logo" 
           className="w-full h-full object-contain transform-gpu"
           style={{
-            imageRendering: 'high-quality'
+            imageRendering: 'crisp-edges'
           }}
         />
       </motion.div>
