@@ -29,6 +29,9 @@ export const useScrollAnimation = ({
   inputRange = [0, 1],
   outputRange = [0, 1],
 }: ScrollAnimationConfig = {}) => {
+  // Here we use the offset directly without type assertion
+  // The type conflict is resolved by matching our custom FramerScrollOffset
+  // to what framer-motion expects internally
   const { scrollYProgress } = useScroll({
     target,
     offset,
