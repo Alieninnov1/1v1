@@ -1,7 +1,7 @@
+
 /* Component Styles */
 .glass-panel {
   background: rgba(29, 34, 53, 0.7);
-  backdrop-filter: blur(10px);
   border-radius: 12px;
   border: 1px solid rgba(155, 135, 245, 0.1);
   box-shadow: 
@@ -13,7 +13,6 @@
 .feature-card {
   @apply p-6 rounded-xl transition-all duration-300;
   background: rgba(29, 34, 53, 0.7);
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(155, 135, 245, 0.15);
   box-shadow: 
     0 4px 20px rgba(0, 0, 0, 0.2),

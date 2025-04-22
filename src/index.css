@@ -26,7 +26,7 @@ body {
 
 /* Text rendering optimization */
 h1, h2, h3 {
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  text-shadow: none; /* Removed text shadow that could cause blur */
   text-rendering: optimizeLegibility;
 }
 
@@ -74,7 +74,7 @@ h1, h2, h3 {
   box-shadow: 0 10px 20px rgba(155, 135, 245, 0.1);
 }
 
-/* Simplified static background pattern */
+/* Simplified static background pattern without blur */
 .bg-mesh-pattern {
   position: relative;
 }
@@ -91,6 +91,8 @@ h1, h2, h3 {
 img, svg {
   transform: translateZ(0);
   backface-visibility: hidden;
+  image-rendering: crisp-edges; /* Sharper image rendering */
+  -webkit-image-rendering: crisp-edges;
 }
 
 /* Improve touch device interactions */
