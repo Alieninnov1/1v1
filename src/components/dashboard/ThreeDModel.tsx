@@ -1,8 +1,7 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, Text, Stars, Trail, Bounds, CameraShake } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
-import { Mesh, Color, MathUtils } from "three";
+import { Mesh, Color, MathUtils, Vector3, BufferGeometry, LineBasicMaterial } from "three";
 import { motion } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -101,13 +100,22 @@ const Node = ({ position, color, name, size = 1, speed = 0.01 }: NodeProps) => {
   );
 };
 
-// Simple line component to connect nodes
+// Fixed Line component to properly handle points using Vector3
 const Line = ({ start, end, color }: { start: number[], end: number[], color: string }) => {
-  const points = [start, end].map(p => new Array(...p));
+  // Convert arrays to Vector3 objects
+  const startVector = new Vector3(start[0], start[1], start[2]);
+  const endVector = new Vector3(end[0], end[1], end[2]);
   
+  // Create and return a line with proper geometry
   return (
     <line>
-      <bufferGeometry attach="geometry" setFromPoints={points} />
+      <bufferGeometry attach="geometry">
+        <float32BufferAttribute attach="attributes-position" args={[
+          [startVector.x, startVector.y, startVector.z, 
+           endVector.x, endVector.y, endVector.z], 
+          3
+        ]} />
+      </bufferGeometry>
       <lineBasicMaterial attach="material" color={color} linewidth={1} />
     </line>
   );
