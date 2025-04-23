@@ -1,9 +1,11 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Text, Stars, Trail } from "@react-three/drei";
-import { useRef, useState } from "react";
-import { Mesh, Color } from "three";
+import { OrbitControls, Float, Text, Stars, Trail, Bounds, CameraShake } from "@react-three/drei";
+import { useRef, useState, useEffect } from "react";
+import { Mesh, Color, MathUtils } from "three";
+import { motion } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NodeProps {
   position: [number, number, number];
@@ -22,6 +24,9 @@ const Node = ({ position, color, name, size = 1, speed = 0.01 }: NodeProps) => {
     if (meshRef.current) {
       meshRef.current.rotation.x += delta * speed;
       meshRef.current.rotation.y += delta * speed * 1.5;
+      
+      // Add slight floating effect
+      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime) * 0.05;
     }
   });
 
@@ -40,13 +45,19 @@ const Node = ({ position, color, name, size = 1, speed = 0.01 }: NodeProps) => {
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <sphereGeometry args={[size, 32, 32]} />
+        {/* Use more geometric shape for brutalist aesthetic */}
+        {name === "HelixHub" ? (
+          <octahedronGeometry args={[size, 0]} />
+        ) : (
+          <boxGeometry args={[size, size, size]} />
+        )}
         <meshStandardMaterial 
           color={hovered ? "#8B5CF6" : color} 
-          metalness={0.5} 
+          metalness={0.7} 
           roughness={0.2}
           emissive={clicked ? "#5E2CA5" : "#000000"}
           emissiveIntensity={clicked ? 0.5 : 0}
+          flatShading={true}
         />
       </mesh>
       <Text
@@ -55,42 +66,78 @@ const Node = ({ position, color, name, size = 1, speed = 0.01 }: NodeProps) => {
         color={clicked ? "#8B5CF6" : "white"}
         anchorX="center"
         anchorY="middle"
+        font="/fonts/Inter-Bold.woff"
+        letterSpacing={0.05}
       >
         {name}
       </Text>
       {clicked && (
         <Trail
-          width={1}
+          width={1.5}
           color={new Color(color)}
           length={5}
           decay={1}
           local={false}
           stride={0}
           interval={1}
+          attenuation={(width) => width}
         >
           <mesh position={position}>
-            <sphereGeometry args={[size * 1.05, 16, 16]} />
+            <sphereGeometry args={[size * 1.1, 16, 16]} />
             <meshBasicMaterial color={color} transparent opacity={0.2} />
           </mesh>
         </Trail>
+      )}
+      
+      {/* Connection lines between nodes when main hub is clicked */}
+      {clicked && name === "HelixHub" && (
+        <>
+          <Line start={position} end={[-2.5, 1.5, 0]} color="#9b87f5" />
+          <Line start={position} end={[2.5, 1.5, 0]} color="#7E69AB" />
+          <Line start={position} end={[0, -2.5, 0]} color="#D6BCFA" />
+        </>
       )}
     </>
   );
 };
 
+// Simple line component to connect nodes
+const Line = ({ start, end, color }: { start: number[], end: number[], color: string }) => {
+  const points = [start, end].map(p => new Array(...p));
+  
+  return (
+    <line>
+      <bufferGeometry attach="geometry" setFromPoints={points} />
+      <lineBasicMaterial attach="material" color={color} linewidth={1} />
+    </line>
+  );
+};
+
 const ThreeDModel = () => {
   const [rotating, setRotating] = useState(true);
+  const [intensity, setIntensity] = useState(0);
+  const isMobile = useIsMobile();
+  
+  useEffect(() => {
+    // Gradually increase intensity for smoother loading
+    const timer = setTimeout(() => {
+      setIntensity(1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const mainNodePosition: [number, number, number] = [0, 0, 0];
   const academiaPosition: [number, number, number] = [-2.5, 1.5, 0];
   const industryPosition: [number, number, number] = [2.5, 1.5, 0];
   const governmentPosition: [number, number, number] = [0, -2.5, 0];
   
   return (
-    <div className="w-full h-[500px] rounded-xl overflow-hidden">
-      <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#5E2CA5" />
+    <div className="w-full h-[500px] md:h-[600px] rounded-sm overflow-hidden brutal-border">
+      <Canvas camera={{ position: [0, 0, 8], fov: isMobile ? 60 : 50 }} dpr={[1, 2]}>
+        <color attach="background" args={["#121212"]} />
+        <ambientLight intensity={0.5 * intensity} />
+        <pointLight position={[10, 10, 10]} intensity={1 * intensity} />
+        <pointLight position={[-10, -10, -10]} intensity={0.5 * intensity} color="#5E2CA5" />
         
         <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
         
@@ -103,34 +150,52 @@ const ThreeDModel = () => {
         <Node position={academiaPosition} color="#9b87f5" name="Academia" />
         <Node position={industryPosition} color="#7E69AB" name="Industry" />
         <Node position={governmentPosition} color="#D6BCFA" name="Government" />
-        
-        <OrbitControls 
-          enableZoom={true}
-          enablePan={true}
-          minDistance={4}
-          maxDistance={12}
-          autoRotate={rotating}
-          autoRotateSpeed={0.5}
-          onChange={() => {
-            if (rotating) {
-              setRotating(false);
-              trackEvent('modelInteraction', { action: 'manualControl' });
-            }
-          }}
+
+        {/* Camera shake for dynamic effect */}
+        <CameraShake 
+          maxYaw={0.01} 
+          maxPitch={0.01} 
+          maxRoll={0.01} 
+          yawFrequency={0.5} 
+          pitchFrequency={0.5} 
+          rollFrequency={0.4} 
+          intensity={0.1} 
         />
+        
+        <Bounds fit clip observe margin={1.2}>
+          <OrbitControls 
+            enableZoom={true}
+            enablePan={true}
+            minDistance={4}
+            maxDistance={12}
+            autoRotate={rotating}
+            autoRotateSpeed={0.5}
+            onChange={() => {
+              if (rotating) {
+                setRotating(false);
+                trackEvent('modelInteraction', { action: 'manualControl' });
+              }
+            }}
+          />
+        </Bounds>
       </Canvas>
       
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
+      >
         <button 
           onClick={() => {
             setRotating(!rotating);
             trackEvent('modelInteraction', { action: rotating ? 'stopRotation' : 'startRotation' });
           }}
-          className="bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm border border-purple-500/30"
+          className="helix-button text-sm flex items-center justify-center gap-2"
         >
-          {rotating ? "Stop Rotation" : "Auto Rotate"}
+          <span>{rotating ? "STOP ROTATION" : "AUTO ROTATE"}</span>
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

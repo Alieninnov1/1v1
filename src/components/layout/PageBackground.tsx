@@ -2,7 +2,7 @@
 import { useEffect, useState, memo } from "react";
 
 /**
- * Optimized Background component with improved visual clarity
+ * Brutalist 3D background component 
  */
 const PageBackground = () => {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
@@ -27,36 +27,46 @@ const PageBackground = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
-      {/* Clean gradient background - no blur */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#151823] to-[#1d2235]" />
+      {/* Harsh gradient background - brutalist style */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#151823] via-[#1d2235] to-[#191c2a]" />
       
-      {/* Static pattern overlay with improved clarity */}
+      {/* Bold grid overlay */}
       <div 
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 opacity-10"
         style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-          backgroundSize: "60px 60px"
+          backgroundImage: "linear-gradient(to right, #5E2CA5 1px, transparent 1px), linear-gradient(to bottom, #5E2CA5 1px, transparent 1px)",
+          backgroundSize: "80px 80px"
         }}
       />
       
-      {/* Crisp starfield effect with reduced quantity */}
+      {/* Geometric shapes for brutalist effect */}
+      <div className="absolute top-20 left-20 w-40 h-40 bg-purple-800/10 rotate-45 transform-gpu" />
+      <div className="absolute bottom-40 right-20 w-60 h-60 bg-blue-800/10 -rotate-12 transform-gpu" />
+      <div className="absolute top-1/2 left-1/4 w-28 h-28 border-4 border-purple-500/10 rotate-12 transform-gpu" />
+      
+      {/* Static starfield effect with reduced number on mobile */}
       {!isReducedMotion && mounted && (
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(15)].map((_, i) => (
             <div
               key={`star-${i}`}
               className="absolute rounded-full bg-white"
               style={{
-                width: Math.random() * 2 + 1 + 'px',
-                height: Math.random() * 2 + 1 + 'px',
+                width: Math.random() * 3 + 1 + 'px',
+                height: Math.random() * 3 + 1 + 'px',
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.5 + 0.5
+                opacity: Math.random() * 0.7 + 0.3
               }}
             />
           ))}
         </div>
       )}
+      
+      {/* Brutalist accent lines */}
+      <div className="absolute top-1/4 left-0 w-full h-1 bg-purple-500/20" />
+      <div className="absolute top-3/4 left-0 w-full h-2 bg-blue-500/20" />
+      <div className="absolute top-0 left-1/3 h-full w-1 bg-indigo-500/10" />
     </div>
   );
 };

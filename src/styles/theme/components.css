@@ -1,29 +1,37 @@
 
-/* Component Styles */
+/* Component Styles with Brutalist Theme */
 .glass-panel {
   background: rgba(29, 34, 53, 0.95);
-  border-radius: 12px;
-  border: 1px solid rgba(155, 135, 245, 0.3);
+  border-radius: 4px;
+  border: 2px solid rgba(155, 135, 245, 0.5);
   box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.2),
-    0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    8px 8px 0 rgba(0, 0, 0, 0.8),
+    0 0 0 2px rgba(155, 135, 245, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.glass-panel:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    10px 10px 0 rgba(0, 0, 0, 0.8),
+    0 0 0 2px rgba(155, 135, 245, 0.3);
 }
 
 .feature-card {
-  @apply p-6 rounded-xl transition-all duration-300;
+  @apply p-6 rounded-sm transition-all duration-300;
   background: rgba(29, 34, 53, 0.95);
-  border: 1px solid rgba(155, 135, 245, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(155, 135, 245, 0.5);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.8);
+  transform: rotate(-1deg);
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 10px 30px rgba(155, 135, 245, 0.2);
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.8);
 }
 
 .parallax {
-  perspective: 1000px;
+  perspective: 1500px;
   transform-style: preserve-3d;
 }
 
@@ -32,33 +40,75 @@
   will-change: transform;
 }
 
-/* Card designs */
+/* Card designs with brutalist elements */
 .helix-card {
-  @apply rounded-xl border border-purple-500/30 bg-[#1A1F2C]/95 p-5 shadow-lg transition-all;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  @apply rounded-sm border-4 border-purple-500/80 bg-[#1A1F2C]/95 p-5 shadow-lg transition-all;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.8);
+  transform: rotate(-0.5deg);
 }
 
 .helix-card:hover {
-  @apply border-purple-500/50;
-  box-shadow: 0 8px 30px rgba(155, 135, 245, 0.15);
+  @apply border-purple-400;
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
-/* Button styles */
+/* Brutalist button styles */
 .helix-button {
-  @apply px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 
-    text-white font-medium transition-all hover:from-purple-700 hover:to-indigo-700
-    active:scale-95;
+  @apply px-4 py-2 rounded-none bg-purple-600
+    text-white font-bold transition-all hover:bg-purple-700
+    active:translate-y-1 active:shadow-none;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
+  border: 2px solid #000;
+  letter-spacing: 0.5px;
 }
 
 /* List styles */
 .helix-list {
-  @apply space-y-2;
+  @apply space-y-3;
 }
 
 .helix-list-item {
-  @apply flex items-start gap-2 py-1.5;
+  @apply flex items-start gap-2 py-2 border-l-4 border-purple-500 pl-2;
 }
 
 .helix-list-item-icon {
   @apply text-purple-400 mt-0.5 flex-shrink-0;
+}
+
+/* Brutalist utility classes */
+.brutal-border {
+  @apply border-4 border-black;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.8);
+}
+
+.brutal-text {
+  @apply font-bold uppercase tracking-wide;
+}
+
+.brutal-rotate {
+  transform: rotate(-1deg);
+}
+
+.brutal-rotate:hover {
+  transform: rotate(0);
+}
+
+/* 3D elements */
+.element-3d {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.brutal-3d-card {
+  @apply bg-gray-800 p-6 rounded-sm;
+  box-shadow: 
+    8px 8px 0 rgba(0, 0, 0, 0.8),
+    -1px -1px 0 2px rgba(155, 135, 245, 0.5);
+  transform: rotateX(2deg) rotateY(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.brutal-3d-card:hover {
+  transform: rotateX(0deg) rotateY(0deg) translateY(-5px);
 }
