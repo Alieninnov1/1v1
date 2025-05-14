@@ -1,0 +1,48 @@
+
+/* Responsive padding adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+  }
+  
+  /* Optimize tap targets for mobile */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+}
+
+/* Improve touch device interactions */
+@media (hover: hover) {
+  .hover-controls {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .hover-container:hover .hover-controls {
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  .hover-controls {
+    opacity: 1;
+  }
+}

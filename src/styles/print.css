@@ -1,0 +1,18 @@
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .xp-window {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,76 @@
+
+/* Main body styles */
+body {
+  background: #1A1F2C;
+  overflow-x: hidden;
+  transform: translateZ(0); /* GPU acceleration */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #f0f4ff;
+  font-family: 'Inter', 'Tahoma', sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background: #1A1F2C;
+  }
+}
+
+/* Text rendering optimization */
+h1, h2, h3 {
+  text-rendering: optimizeLegibility;
+}
+
+/* Clear headings - no text shadows */
+h1 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+  color: #f0f4ff;
+}
+
+h2 {
+  @apply text-xl md:text-2xl lg:text-3xl font-bold;
+  color: #f0f4ff;
+}
+
+h3 {
+  @apply text-lg md:text-xl font-bold;
+  color: #f0f4ff;
+}
+
+/* Clear card animations with better performance */
+.eth-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  border: 1px solid rgba(155, 135, 245, 0.3);
+  border-radius: 12px;
+  background: rgba(29, 34, 53, 0.95);
+}
+
+.eth-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(155, 135, 245, 0.2);
+  border-color: rgba(155, 135, 245, 0.4);
+}
+
+/* Crisp static background pattern */
+.bg-mesh-pattern {
+  position: relative;
+  background-size: 60px 60px;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  image-rendering: crisp-edges;
+}
+
+/* Better scrolling experience */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

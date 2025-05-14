@@ -1,0 +1,43 @@
+
+/* Optimized image loading */
+img, svg {
+  backface-visibility: hidden;
+  image-rendering: crisp-edges; /* Sharper image rendering */
+  -webkit-image-rendering: crisp-edges;
+}
+
+/* Optimize image loading with content visibility */
+.opt-img {
+  content-visibility: auto;
+  object-fit: cover;
+}
+
+/* Improved responsive font sizing using clamp */
+.responsive-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.5;
+}
+
+.responsive-heading {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  line-height: 1.2;
+}
+
+/* Transform GPU optimization class */
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Will-change optimization class */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Optimized element rendering */
+.render-optimized {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}

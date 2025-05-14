@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,6 +11,7 @@
 @import './theme/components.css';
 @import './theme/utilities.css';
 @import './theme/motion.css';
+@import './theme/helix-themes.css';
 
 @layer base {
   * {
@@ -47,4 +49,3 @@
     }
   }
 }
-
