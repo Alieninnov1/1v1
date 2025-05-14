@@ -1,7 +1,8 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, Text, Stars, Trail, Bounds, CameraShake } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
-import { Mesh, Color, MathUtils, Vector3, BufferGeometry, LineBasicMaterial } from "three";
+import { Mesh, Color, MathUtils, Vector3 } from "three";
 import { motion } from "framer-motion";
 import { trackEvent } from "@/utils/analytics";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -10,6 +11,7 @@ import Node3D from "./Node3D";
 const ThreeDModel = () => {
   const [rotating, setRotating] = useState(true);
   const [intensity, setIntensity] = useState(0);
+  const [hasError, setHasError] = useState(false);
   const isMobile = useIsMobile();
   
   useEffect(() => {
@@ -17,7 +19,19 @@ const ThreeDModel = () => {
     const timer = setTimeout(() => {
       setIntensity(1);
     }, 1000);
-    return () => clearTimeout(timer);
+
+    // Add event listener for WebGL context loss
+    const handleContextLoss = () => {
+      console.error("THREE.WebGLRenderer: Context Lost.");
+      setHasError(true);
+    };
+
+    window.addEventListener('webglcontextlost', handleContextLoss);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('webglcontextlost', handleContextLoss);
+    };
   }, []);
 
   const mainNodePosition: [number, number, number] = [0, 0, 0];
@@ -25,9 +39,29 @@ const ThreeDModel = () => {
   const industryPosition: [number, number, number] = [2.5, 1.5, 0];
   const governmentPosition: [number, number, number] = [0, -2.5, 0];
   
+  if (hasError) {
+    return (
+      <div className="w-full h-[500px] md:h-[600px] rounded-sm overflow-hidden brutal-border flex items-center justify-center bg-gray-800/70">
+        <div className="text-center p-8">
+          <h3 className="text-xl font-bold text-red-400 mb-2">WebGL Context Lost</h3>
+          <p className="text-gray-300">
+            Your browser encountered a graphics issue. Try refreshing the page or using a different browser.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="w-full h-[500px] md:h-[600px] rounded-sm overflow-hidden brutal-border">
-      <Canvas camera={{ position: [0, 0, 8], fov: isMobile ? 60 : 50 }} dpr={[1, 2]}>
+      <Canvas
+        camera={{ position: [0, 0, 8], fov: isMobile ? 60 : 50 }}
+        dpr={[1, 2]}
+        onCreated={({ gl }) => {
+          // Enable context preservation
+          gl.preserveDrawingBuffer = true;
+        }}
+      >
         <color attach="background" args={["#121212"]} />
         <ambientLight intensity={0.5 * intensity} />
         <pointLight position={[10, 10, 10]} intensity={1 * intensity} />
