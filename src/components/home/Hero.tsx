@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const proofConcepts = [
   {
@@ -24,6 +25,17 @@ const proofConcepts = [
 ];
 
 const Hero = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="relative min-h-screen py-16 flex flex-col justify-center items-center overflow-x-hidden">
       {/* Clean, crisp headline */}
@@ -35,6 +47,17 @@ const Hero = () => {
       >
         Triple Helix Proof of Concept
       </motion.h1>
+      
+      {/* Added value proposition */}
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.2 }}
+        className="text-xl md:text-2xl lg:text-3xl font-medium text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300"
+      >
+        Synchronizing Education, Industry & Governance
+      </motion.h2>
+      
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -65,7 +88,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 + idx * 0.09, duration: 0.6 }}
-            className={`rounded-xl p-6 min-h-[180px] flex flex-col items-center ${item.color} shadow-lg`}
+            className={`rounded-xl p-6 min-h-[180px] flex flex-col items-center ${item.color} shadow-lg card-hover`}
           >
             <div className="text-4xl mb-3">{item.icon}</div>
             <h3 className="font-bold text-xl text-white mb-1">{item.label}</h3>
@@ -86,6 +109,28 @@ const Hero = () => {
         >
           Explore Features <ArrowRight className="ml-3 h-5 w-5" />
         </a>
+      </motion.div>
+      
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          delay: 2,
+          duration: 0.8,
+          y: { 
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut"
+          }
+        }}
+        className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`}
+      >
+        <div className="flex flex-col items-center text-white/70">
+          <span className="text-xs mb-2">Scroll to explore</span>
+          <ChevronDown className="h-5 w-5 animate-bounce" />
+        </div>
       </motion.div>
     </section>
   );

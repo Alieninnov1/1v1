@@ -8,6 +8,7 @@ import VoteImpactSim from "@/components/voting/VoteImpactSim";
 import MatchGrants from "@/components/grants/MatchGrants";
 import { Button } from "@/components/ui/button";
 import { BeakerIcon, FolderHeart, LayoutDashboard, ScrollText } from "lucide-react";
+import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 
 const PolicySandbox = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -16,26 +17,42 @@ const PolicySandbox = () => {
   
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative">
+        {/* Enhanced Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-8"
+          className="mb-16 min-h-[50vh] flex flex-col justify-center relative"
+          id="policy-hero"
         >
           <div className="flex items-center mb-2">
             <BeakerIcon className="h-8 w-8 mr-2 text-helix-purple" />
-            <h1 className="text-3xl font-bold brutal-text transform -rotate-1 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold brutal-text transform -rotate-1 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300">
               POLICY SANDBOX
             </h1>
           </div>
-          <p className="text-gray-400 mb-8 border-l-4 border-purple-500 pl-3">
-            Experiment with policies and discover their potential impacts on the triple helix
+          
+          {/* Added subheadline */}
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-gray-300 text-xl md:text-2xl max-w-2xl mt-4 font-light"
+          >
+            Simulate, test, and optimize policy decisions with real-time impact analysis
+          </motion.p>
+          
+          <p className="text-gray-400 mt-6 mb-8 border-l-4 border-purple-500 pl-3 max-w-3xl">
+            Experiment with policies and discover their potential impacts on the triple helix ecosystem of academia, industry, and government.
           </p>
+          
+          {/* Scroll indicator */}
+          <ScrollIndicator targetId="policy-tabs" />
         </motion.div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
-          <div className="brutal-border mb-8 p-1 bg-gray-900">
+        <Tabs id="policy-tabs" value={activeTab} onValueChange={setActiveTab} className="mt-6 sticky-header">
+          <div className="brutal-border mb-8 p-1 bg-gray-900 sticky top-0 z-30">
             <TabsList className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 bg-gray-800">
               <TabsTrigger 
                 value="overview" 
@@ -106,7 +123,7 @@ const PolicySandbox = () => {
                     </ul>
                     <Button 
                       onClick={() => setActiveTab("vote-impact")}
-                      className="helix-button mt-2"
+                      className="helix-button mt-2 w-full sm:w-auto focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-shadow"
                     >
                       Try Vote Impact Simulator
                     </Button>
@@ -146,7 +163,7 @@ const PolicySandbox = () => {
                     </ul>
                     <Button 
                       onClick={() => setActiveTab("grants")}
-                      className="helix-button mt-2"
+                      className="helix-button mt-2 w-full sm:w-auto focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-shadow"
                     >
                       Try Grant Matchmaker
                     </Button>

@@ -1,49 +1,54 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.cdnfonts.com/css/tahoma');
-@import './scrollbar.css';
-@import './animations.css';
-@import './cards.css';
-@import './ethereum-theme.css';
-@import './xp-theme/index.css';
-
 @layer base {
-  * {
-    @apply border-border;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-    height: 100%;
-    overflow-x: hidden;
-    font-family: 'Inter', 'Tahoma', sans-serif;
-  }
-
+  /* Base styling for the document */
   body {
-    @apply bg-[#0f1221] text-[#f7f8fc];
-    font-family: 'Inter', 'Tahoma', sans-serif;
-    background: linear-gradient(to bottom, #151823, #1d2235);
-    color: #f0f4ff;
+    @apply bg-gradient-to-br from-gray-900 to-gray-800 text-gray-200 min-h-screen font-satoshi;
   }
 
-  a:focus, button:focus, input:focus, textarea:focus, select:focus {
-    @apply outline-offset-2 outline-primary ring-2 ring-primary/50;
+  /* Improved form field focus states */
+  input, textarea, select {
+    @apply transition-all duration-200 ease-in-out;
   }
 
-  @supports (padding-top: env(safe-area-inset-top)) {
-    body {
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-      padding-left: env(safe-area-inset-left);
-      padding-right: env(safe-area-inset-right);
-    }
+  input:focus, textarea:focus, select:focus {
+    @apply ring-2 ring-purple-500/50 ring-offset-1 ring-offset-gray-900;
+  }
+
+  /* Typography enhancements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-satoshi font-bold;
+  }
+
+  /* Link styling */
+  a {
+    @apply text-purple-400 hover:text-purple-300 transition-colors;
+  }
+
+  /* Custom classes */
+  .helix-button {
+    @apply bg-helix-purple hover:bg-purple-700 text-white px-4 py-2 rounded transition-all duration-200;
+  }
+
+  .brutal-text {
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .brutal-border {
+    @apply rounded-md border-2 border-white/10 shadow-lg overflow-hidden;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-200 hover:transform hover:scale-[1.02] hover:shadow-lg;
+  }
+
+  /* Sticky header for PolicySandbox */
+  .sticky-header {
+    @apply sticky top-0 z-30 bg-gray-900/80 backdrop-blur-sm;
+  }
+
+  /* Focus improvements */
+  .focus-visible:focus {
+    @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-gray-900;
   }
 }
