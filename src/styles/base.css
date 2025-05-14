@@ -5,13 +5,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/tahoma');
-@import './theme/colors.css';
-@import './theme/typography.css';
-@import './theme/layout.css';
-@import './theme/components.css';
-@import './theme/utilities.css';
-@import './theme/motion.css';
-@import './theme/helix-themes.css';
+@import './scrollbar.css';
+@import './animations.css';
+@import './cards.css';
+@import './ethereum-theme.css';
+@import './xp-theme/index.css';
 
 @layer base {
   * {
