@@ -1,0 +1,9 @@
+
+/* Theme Index - Centralize all theme imports */
+@import './colors.css';
+@import './typography.css';
+@import './layout.css';
+@import './components.css';
+@import './utilities.css';
+@import './motion.css';
+@import './helix-themes.css';

@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, Text, Stars, Trail, Bounds, CameraShake } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
@@ -58,8 +57,8 @@ const ThreeDModel = () => {
         camera={{ position: [0, 0, 8], fov: isMobile ? 60 : 50 }}
         dpr={[1, 2]}
         onCreated={({ gl }) => {
-          // Enable context preservation
-          gl.preserveDrawingBuffer = true;
+          // Enable context preservation - using type assertion for compatibility
+          (gl as any).preserveDrawingBuffer = true;
         }}
       >
         <color attach="background" args={["#121212"]} />

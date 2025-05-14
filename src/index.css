@@ -1,11 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import './styles/base.css';
-@import './styles/scrollbar.css';
-@import './styles/animations.css';
-@import './styles/xp-theme/index.css';
-@import './styles/cards.css';
-@import './styles/ethereum-theme.css';
+@import './styles/theme/index.css';
 @import './styles/main.css';
 @import './styles/responsive.css';
 @import './styles/optimization.css';
