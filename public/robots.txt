@@ -1,14 +1,30 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://helixhub.app/sitemap.xml
+
+# Allow crawling of important pages
 User-agent: Googlebot
 Allow: /
+Allow: /dashboard
+Allow: /academia
+Allow: /industry
+Allow: /government
+Allow: /knowledge
+Allow: /knowledge-base
 
 User-agent: Bingbot
 Allow: /
+Allow: /dashboard
+Allow: /academia
+Allow: /industry
+Allow: /government
+Allow: /knowledge
+Allow: /knowledge-base
 
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
-Allow: /
-
-User-agent: *
 Allow: /

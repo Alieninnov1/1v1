@@ -21,53 +21,57 @@ import Knowledge from "@/pages/Knowledge";
 import KnowledgeBasePage from "@/pages/KnowledgeBase";
 import NotFound from "@/pages/NotFound";
 
-// Boot screen components
-import BootScreen from "@/components/boot/BootScreen";
-
 // Create a client
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 60000,
+      retry: 1
+    },
+  },
+});
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [bootProgress, setBootProgress] = useState(0);
-  const [showStartup, setShowStartup] = useState(true);
 
   useEffect(() => {
     // Simulate loading delay
     setTimeout(() => setLoading(false), 2000);
+    
+    // Performance optimization - preload critical resources
+    const preloadAssets = ['/logo.png'];
+    preloadAssets.forEach(asset => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = asset;
+      link.as = asset.endsWith('.png') || asset.endsWith('.jpg') ? 'image' : 'script';
+      document.head.appendChild(link);
+    });
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        {loading ? (
-          <BootScreen 
-            showStartup={showStartup}
-            bootProgress={bootProgress}
-            setBootProgress={setBootProgress}
-            setShowStartup={setShowStartup}
-          />
-        ) : (
-          <BrowserRouter>
-            <Analytics />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/academia" element={<Academia />} />
-              <Route path="/industry" element={<Industry />} />
-              <Route path="/government" element={<Government />} />
-              <Route path="/policy-sandbox" element={<PolicySandbox />} />
-              <Route path="/token-economics" element={<TokenEconomics />} />
-              <Route path="/dao-governance" element={<DaoGovernance />} />
-              <Route path="/blockchain-explorer" element={<BlockchainExplorer />} />
-              <Route path="/discussions" element={<Discussions />} />
-              <Route path="/knowledge" element={<Knowledge />} />
-              <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Toaster />
-          </BrowserRouter>
-        )}
+        <BrowserRouter>
+          <Analytics />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/academia" element={<Academia />} />
+            <Route path="/industry" element={<Industry />} />
+            <Route path="/government" element={<Government />} />
+            <Route path="/policy-sandbox" element={<PolicySandbox />} />
+            <Route path="/token-economics" element={<TokenEconomics />} />
+            <Route path="/dao-governance" element={<DaoGovernance />} />
+            <Route path="/blockchain-explorer" element={<BlockchainExplorer />} />
+            <Route path="/discussions" element={<Discussions />} />
+            <Route path="/knowledge" element={<Knowledge />} />
+            <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Toaster />
+        </BrowserRouter>
       </ThemeProvider>
     </QueryClientProvider>
   );

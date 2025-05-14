@@ -57,12 +57,12 @@ const CallToAction = () => {
           className="text-center max-w-3xl mx-auto"
         >
           <h2 className={`text-3xl ${isMobile ? "" : "sm:text-4xl lg:text-5xl"} font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300 font-satoshi mb-6`}>
-            Join the Innovation Network
+            Join the HelixHub Network
           </h2>
           <p className={`${isMobile ? "text-lg" : "text-xl"} mb-8 sm:mb-10 text-gray-300 leading-relaxed`}>
-            Connect with a growing ecosystem of institutions, industries, and policymakers 
-            shaping the future of collaborative innovation. Harness the power of real-time 
-            data and predictive analytics to drive meaningful outcomes.
+            Connect with the Triple Helix ecosystem of institutions, industries, and policymakers 
+            working together to drive innovation. Use real-time data and predictive analytics to make 
+            better decisions and create meaningful impact.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button 
