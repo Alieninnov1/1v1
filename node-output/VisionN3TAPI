@@ -1,0 +1,324 @@
+openapi: 3.0.3
+info:
+  title: Vision.N3t API
+  description: "API for Vision.N3t - Modular Civic, Learning & Creator OS"
+  contact:
+    name: Vision.N3t Team
+    url: https://vision-net.info/
+    email: hello@vision-net.info
+  version: 3.0.3
+servers:
+- url: https://virtserver.swaggerhub.com/futureu/visionN3T/3.0.3
+  description: SwaggerHub API Auto Mocking
+- url: https://api.vision-net.info/v1
+tags:
+- name: Auth
+  description: Authentication and user identity
+- name: Proposals
+  description: Civic proposal & governance endpoints
+- name: Knowledge
+  description: "Semantic journaling, knowledge graphs"
+- name: Creators
+  description: Modular content and creative projects
+paths:
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Log in user and retrieve JWT token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: "Success, returns auth token"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+        required: true
+      responses:
+        "201":
+          description: User created
+        "400":
+          description: Invalid input
+  /proposals:
+    get:
+      tags:
+      - Proposals
+      summary: List all civic proposals
+      parameters:
+      - name: status
+        in: query
+        description: Filter proposals by status
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - open
+          - closed
+          - all
+      responses:
+        "200":
+          description: List of proposals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Proposal"
+    post:
+      tags:
+      - Proposals
+      summary: Create a new civic proposal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProposalCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Proposal created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Proposal"
+        "401":
+          description: Unauthorized
+      security:
+      - bearerAuth: []
+  /proposals/{id}/vote:
+    post:
+      tags:
+      - Proposals
+      summary: Cast a vote on a proposal
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VoteRequest"
+        required: true
+      responses:
+        "200":
+          description: Vote submitted
+        "401":
+          description: Unauthorized
+      security:
+      - bearerAuth: []
+  /journal/entries:
+    get:
+      tags:
+      - Knowledge
+      summary: List journal entries for authenticated user
+      responses:
+        "200":
+          description: List of journal entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JournalEntry"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Knowledge
+      summary: Create a new journal entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JournalEntryCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Entry created
+      security:
+      - bearerAuth: []
+  /creators/projects:
+    get:
+      tags:
+      - Creators
+      summary: List all creator projects
+      responses:
+        "200":
+          description: Project list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CreatorProject"
+    post:
+      tags:
+      - Creators
+      summary: Create new project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatorProjectCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Project created
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    LoginRequest:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    RegisterRequest:
+      required:
+      - email
+      - password
+      - username
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        username:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        userId:
+          type: string
+    Proposal:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        votesFor:
+          type: integer
+        votesAgainst:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+    ProposalCreateRequest:
+      required:
+      - description
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+    VoteRequest:
+      required:
+      - vote
+      type: object
+      properties:
+        vote:
+          type: string
+          enum:
+          - for
+          - against
+    JournalEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    JournalEntryCreateRequest:
+      required:
+      - content
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+    CreatorProject:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    CreatorProjectCreateRequest:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    Schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
