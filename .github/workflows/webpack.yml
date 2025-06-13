@@ -7,10 +7,15 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   update-file:
     name: Update Timestamp File
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -28,6 +33,8 @@ jobs:
     name: Deploy to Vercel
     needs: update-file
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
